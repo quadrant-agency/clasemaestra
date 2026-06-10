@@ -657,7 +657,7 @@ tbody tr:hover{background:var(--bg)}
     <header class="pub-head"><div class="wrap">
       <a class="wm" onclick="nav('landing')"><span class="a">clase</span><span class="b">maestra</span></a>
       <nav class="pub-nav"><a href="#col-ben">Beneficios</a><a href="#col-como">Cómo funciona</a><a href="#col-precio">Precios</a></nav>
-      <div class="acts"><button class="btn btn-ghost btn-sm" onclick="nav('landing')">Soy maestra</button><a href="#col-form" class="btn btn-cta btn-sm">Agenda una demo</a></div>
+      <div class="acts"><button class="btn btn-ghost btn-sm" onclick="nav('landing')">Soy maestra</button><button class="btn btn-ghost btn-sm" onclick="nav('demo')">Probar</button><a href="#col-form" class="btn btn-cta btn-sm">Agenda una demo</a></div>
       <button class="burger" onclick="document.getElementById('col-form').scrollIntoView({behavior:'smooth'})">☰</button>
     </div></header>
 
@@ -666,7 +666,7 @@ tbody tr:hover{background:var(--bg)}
         <span class="pill pill-amber">🏫 Para dirección y coordinación</span>
         <h1>Equipa a todo tu colegio con planeaciones de vanguardia.</h1>
         <p class="sub">Tus maestras recuperan ~32 horas de planeación al mes y la coordinación obtiene un panel para dar seguimiento a todo el equipo. Alineado a NEM 2022 y compatible con PYP, Cambridge, CASEL y Montessori.</p>
-        <div class="cta-row"><a href="#col-form" class="btn btn-cta">Agenda una demo →</a><a href="#col-precio" class="btn btn-ghost">Ver planes</a></div>
+        <div class="cta-row"><a class="btn btn-cta" onclick="nav('demo')">Probar clasemaestra →</a><a href="#col-form" class="btn btn-ghost">Agenda una demo</a></div>
         <div class="trust"><span>✓ <b>5 cuentas</b> nivel Plus</span><span>✓ Español, inglés o <b>bilingüe</b></span><span>✓ Onboarding del equipo</span></div>
       </div>
       <div class="hero-card">
@@ -697,6 +697,19 @@ tbody tr:hover{background:var(--bg)}
       </div>
     </div></section>
 
+    <section class="pub" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Enfoques internacionales</span><h2>Compatible con los marcos que tu colegio ya usa</h2><p>Cada planeación se diseña para encajar con los enfoques pedagógicos más pedidos por los colegios privados, sin que tu equipo tenga que adaptar nada a mano.</p></div>
+      <div class="incl-grid">
+        <div class="incl-card"><div class="ic">🌍</div><h4>PYP (IB)</h4><p>Indagación por unidades y aprendizaje por proyectos.</p><span class="pill pill-cyan">Preescolar y toda la primaria · cualquier idioma</span></div>
+        <div class="incl-card"><div class="ic">🎓</div><h4>Cambridge</h4><p>Objetivos y vocabulario alineados al enfoque Cambridge.</p><span class="pill pill-amber">Cualquier grado · solo inglés o bilingüe</span></div>
+        <div class="incl-card"><div class="ic">💛</div><h4>CASEL</h4><p>Competencias socioemocionales integradas en las actividades.</p><span class="pill pill-cyan">Todos los grados · donde haya socioemocional</span></div>
+        <div class="incl-card"><div class="ic">🧩</div><h4>Montessori</h4><p>Materiales manipulables y trabajo autónomo por estaciones.</p><span class="pill pill-cyan">Preescolar y primaria baja (1.º–3.º)</span></div>
+        <div class="incl-card"><div class="ic">🎨</div><h4>Reggio Emilia</h4><p>Proyectos emergentes desde el interés y la expresión de los niños.</p><span class="pill pill-cyan">Solo preescolar</span></div>
+        <div class="incl-card" style="background:var(--bg);border-style:dashed"><div class="ic">📝</div><h4>¿Otro enfoque?</h4><p>Cuéntanos en la demo cómo trabaja tu colegio y te decimos qué encaja.</p><a onclick="nav('demo')" style="color:var(--cyan-dark);font-weight:700;cursor:pointer">Probar clasemaestra →</a></div>
+      </div>
+      <p class="muted" style="text-align:center;font-size:12px;margin-top:18px;max-width:700px;margin-left:auto;margin-right:auto">Diseñamos contenido <b>compatible con</b> estos marcos pedagógicos. clasemaestra no es un proveedor afiliado, certificado ni oficial de PYP/IB, Cambridge, CASEL, Montessori ni Reggio Emilia.</p>
+    </div></section>
+
     <section class="pub" id="col-como" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
       <div class="sec-head"><span class="eyebrow">Implementación</span><h2>Así lo activas en tu colegio</h2></div>
       <div class="steps">
@@ -714,16 +727,45 @@ tbody tr:hover{background:var(--bg)}
       </div>
     </div></section>
 
+    <section class="pub"><div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Coordinaciones que ya lo viven</span><h2>Lo que dicen las direcciones y coordinaciones</h2></div>
+      <div class="incl-grid">
+        <div class="tcard"><div class="stars">★★★★★</div><p>"La consistencia entre grados era nuestro dolor de cabeza. Ahora todas mis maestras planean con la misma calidad y yo lo veo desde un solo panel."</p><div class="flex" style="gap:10px;margin-top:10px;align-items:center"><span style="width:40px;height:40px;border-radius:50%;background:var(--cyan);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">CV</span><div><b style="font-size:13.5px">Claudia Vázquez</b><div class="muted" style="font-size:12px">Dirección académica · Guadalajara</div></div></div></div>
+        <div class="tcard"><div class="stars">★★★★★</div><p>"Lo activamos a mitad de ciclo para 8 maestras y el onboarding fue en una tarde. El panel nos quitó las juntas de seguimiento."</p><div class="flex" style="gap:10px;margin-top:10px;align-items:center"><span style="width:40px;height:40px;border-radius:50%;background:var(--amber);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">RM</span><div><b style="font-size:13.5px">Roberto Mendoza</b><div class="muted" style="font-size:12px">Coordinación primaria · CDMX</div></div></div></div>
+        <div class="tcard"><div class="stars">★★★★★</div><p>"Somos colegio bilingüe y que el contenido venga listo en inglés y compatible con Cambridge nos quitó muchísimo trabajo de adaptación."</p><div class="flex" style="gap:10px;margin-top:10px;align-items:center"><span style="width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">AL</span><div><b style="font-size:13.5px">Ana Lucía Pérez</b><div class="muted" style="font-size:12px">Coordinación bilingüe · Puebla</div></div></div></div>
+      </div>
+    </div></section>
+
     <section class="pub" id="col-precio" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
       <div class="sec-head"><span class="eyebrow">Inversión</span><h2>Plan Escuela</h2><p>5 cuentas nivel Plus para tu colegio. Disponible en español, inglés o bilingüe.</p></div>
       <div class="center"><div class="plan featured" style="max-width:440px;width:100%">
         <span class="pop pill pill-cyan" style="background:var(--cyan);color:var(--ink)">El plan de los colegios</span>
         <h3>Plan Escuela</h3><p class="desc">Todo tu equipo docente con planeaciones de vanguardia.</p>
-        <div class="price">$997 <small>MXN/mes</small></div>
-        <p class="muted" style="font-size:12.5px;margin-top:-4px">Inglés $1,497 · Bilingüe $1,997 · maestra adicional +$197</p>
+        <div class="flex" id="colSwitch" style="gap:8px;justify-content:center;margin-bottom:12px"><button class="btn btn-ghost btn-sm cmod on" onclick="colMod('es',this)">Español</button><button class="btn btn-ghost btn-sm cmod" onclick="colMod('en',this)">+ Inglés</button><button class="btn btn-ghost btn-sm cmod" onclick="colMod('bi',this)">Bilingüe</button></div>
+        <div class="price"><span id="colPrice">$997</span> <small>MXN/mes</small></div>
+        <p class="muted" id="colNote" style="font-size:12.5px;margin-top:-4px">Español · 5 cuentas nivel Plus · maestra adicional +$197</p>
         <ul><li>5 cuentas nivel Plus</li><li>Panel de coordinación</li><li>Todos los grados (preescolar a 6.º)</li><li>Compatible con PYP, CASEL, Montessori (y Cambridge en EN/BI)</li><li>Onboarding del equipo</li><li>Garantía de 7 días</li></ul>
         <a href="#col-form" class="btn btn-cta btn-block">Agenda una demo</a>
       </div></div>
+    </div></section>
+
+    <section class="pub" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Preguntas de colegios</span><h2>Dudas frecuentes de dirección</h2></div>
+      <div class="faq" style="max-width:760px;margin:0 auto">
+        <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Podemos empezar a mitad del ciclo escolar?<span>+</span></div><div class="faq-a">Sí. Damos de alta a tu equipo cuando lo necesites y el bundle del mes en curso se libera completo desde el primer día.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué pasa si entran o salen maestras?<span>+</span></div><div class="faq-a">Reasignas las cuentas del Plan Escuela desde el panel de coordinación. Si necesitas más de 5, agregas maestras adicionales por +$197 cada una.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Aplica la pausa de verano?<span>+</span></div><div class="faq-a">Sí: dos meses sin cobro que se reanudan solos el 1.º de septiembre, para no pagar durante el receso.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Emiten factura (CFDI)?<span>+</span></div><div class="faq-a">Sí, emitimos factura a nombre de tu colegio; lo configuramos en el alta.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Podemos probarlo antes de contratar?<span>+</span></div><div class="faq-a">Claro. Entra al demo interactivo sin registro y personaliza una semana con el logo y los colores de tu colegio; además toda contratación tiene garantía de 7 días.</div></div>
+      </div>
+    </div></section>
+
+    <section class="pub" style="background:var(--bg)"><div class="wrap">
+      <div class="finalcta" style="text-align:center;max-width:720px;margin:0 auto">
+        <h2>Conoce clasemaestra por dentro antes de decidir.</h2>
+        <p class="sub" style="margin-bottom:18px">Pruébala con el logo y los colores de tu colegio, o agenda una demo guiada con tu equipo.</p>
+        <div class="cta-row" style="justify-content:center"><a class="btn btn-cta" onclick="nav('demo')">Probar clasemaestra →</a><a href="#col-form" class="btn btn-ghost">Agenda una demo</a></div>
+      </div>
     </div></section>
 
     <section class="pub" id="col-form" style="background:var(--ink)"><div class="wrap">
@@ -1602,6 +1644,7 @@ function exitDemo(){window.demoMode=false;demoClose();nav('landing');}
 function demoModal(){var m=document.getElementById('demoModal');if(m)m.classList.add('on');}
 function demoClose(){var m=document.getElementById('demoModal');if(m)m.classList.remove('on');}
 function syncDemoBanner(ctx){var b=document.getElementById('demoBanner');if(!b)return;b.style.display=(window.demoMode&&ctx==='user')?'flex':'none';}
+function colMod(m,btn){var d={es:['$997','Español'],en:['$1,497','Inglés'],bi:['$1,997','Bilingüe (español + inglés)']};var p=document.getElementById('colPrice'),n=document.getElementById('colNote');if(p)p.textContent=d[m][0];if(n)n.textContent=d[m][1]+' · 5 cuentas nivel Plus · maestra adicional +$197';document.querySelectorAll('#colSwitch .cmod').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');}
 
 
 // ---- Pricing (landing) ----
@@ -1778,6 +1821,7 @@ updatePricing();
 .demo-card h3{font-size:23px;margin-bottom:10px}
 .demo-card p{color:#5A6672;font-size:15px;margin-bottom:20px}
 .demo-card .mic{color:var(--gray);font-size:12.5px;margin-top:14px;margin-bottom:0}
+.cmod.on{background:var(--cyan)!important;color:var(--ink)!important;border-color:var(--cyan)!important}
 </style>
 <div id="demoBanner">
   <span class="dpill">VISTA DEMO</span>
