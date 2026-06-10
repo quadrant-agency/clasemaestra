@@ -468,7 +468,7 @@ tbody tr:hover{background:var(--bg)}
             <h3>Plan Escuela</h3><p class="desc">5 maestras de tu colegio, cada una nivel Plus.</p>
             <div class="price">$<span data-price="escuela">997</span> <small class="suf" data-plan="escuela">MXN/mes</small></div><div class="muted anote" data-plan="escuela" style="font-size:12px;margin-top:2px;min-height:15px"></div>
             <ul><li>5 cuentas nivel Plus</li><li>Panel para la coordinación</li><li>Integrantes extra disponibles</li><li>Onboarding del equipo</li></ul>
-            <button class="btn btn-ghost btn-block" onclick="startPlan('escuela')">Cotizar Escuela</button>
+            <li>Español, inglés o bilingüe</li><button class="btn btn-ghost btn-block" onclick="startPlan('escuela')">Cotizar Escuela</button>
           </div>
         </div>
         <p class="note" data-note>Precios de contenido en español. El Plan Escuela se cotiza en español; pregúntanos por inglés o bilingüe.</p>
@@ -583,7 +583,7 @@ tbody tr:hover{background:var(--bg)}
           <h2>Elige tu plan</h2><p class="muted mb">Puedes cambiar de plan o cancelar cuando quieras.</p>
           <div class="opt sel" data-plan="solo" onclick="pickPlan(this,'solo')"><div class="radio"></div><div class="grow"><h4>Maestra Solo</h4><div class="p">1 grado · 20+ actividades al mes</div></div><div class="pr">$<span class="co-solo">147</span></div></div>
           <div class="opt" data-plan="plus" onclick="pickPlan(this,'plus')"><div class="radio"></div><div class="grow"><h4>Maestra Plus <span class="pill pill-cyan">Popular</span></h4><div class="p">2 grados · comunidad incluida</div></div><div class="pr">$<span class="co-plus">297</span></div></div>
-          <div class="opt" data-plan="escuela" onclick="pickPlan(this,'escuela')"><div class="radio"></div><div class="grow"><h4>Plan Escuela</h4><div class="p">5 maestras nivel Plus · panel de coordinación</div></div><div class="pr">$997</div></div>
+          <div class="opt" data-plan="escuela" onclick="pickPlan(this,'escuela')"><div class="radio"></div><div class="grow"><h4>Plan Escuela</h4><div class="p">5 maestras nivel Plus · ES, EN o bilingüe</div></div><div class="pr">$997</div></div>
           <button class="btn btn-cta btn-block mt" onclick="coStep(2)">Continuar →</button>
         </div></div>
         <!-- step 2 -->
@@ -813,7 +813,7 @@ tbody tr:hover{background:var(--bg)}
             <div class="card stat"><div class="lbl">Maestras activas</div><div class="val">5</div><div class="chg muted">de 5 incluidas</div></div>
             <div class="card stat"><div class="lbl">Grados cubiertos</div><div class="val">8</div><div class="chg muted">Preescolar a 6.º</div></div>
             <div class="card stat"><div class="lbl">Actividades del mes</div><div class="val">200</div><div class="chg up">▲ todo el colegio</div></div>
-            <div class="card stat"><div class="lbl">Plan</div><div class="val" style="font-size:20px;margin-top:12px">Escuela</div><div class="chg muted">$997/mes</div></div>
+            <div class="card stat"><div class="lbl">Plan · Modalidad</div><div class="val" style="font-size:20px;margin-top:12px">Escuela</div><div class="chg"><span class="link" onclick="showModal(modalModalitySchool())">Español · cambiar</span></div></div>
           </div>
           <div class="section-card">
             <div class="sc-head"><span style="font-size:20px">👩‍🏫</span><h3>Equipo del colegio</h3><div class="sp"></div><button class="btn btn-cta btn-sm" onclick="showModal(modalInvite())">+ Agregar maestra</button></div>
@@ -1133,14 +1133,14 @@ window.addEventListener('hashchange',applyHash);
 window.addEventListener('DOMContentLoaded',applyHash);
 
 // ---- Pricing (landing) ----
-var PRICES={es:{solo:147,plus:297,note:"Precios de contenido en español. El Plan Escuela se cotiza en español; pregúntanos por inglés o bilingüe."},
-  en:{solo:197,plus:397,note:"Contenido en inglés: planeaciones con traducción pedagógica para aulas de inmersión."},
-  bi:{solo:247,plus:497,note:"Modalidad bilingüe: cada planeación en español e inglés, lista para escuelas bilingües."}};
+var PRICES={es:{solo:147,plus:297,escuela:997,note:"Precios de contenido en español. Todos los planes —incluido Plan Escuela— están disponibles en inglés y bilingüe."},
+  en:{solo:197,plus:397,escuela:1497,note:"Contenido en inglés con validación Cambridge, listo para aulas de inmersión. Plan Escuela en inglés disponible."},
+  bi:{solo:247,plus:497,escuela:1997,note:"Modalidad bilingüe: cada planeación en español e inglés (+ Cambridge). Plan Escuela bilingüe disponible."}};
 var LANG='es', BILLING='m';
 function fmtMX(n){return n.toLocaleString('es-MX');}
 function updatePricing(){
   var l=LANG, ann=(BILLING==='a');
-  [['solo',PRICES[l].solo],['plus',PRICES[l].plus],['escuela',997]].forEach(function(p){
+  [['solo',PRICES[l].solo],['plus',PRICES[l].plus],['escuela',PRICES[l].escuela]].forEach(function(p){
     var amt=document.querySelector('[data-price="'+p[0]+'"]'); if(!amt) return;
     var suf=document.querySelector('.suf[data-plan="'+p[0]+'"]');
     var note=document.querySelector('.anote[data-plan="'+p[0]+'"]');
@@ -1162,16 +1162,12 @@ function startPlan(p){CO.plan=p;nav('checkout');document.querySelectorAll('[data
 function pickPlan(el,p){CO.plan=p;document.querySelectorAll('[data-plan]').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');updateSummary();}
 function pickMod(el,m){CO.mod=m;el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');updateSummary();}
 function updateSummary(){
-  var base = CO.plan==='escuela'?997:PRICES[CO.mod][CO.plan];
-  if(CO.plan==='escuela') base=997;
-  var add = MOD_ADD[CO.plan][CO.mod]||0;
+  var baseES=PRICES.es[CO.plan], cur=PRICES[CO.mod][CO.plan], add=cur-baseES;
   document.getElementById('sumPlan').textContent=PLAN_NAMES[CO.plan];
   document.getElementById('sumMod').textContent=MOD_NAMES[CO.mod];
   document.getElementById('sumModP').textContent= add>0? '+$'+add : 'incluido';
-  var b = CO.plan==='escuela'?997:PRICES.es[CO.plan];
-  document.getElementById('sumBase').textContent=b;
-  var total = CO.plan==='escuela'?997:(PRICES.es[CO.plan]+add);
-  document.getElementById('sumTotal').textContent=total;
+  document.getElementById('sumBase').textContent=baseES;
+  document.getElementById('sumTotal').textContent=cur;
 }
 function coStep(n){
   document.querySelectorAll('.cosec').forEach(function(s){s.classList.remove('on');});
@@ -1230,8 +1226,14 @@ function modalInvite(){return mHead('Agregar maestra al colegio')+
  '<div class="flex"><div class="field" style="flex:1"><label>Grado</label><select><option>1.º primaria</option><option>2.º primaria</option><option>Preescolar 2</option></select></div><div class="field" style="flex:1"><label>Modalidad</label><select><option>Español</option><option>Inglés</option><option>Bilingüe</option></select></div></div></div>'+
  '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-cta btn-sm" onclick="mDone(\'📩 Invitación enviada\')">Enviar invitación</button></div>';}
 
+function modalModalitySchool(){return mHead('Modalidad del colegio')+
+ '<div class="modal-body"><p class="muted mb">Elige la modalidad del contenido para todo el Plan Escuela.</p>'+
+ '<div class="opt sel"><div class="radio"></div><div class="grow"><h4>Español</h4></div><b>$997/mes</b></div>'+
+ '<div class="opt"><div class="radio"></div><div class="grow"><h4>Inglés · Cambridge</h4></div><b>$1,497/mes</b></div>'+
+ '<div class="opt"><div class="radio"></div><div class="grow"><h4>Bilingüe · Cambridge</h4></div><b>$1,997/mes</b></div></div>'+
+ '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-cta btn-sm" onclick="mDone(\'✅ Modalidad del colegio actualizada\')">Guardar</button></div>';}
 function modalSchool(){return mHead('Subir a Plan Escuela')+
- '<div class="modal-body"><p class="muted mb">5 cuentas nivel Plus para tu colegio, panel de coordinación y onboarding del equipo.</p><div class="flex" style="justify-content:space-between"><span class="muted">Plan Escuela</span><b>$997/mes</b></div></div>'+
+ '<div class="modal-body"><p class="muted mb">5 cuentas nivel Plus para tu colegio, panel de coordinación y onboarding del equipo. Disponible en español, inglés o bilingüe.</p><div class="flex" style="justify-content:space-between"><span class="muted">Plan Escuela · Español</span><b>$997/mes</b></div><div class="flex" style="justify-content:space-between;margin-top:4px"><span class="muted">Inglés</span><b>$1,497/mes</b></div><div class="flex" style="justify-content:space-between;margin-top:4px"><span class="muted">Bilingüe</span><b>$1,997/mes</b></div></div>'+
  '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal()">Ahora no</button><button class="btn btn-cta btn-sm" onclick="mDone(\'🏫 ¡Listo! Te guiamos para dar de alta tu colegio\')">Subir a Escuela</button></div>';}
 
 function modalCancel(){return mHead('¿Cancelar tu suscripción?')+
