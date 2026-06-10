@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>clasemaestra · Guía del programador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --carbon:#243240; --cian:#29C0F5; --cian-d:#1192c4; --amarillo:#F7A823; --rojo:#E8483B;
+  --gris:#8A8C8E; --fondo:#F6F9FB; --niebla:#F6F9FB; --line:#e4e9ef; --card:#ffffff;
+  --text:#243240; --text-2:#5b6b78; --ink:#243240;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Archivo",system-ui,sans-serif;color:var(--text);background:var(--fondo);line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--cian-d);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.18;margin:0;color:var(--carbon);font-weight:800}
+p{margin:0 0 12px}
+code{font-family:var(--mono);font-size:.86em;background:#eaf0f5;padding:1.5px 6px;border-radius:6px;color:#0f5c7a}
+/* layout */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:12px 22px}
+.topbar img{height:26px}
+.topbar .tag{font-size:12.5px;font-weight:700;color:var(--text-2);border-left:1px solid var(--line);padding-left:14px}
+.topbar .sp{flex:1}
+.topbar .pill{background:var(--cian);color:var(--carbon);font-weight:800;font-size:12px;padding:6px 12px;border-radius:99px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.layout{display:grid;grid-template-columns:248px 1fr;gap:34px;max-width:1180px;margin:0 auto;padding:0 22px}
+/* TOC */
+.toc{position:sticky;top:70px;align-self:start;max-height:calc(100vh - 90px);overflow:auto;font-size:13.5px;padding:18px 0}
+.toc h5{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);margin:16px 0 8px}
+.toc a{display:block;color:var(--text-2);padding:4px 10px;border-radius:8px;border-left:2px solid transparent}
+.toc a:hover{background:#fff;text-decoration:none;color:var(--carbon)}
+.toc a.day{font-weight:600;color:var(--carbon)}
+main{padding:30px 0 90px;min-width:0}
+/* hero */
+.hero{background:linear-gradient(135deg,var(--carbon),#33485c);color:#fff;border-radius:22px;padding:38px 40px;position:relative;overflow:hidden;margin-bottom:14px}
+.hero img.kipi{position:absolute;right:26px;bottom:-8px;height:188px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.25))}
+.hero h1{color:#fff;font-size:34px;max-width:640px}
+.hero p{color:#cdd9e3;max-width:560px;font-size:15.5px}
+.hero .eyebrow{display:inline-block;background:rgba(41,192,245,.2);color:var(--cian);font-weight:800;font-size:12px;padding:6px 13px;border-radius:99px;margin-bottom:14px;letter-spacing:.02em}
+.hero .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.hero .links a{background:var(--cian);color:var(--carbon);font-weight:800;font-size:13.5px;padding:10px 16px;border-radius:11px}
+.hero .links a.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.hero .links a:hover{text-decoration:none;transform:translateY(-1px)}
+/* sections */
+section{scroll-margin-top:74px;margin:38px 0}
+.eyebrow{display:inline-block;background:rgba(41,192,245,.13);color:var(--cian-d);font-weight:800;font-size:11.5px;padding:5px 11px;border-radius:99px;letter-spacing:.04em;margin-bottom:10px}
+h2.s{font-size:25px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+h2.s .num{background:var(--carbon);color:#fff;font-size:14px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none}
+.lead{color:var(--text-2);font-size:15.5px;margin-bottom:18px;max-width:760px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:0 4px 18px rgba(36,50,64,.04);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{background:#eef3f8;color:var(--carbon);font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:99px;border:1px solid var(--line)}
+.chip.cian{background:rgba(41,192,245,.13);color:var(--cian-d);border-color:rgba(41,192,245,.3)}
+.chip.amar{background:rgba(247,168,35,.16);color:#a76a04;border-color:rgba(247,168,35,.35)}
+ul.clean{margin:6px 0 12px;padding-left:20px}
+ul.clean li{margin:5px 0}
+.kvt{width:100%;border-collapse:collapse;font-size:14px}
+.kvt th,.kvt td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.kvt th{background:#f1f5f9;font-size:12.5px;color:var(--text-2);text-transform:uppercase;letter-spacing:.03em}
+.kvt tr:last-child td{border-bottom:none}
+.kvt code{white-space:nowrap}
+/* day card */
+.day{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:20px;box-shadow:0 6px 22px rgba(36,50,64,.05)}
+.day-h{background:linear-gradient(120deg,var(--carbon),#34495d);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:14px}
+.day-h .dn{background:var(--cian);color:var(--carbon);font-weight:900;font-size:14px;border-radius:10px;padding:7px 12px;flex:none;letter-spacing:.02em}
+.day-h h3{color:#fff;font-size:18.5px}
+.day-h .sub{color:#bccbd7;font-size:12.5px;font-weight:600;margin-top:1px}
+.day-b{padding:20px 24px}
+.day-b h4{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:16px 0 8px}
+.day-b h4:first-child{margin-top:0}
+.ac{background:rgba(41,192,245,.06);border:1px solid rgba(41,192,245,.22);border-radius:12px;padding:12px 16px;margin:8px 0}
+.ac b{color:var(--carbon)}
+.acc{list-style:none;padding:0;margin:0}
+.acc li{padding:4px 0 4px 26px;position:relative;font-size:14px}
+.acc li:before{content:"✓";position:absolute;left:0;color:#1a8f4a;font-weight:900}
+.protolinks{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+.protolinks a{font-family:var(--mono);font-size:12px;background:#eef3f8;border:1px solid var(--line);color:var(--cian-d);padding:4px 10px;border-radius:8px}
+.protolinks a:hover{background:var(--cian);color:var(--carbon);text-decoration:none}
+/* prompt block */
+.prompt{position:relative;background:#1c2733;color:#e8eef3;border-radius:13px;padding:18px 18px 18px;margin:10px 0 4px;font-family:var(--mono);font-size:12.7px;line-height:1.62;white-space:pre-wrap;overflow:auto;border:1px solid #2c3a49}
+.prompt .lbl{display:inline-block;background:var(--cian);color:var(--carbon);font-family:"Archivo";font-weight:800;font-size:10.5px;letter-spacing:.05em;padding:3px 9px;border-radius:6px;margin-bottom:12px}
+.prompt b{color:#fff}
+.copybtn{position:absolute;top:14px;right:14px;background:#33485c;color:#fff;border:none;border-radius:7px;font-family:"Archivo";font-weight:700;font-size:11px;padding:6px 11px;cursor:pointer}
+.copybtn:hover{background:var(--cian);color:var(--carbon)}
+.note{background:rgba(247,168,35,.1);border-left:3px solid var(--amarillo);border-radius:0 10px 10px 0;padding:11px 16px;margin:12px 0;font-size:13.7px}
+.note.red{background:rgba(232,72,59,.08);border-color:var(--rojo)}
+.note b{color:var(--carbon)}
+.callout{background:var(--carbon);color:#fff;border-radius:14px;padding:18px 22px;margin:14px 0}
+.callout b,.callout h4{color:#fff}
+.callout a{color:var(--cian)}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding:24px 0;color:var(--text-2);font-size:13px;text-align:center}
+@media(max-width:920px){
+  .layout{grid-template-columns:1fr}
+  .toc{display:none}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .hero img.kipi{display:none}
+  .hero{padding:28px 24px}
+  .hero h1{font-size:27px}
+}
+
+.step{display:flex;gap:12px;margin:18px 0 6px;align-items:center}
+.step .n{flex:none;width:27px;height:27px;border-radius:8px;background:var(--amarillo);color:#3a2a05;font-weight:900;display:grid;place-items:center;font-size:13px}
+.step .t{font-weight:800;color:var(--carbon);font-size:15px}
+.prompt .lbl.term{background:#2fbf86;color:#04261a}
+.goal{background:rgba(41,192,245,.08);border-left:3px solid var(--cian);border-radius:0 10px 10px 0;padding:11px 16px;margin:0 0 6px;font-size:14.5px}
+.goal b{color:var(--carbon)}
+.verify{background:rgba(26,143,74,.05);border:1px solid rgba(26,143,74,.22);border-radius:12px;padding:6px 16px 10px;margin:6px 0}
+.trouble{background:rgba(232,72,59,.05);border:1px solid rgba(232,72,59,.2);border-radius:12px;padding:10px 16px;margin:10px 0;font-size:13.6px}
+.trouble b{color:var(--rojo)}
+.bigwarn{background:linear-gradient(120deg,#fff7e8,#fdeaccd);background:linear-gradient(120deg,#fff7e8,#fde8c4);border:1px solid rgba(247,168,35,.55);border-radius:16px;padding:20px 24px;margin:16px 0}
+.bigwarn h3{color:#8a5a00;margin:0 0 8px;font-size:19px}
+.bigwarn b{color:#6b4500}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="https://quadrant-agency.github.io/clasemaestra/assets/wordmark-transparente.png" alt="clasemaestra">
+  <span class="tag">Guía del programador</span>
+  <span class="sp"></span>
+  <span class="pill">Build del sistema · v1</span>
+</div>
+
+<div class="layout">
+  <!-- TOC -->
+  <nav class="toc">
+    <h5>Antes de empezar</h5>
+    <a href="#intro">Objetivo y alcance</a>
+    <a href="#recursos">Recursos y ligas</a>
+    <a href="#proto-acceso" style="font-weight:700;color:var(--carbon)">⭐ Acceso al prototipo</a>
+    <a href="#claude">Cómo usar (paso a paso)</a>
+    <a href="#stack">Stack recomendado</a>
+    <a href="#tokens">Sistema de diseño</a>
+    <a href="#datos">Modelo de datos</a>
+    <a href="#reglas">Reglas de negocio</a>
+    <a href="#stripe">Mapeo Stripe</a>
+    <a href="#roles">Roles y seguridad</a>
+    <h5>Plan día por día</h5>
+    <a class="day" href="#d0">Día 0 · Prerrequisitos</a>
+    <a class="day" href="#d1">Día 1 · Cimientos</a>
+    <a class="day" href="#d2">Día 2 · Auth + BD</a>
+    <a class="day" href="#d3">Día 3 · Design system</a>
+    <a class="day" href="#d4">Día 4 · Público I</a>
+    <a class="day" href="#d5">Día 5 · Público II</a>
+    <a class="day" href="#d6">Día 6 · Stripe I · checkout</a>
+    <a class="day" href="#d7">Día 7 · Stripe II · webhooks + pago</a>
+    <a class="day" href="#d8">Día 8 · Stripe III · suscripción</a>
+    <a class="day" href="#d9">Día 9 · Dashboard + biblioteca</a>
+    <a class="day" href="#d10">Día 10 · Actividad + rating</a>
+    <a class="day" href="#d11">Día 11 · Editor I</a>
+    <a class="day" href="#d12">Día 12 · Editor II + señal</a>
+    <a class="day" href="#d13">Día 13 · Mi estilo</a>
+    <a class="day" href="#d14">Día 14 · Panel de escuela</a>
+    <a class="day" href="#d15">Día 15 · Comunidad I</a>
+    <a class="day" href="#d16">Día 16 · Aportes + referidas</a>
+    <a class="day" href="#d17">Día 17 · Admin I</a>
+    <a class="day" href="#d18">Día 18 · Admin II</a>
+    <a class="day" href="#d19">Día 19 · Admin III</a>
+    <a class="day" href="#d20">Día 20 · Admin IV · correos</a>
+    <a class="day" href="#d21">Día 21 · QA + seguridad</a>
+    <a class="day" href="#d22">Día 22 · Responsive + lanzamiento</a>
+    <h5>Cierre</h5>
+    <a href="#dod">Definición de "terminado"</a>
+    <a href="#falta">Qué más se necesita</a>
+    <a href="#conv">Convenciones Claude Code</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <img class="kipi" src="https://quadrant-agency.github.io/clasemaestra/assets/kipi-planea.png" alt="Kipi">
+      <span class="eyebrow">Para el desarrollador</span>
+      <h1>Guía para construir el sistema de clasemaestra, paso a paso.</h1>
+      <p>Guía paso a paso, a prueba de todo: comandos exactos para copiar, prompts detallados para Claude Code y una checklist de "cómo verificar" en cada día. La meta: que la plataforma quede <b style="color:#fff">idéntica al prototipo</b>. Pensada para que la ejecute alguien sin perfil técnico, en jornadas de ~8 horas.</p>
+      <div class="links">
+        <a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">Ver prototipo ↗</a>
+        <a class="ghost" href="https://quadrant-agency.github.io/clasemaestra/manual-identidad.html" target="_blank">Manual de identidad ↗</a>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <section id="intro">
+      <span class="eyebrow">01 · Objetivo</span>
+      <h2 class="s">Objetivo y alcance</h2>
+      <p class="lead">Construir el <b>sistema completo y funcional</b> de clasemaestra tal como está definido en el prototipo navegable, en el menor tiempo posible y con calidad de producción.</p>
+      <div class="grid2">
+        <div class="card">
+          <h4 style="color:#1a8f4a;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px">✓ Sí entra en este build</h4>
+          <ul class="clean">
+            <li>Las <b>24 pantallas</b> del prototipo (público, maestra, admin), funcionales y conectadas.</li>
+            <li>Autenticación, roles y base de datos.</li>
+            <li><b>Pagos y suscripciones con Stripe</b> (alta, cambio de plan/modalidad, anual, add-ons, pausa de verano, cancelación, dunning, garantía 7 días).</li>
+            <li>Editor en plataforma (tipo documento), "Mi estilo" (kit de marca) y aplicar a todas.</li>
+            <li>Comunidad, programa de aportes y referidas.</li>
+            <li>Backend de admin (contenidos, planes, flywheel, señal, CRM, correos).</li>
+            <li>Sistema de diseño clasemaestra desde el día 1.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--rojo);font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px">✕ NO entra (por ahora)</h4>
+          <ul class="clean">
+            <li>Los <b>agentes de IA que producen contenido</b> (Agente 0–4) y la generación automática de planeaciones.</li>
+            <li>La producción del contenido pedagógico en sí (eso se carga manualmente / vendrá después).</li>
+          </ul>
+          <div class="note"><b>Importante:</b> el sistema debe quedar <b>listo para recibir</b> ese contenido (estructura de bundles, actividades por grado/campo/semana, modalidades), aunque el contenido se cargue manualmente desde el admin mientras tanto.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <h4>La fuente de verdad es el prototipo</h4>
+        <p style="margin:6px 0 0">Cuando haya cualquier duda de comportamiento, copy, jerarquía o flujo, <b>gana el prototipo</b>. Cada día de esta guía enlaza a las pantallas exactas que debes replicar: <a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">prototipo.html</a>.</p>
+      </div>
+    </section>
+
+    <!-- RECURSOS -->
+    <section id="recursos">
+      <span class="eyebrow">02 · Recursos</span>
+      <h2 class="s">Recursos y ligas</h2>
+      <div class="card">
+        <table class="kvt">
+          <tr><th>Recurso</th><th>Liga</th><th>Para qué</th></tr>
+          <tr><td><b>Prototipo navegable</b></td><td><a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">prototipo.html</a></td><td>Réplica exacta de cada pantalla, flujo e interacción.</td></tr>
+          <tr><td><b>Manual de identidad</b></td><td><a href="https://quadrant-agency.github.io/clasemaestra/manual-identidad.html" target="_blank">manual-identidad.html</a></td><td>Paleta, tipografía, wordmark, Kipi y reglas de marca.</td></tr>
+          <tr><td><b>Landing en vivo</b></td><td><a href="https://quadrant-agency.github.io/clasemaestra/" target="_blank">clasemaestra (index)</a></td><td>Referencia visual del estilo público.</td></tr>
+          <tr><td><b>Assets de marca</b></td><td><code>/assets/</code> en el repo</td><td>Kipi (planea, escribe, enseña, celebra) y wordmark (transparente, blanco).</td></tr>
+        </table>
+      </div>
+      <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:18px 0 8px">Deep-links a cada pantalla del prototipo</h4>
+      <p class="lead" style="margin-bottom:8px">Cada pantalla tiene su URL con <code>#hash</code>. Úsalas como referencia mientras desarrollas la pantalla equivalente.</p>
+      <div class="card">
+        <b style="color:var(--cian-d)">Público</b>
+        <div class="protolinks">
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#landing">#landing</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#colegios">#colegios</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#sample">#sample</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#login">#login</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#checkout">#checkout</a>
+        </div>
+        <b style="color:var(--cian-d)">Maestra</b>
+        <div class="protolinks">
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-dashboard">#u-dashboard</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-library">#u-library</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-activity">#u-activity</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-editor">#u-editor</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-style">#u-style</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-subscription">#u-subscription</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-billing">#u-billing</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-school">#u-school</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-community">#u-community</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-profile">#u-profile</a>
+        </div>
+        <b style="color:var(--cian-d)">Admin</b>
+        <div class="protolinks">
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-dashboard">#a-dashboard</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-content">#a-content</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-upload">#a-upload</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-plans">#a-plans</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-flywheel">#a-flywheel</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-signal">#a-signal</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-users">#a-users</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-crm">#a-crm</a>
+          <a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-email">#a-email</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLAUDE CODE -->
+    <section id="claude">
+      <span class="eyebrow">03 · Método</span>
+      <h2 class="s">Cómo usar esta guía con Claude Code</h2>
+      <p class="lead">Cada día trae uno o más <b>prompts listos para pegar en Claude Code</b>. El flujo recomendado para no perder detalle:</p>
+      <div class="card">
+        <ul class="clean">
+          <li><b>1. Crea un <code>CLAUDE.md</code></b> en la raíz del repo (ver sección "Convenciones"). Pégale el stack, los design tokens, las reglas de negocio y la liga al prototipo. Claude Code lo lee en cada sesión.</li>
+          <li><b>2. Trabaja un día = una rama.</b> <code>git checkout -b dia-04-publico</code>. Pega el prompt del día. Revisa, prueba, commitea.</li>
+          <li><b>3. Abre el prototipo al lado.</b> Antes de aceptar la pantalla, compárala contra su deep-link. La fuente de verdad es el prototipo.</li>
+          <li><b>4. Verifica los criterios de aceptación</b> de cada día antes de pasar al siguiente. No avances con deuda.</li>
+          <li><b>5. Pídele a Claude Code que escriba pruebas</b> de los flujos críticos (auth, checkout, webhooks, gating por plan).</li>
+        </ul>
+        <div class="note"><b>Regla de oro de los prompts:</b> siempre termina pidiéndole a Claude Code que (a) respete los design tokens, (b) compare contra el deep-link del prototipo, y (c) liste qué criterios de aceptación quedaron cumplidos y cuáles no.</div>
+      </div>
+    </section>
+
+    <!-- ACCESO AL PROTOTIPO -->
+    <section id="proto-acceso">
+      <span class="eyebrow">⭐ Lo más importante</span>
+      <h2 class="s">Acceso al prototipo (para que quede IDÉNTICO)</h2>
+      <div class="bigwarn">
+        <h3>Regla #1 del proyecto</h3>
+        <p style="margin:0">El prototipo es la <b>fuente de verdad</b>. Para que el sistema quede idéntico, Claude Code debe <b>leer el archivo del prototipo</b>, no solo "imaginárselo". Por eso lo primero que haces es <b>descargar el prototipo dentro del proyecto</b>, y en cada prompt le ordenas a Claude Code que lo abra y lo copie tal cual.</p>
+      </div>
+      <div class="step"><span class="n">1</span><span class="t">Descarga el prototipo y la marca dentro del proyecto</span></div>
+      <p class="lead" style="margin:4px 0 8px">Corre esto una vez, dentro de la carpeta del proyecto (lo verás también en el Día 0):</p>
+      <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>mkdir -p referencia/assets
+curl -L -o referencia/prototipo.html "https://quadrant-agency.github.io/clasemaestra/prototipo.html"
+curl -L -o referencia/manual-identidad.html "https://quadrant-agency.github.io/clasemaestra/manual-identidad.html"
+curl -L -o referencia/assets/kipi-planea.png   "https://quadrant-agency.github.io/clasemaestra/assets/kipi-planea.png"
+curl -L -o referencia/assets/kipi-escribe.png  "https://quadrant-agency.github.io/clasemaestra/assets/kipi-escribe.png"
+curl -L -o referencia/assets/kipi-ensena.png   "https://quadrant-agency.github.io/clasemaestra/assets/kipi-ensena.png"
+curl -L -o referencia/assets/kipi-celebra.png  "https://quadrant-agency.github.io/clasemaestra/assets/kipi-celebra.png"
+curl -L -o referencia/assets/wordmark-transparente.png "https://quadrant-agency.github.io/clasemaestra/assets/wordmark-transparente.png"
+curl -L -o referencia/assets/wordmark-blanco.png "https://quadrant-agency.github.io/clasemaestra/assets/wordmark-blanco.png"</div>
+      <div class="step"><span class="n">2</span><span class="t"> Deja esta orden fija en CLAUDE.md</span></div>
+      <p class="lead" style="margin:4px 0 8px">Para que Claude Code la respete siempre, pega esta regla en el archivo <code>CLAUDE.md</code> (lo creas el Día 1):</p>
+      <div class="prompt"><span class="lbl">CLAUDE.md</span><button class="copybtn">Copiar</button>REGLA #1 — FIDELIDAD AL PROTOTIPO:
+Antes de construir CUALQUIER pantalla, abre y lee el archivo local referencia/prototipo.html y localiza la pantalla por su #hash (por ejemplo #landing, #u-library, #a-content). Replica EXACTAMENTE: estructura, orden de secciones, textos visibles, jerarquía, colores, espaciados y comportamiento. NO inventes copy ni cambies textos. Si algo del prototipo no es claro, pregúntame antes de inventar. El diseño visual debe ser el de clasemaestra (referencia/manual-identidad.html). Si una pantalla del sistema no se parece al prototipo, está mal.</div>
+      <div class="verify">
+        <ul class="acc">
+          <li>Abre <code>referencia/prototipo.html</code> en tu navegador: debe verse el prototipo completo y poder navegar a cada <code>#hash</code>.</li>
+          <li>En cada día, Claude Code debe decir explícitamente que leyó <code>referencia/prototipo.html</code> antes de construir.</li>
+        </ul>
+      </div>
+      <div class="note"><b>Nota:</b> Claude Code también puede abrir la versión en vivo (<a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">en línea</a>), pero el archivo local es más confiable y no depende de internet. Ten ambos a la mano.</div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <span class="eyebrow">04 · Stack</span>
+      <h2 class="s">Stack recomendado (optimizado para velocidad)</h2>
+      <p class="lead">Stack moderno, probado para SaaS, que un solo desarrollador con Claude Code puede llevar a producción rápido. Todo es <b>sistema propio</b> — sin Kajabi ni Hotmart.</p>
+      <div class="card">
+        <table class="kvt">
+          <tr><th>Capa</th><th>Tecnología</th><th>Por qué</th></tr>
+          <tr><td>Framework / Frontend + API</td><td><b>Next.js 14 (App Router) + TypeScript</b></td><td>Frontend + server actions + API routes en un solo proyecto. Ideal para Claude Code.</td></tr>
+          <tr><td>Estilos</td><td><b>Tailwind CSS</b></td><td>Mapea 1:1 con el prototipo (utilidades). Tokens de clasemaestra en <code>tailwind.config</code>.</td></tr>
+          <tr><td>Base de datos + Auth + Storage</td><td><b>Supabase</b> (Postgres + Auth + Storage + RLS)</td><td>Auth, base de datos relacional, almacenamiento de logos/imágenes y seguridad por fila, listos.</td></tr>
+          <tr><td>Pagos / Suscripciones</td><td><b>Stripe</b> (Payment Element + Billing + Webhooks)</td><td>Suscripciones, prorrateos, pausas, anual, dunning y portal.</td></tr>
+          <tr><td>Editor de documento</td><td><b>TipTap</b> (ProseMirror)</td><td>Editor por bloques (encabezado, párrafo, lista, imagen) para la pantalla del editor.</td></tr>
+          <tr><td>Correo transaccional + campañas</td><td><b>Resend</b> (o SendGrid)</td><td>Bienvenida, recuperación de pago, fin de mes, broadcasts del admin.</td></tr>
+          <tr><td>Hosting / Deploy</td><td><b>Vercel</b></td><td>Deploy continuo desde Git, edge, variables de entorno, dominios.</td></tr>
+        </table>
+      </div>
+      <div class="note"><b>Alternativa de pasarela para México:</b> si se quiere cobrar con métodos locales (OXXO, SPEI), Stripe ya los soporta en México; mantener Stripe. Si más adelante se requiere otra pasarela (Mercado Pago / Conekta), la lógica de suscripción queda aislada en un módulo <code>/lib/billing</code> para poder cambiarla.</div>
+    </section>
+
+    <!-- DESIGN TOKENS -->
+    <section id="tokens">
+      <span class="eyebrow">05 · Diseño</span>
+      <h2 class="s">Sistema de diseño clasemaestra</h2>
+      <p class="lead">Configura esto el <b>Día 1</b> para que todo nazca on-brand. Tomado del manual de identidad (junio 2026, canónico).</p>
+      <div class="grid2">
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 10px">Paleta</h4>
+          <table class="kvt">
+            <tr><th>Token</th><th>Hex</th><th>Uso</th></tr>
+            <tr><td>Carbón</td><td><code>#243240</code></td><td>Texto, fondos oscuros, wordmark "maestra"</td></tr>
+            <tr><td>Cian</td><td><code>#29C0F5</code></td><td><b>CTA primario</b> (texto carbón encima)</td></tr>
+            <tr><td>Amarillo</td><td><code>#F7A823</code></td><td>Acentos, destacados, badges</td></tr>
+            <tr><td>Rojo</td><td><code>#E8483B</code></td><td><b>Solo alertas / acciones críticas</b></td></tr>
+            <tr><td>Gris</td><td><code>#8A8C8E</code></td><td>Texto secundario, "clase" del wordmark</td></tr>
+            <tr><td>Niebla / Fondo</td><td><code>#F6F9FB</code></td><td>Fondo de la app</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 10px">Tipografía y forma</h4>
+          <ul class="clean">
+            <li><b>Tipografía:</b> Helvetica Now Display Bold (si hay licencia); si no, <b>Archivo</b> (Google Fonts) como sustituto web.</li>
+            <li><b>Wordmark:</b> "clase" en gris + "maestra" en carbón, minúsculas, bold.</li>
+            <li><b>Titulares:</b> mayúscula de oración (no todo en minúsculas, no TODO MAYÚSCULAS).</li>
+            <li><b>Radios:</b> ~12–16px. Sombras suaves. Estilo limpio y cálido.</li>
+            <li><b>Mascota Kipi:</b> 4 poses en <code>/assets/</code>. Decorativa; <b>nunca</b> presentada como "un agente que trabaja por ti".</li>
+          </ul>
+          <div class="note red"><b>Regla crítica:</b> el rojo es <b>solo</b> para alertas/errores/acciones destructivas. El CTA principal siempre es cian con texto carbón.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <h4>Regla de marca de producto</h4>
+        <p style="margin:6px 0 0"><b>Cero menciones de IA en contenido visible al usuario.</b> El posicionamiento es "creado y revisado por expertos en educación". La IA puede existir internamente, pero nunca en copy público ni en la app de la maestra.</p>
+      </div>
+    </section>
+
+    <!-- DATA MODEL -->
+    <section id="datos">
+      <span class="eyebrow">06 · Datos</span>
+      <h2 class="s">Modelo de datos (esquema base)</h2>
+      <p class="lead">Tablas principales en Postgres/Supabase. El <b>Día 2</b> crea el esquema y las políticas RLS. Los nombres son sugeridos; ajústalos con criterio.</p>
+      <div class="card">
+        <table class="kvt">
+          <tr><th>Tabla</th><th>Campos clave</th><th>Notas</th></tr>
+          <tr><td><code>profiles</code></td><td>id, nombre, rol (teacher/coordinator/admin), school_id, created_at</td><td>1:1 con auth.users. El rol define accesos.</td></tr>
+          <tr><td><code>schools</code></td><td>id, nombre, modalidad, coordinator_id</td><td>Para Plan Escuela.</td></tr>
+          <tr><td><code>subscriptions</code></td><td>id, profile_id, plan (solo/plus/escuela), modalidad (es/en/bi), status (active/paused/past_due/canceled), billing (monthly/annual), stripe_customer_id, stripe_subscription_id, current_period_end, pause_until</td><td>Espejo del estado en Stripe.</td></tr>
+          <tr><td><code>subscription_addons</code></td><td>id, subscription_id, tipo (grado_extra/maestra_adicional), cantidad, stripe_item_id</td><td>Items extra de la suscripción.</td></tr>
+          <tr><td><code>grades</code></td><td>id, nombre, nivel (preescolar/primaria), orden</td><td>9 grados (3 preescolar + 6 primaria).</td></tr>
+          <tr><td><code>teacher_grades</code></td><td>profile_id, grade_id</td><td>Qué grados tiene acceso cada maestra (según plan).</td></tr>
+          <tr><td><code>bundles</code></td><td>id, mes (YYYY-MM), grade_id, modalidad, published_at</td><td>El paquete mensual completo (Modelo A).</td></tr>
+          <tr><td><code>activities</code></td><td>id, bundle_id, grade_id, campo_formativo, semana, titulo, descripcion, frameworks (jsonb: pyp/casel/montessori/reggio/cambridge), content (jsonb bloques), status</td><td>Cada planeación. <code>frameworks</code> los otorga la revisión (ver reglas).</td></tr>
+          <tr><td><code>personalizations</code></td><td>id, profile_id, activity_id, content (jsonb), updated_at</td><td>La versión editada de la maestra. <b>Vive en plataforma.</b></td></tr>
+          <tr><td><code>brand_kits</code></td><td>id, profile_id, logo_url, accent_color, font, header_style</td><td>"Mi estilo" — se aplica a todas sus actividades.</td></tr>
+          <tr><td><code>ratings</code></td><td>id, profile_id, activity_id, estrellas (1–5), que_cambiaste (text), created_at</td><td>"¿Funcionó en tu salón?"</td></tr>
+          <tr><td><code>edit_events</code></td><td>id, profile_id, activity_id, tipo (section_deleted/added/text_replaced/logo_added/reuse/print), meta (jsonb), created_at</td><td><b>Señal pasiva</b> para el panel de Señal de contenido.</td></tr>
+          <tr><td><code>subforums</code></td><td>id, tipo (grade/topic), grade_id</td><td>Subforos por grado + generales.</td></tr>
+          <tr><td><code>posts</code></td><td>id, profile_id, subforum_id, body, photo_url, featured, created_at</td><td>Foto primero. <code>featured</code> = "Destacada".</td></tr>
+          <tr><td><code>comments</code> / <code>likes</code></td><td>id, post_id, profile_id, body / target, profile_id</td><td>Respuestas y reacciones.</td></tr>
+          <tr><td><code>points_ledger</code></td><td>id, profile_id, accion, puntos, created_at</td><td>Estrellitas 🌟. El nivel (Aportadora/Destacada/Embajadora) se calcula del saldo.</td></tr>
+          <tr><td><code>referrals</code></td><td>id, referrer_id, referred_email, status, stripe_coupon, comision</td><td>Embajadoras 25% + 50% colega.</td></tr>
+          <tr><td><code>qa_sessions</code></td><td>id, fecha, tema, recording_url, rsvps</td><td>Q&A en vivo mensual + grabaciones.</td></tr>
+          <tr><td><code>invoices</code></td><td>id, profile_id, stripe_invoice_id, monto, status, fecha, pdf_url</td><td>Historial de facturación (espejo de Stripe).</td></tr>
+          <tr><td><code>leads</code></td><td>id, tipo (sample/colegio), nombre, correo, datos (jsonb), created_at</td><td>Muestra gratis (F1) y formulario de colegios.</td></tr>
+          <tr><td><code>campaigns</code></td><td>id, asunto, cuerpo, segmento, status, sent_at, stats</td><td>Correos del admin + secuencias automáticas.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- REGLAS -->
+    <section id="reglas">
+      <span class="eyebrow">07 · Negocio</span>
+      <h2 class="s">Reglas de negocio (codifícalas exactamente)</h2>
+      <p class="lead">Estas reglas deben quedar centralizadas (ej. <code>/lib/pricing.ts</code> y <code>/lib/frameworks.ts</code>) y ser la única fuente de cálculo.</p>
+
+      <div class="card">
+        <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Precios (MXN/mes)</h4>
+        <table class="kvt">
+          <tr><th>Plan</th><th>Español</th><th>+ Inglés</th><th>+ Bilingüe</th></tr>
+          <tr><td><b>Maestra Solo</b> (1 grado · comunidad incluida)</td><td>$147</td><td>+$50 → $197</td><td>+$100 → $247</td></tr>
+          <tr><td><b>Maestra Plus</b> (2 grados · comunidad)</td><td>$297</td><td>+$100 → $397</td><td>+$200 → $497</td></tr>
+          <tr><td><b>Plan Escuela</b> (5 cuentas Plus + panel)</td><td>$997</td><td>$1,497</td><td>$1,997</td></tr>
+        </table>
+        <ul class="clean" style="margin-top:12px">
+          <li><b>Plan anual:</b> paga 10 meses, obtén 12 (precio mensual × 10).</li>
+          <li><b>Add-on Grado extra:</b> +$97/mes — <b>solo Plus y Escuela</b>.</li>
+          <li><b>Add-on Maestra adicional:</b> +$197/mes — <b>solo Escuela</b>.</li>
+          <li><b>Comunidad:</b> incluida en <b>todos</b> los planes (no es add-on).</li>
+          <li><b>No existe</b> Pack NEE ni plan "Total". No hay descuentos por defecto.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Enfoques internacionales (mapa fijo)</h4>
+        <table class="kvt">
+          <tr><th>Enfoque</th><th>Aplica a</th><th>Condición</th></tr>
+          <tr><td>PYP</td><td>Preescolar + toda la primaria</td><td>Todo idioma</td></tr>
+          <tr><td>CASEL</td><td>Todos los grados</td><td>Donde haya socioemocional</td></tr>
+          <tr><td>Montessori</td><td>Preescolar + primaria baja (1.º–3.º)</td><td>—</td></tr>
+          <tr><td>Reggio</td><td>Solo preescolar</td><td>—</td></tr>
+          <tr><td>Cambridge</td><td>Cualquier grado</td><td><b>Solo en modalidad inglés/bilingüe</b></td></tr>
+        </table>
+        <div class="note"><b>Lenguaje obligatorio:</b> siempre "<b>compatible con</b>"; nunca "afiliado/certificado/oficial". Incluir nota legal "no somos proveedor oficial de estos marcos".</div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Entrega (Modelo A)</h4>
+          <ul class="clean">
+            <li>El <b>bundle mensual completo</b> se libera al inicio del mes. Sin drip ni candados por semana.</li>
+            <li>Organizado por <b>semana sugerida</b> y por los <b>4 campos formativos NEM</b>.</li>
+            <li>Navegación = <b>tira del ciclo escolar</b> (Ago→Jul), no dropdown ni journey individual.</li>
+            <li>Una maestra nueva ve el mes en curso + meses anteriores en su biblioteca.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Uso del contenido</h4>
+          <ul class="clean">
+            <li>La maestra <b>edita su plan en plataforma</b> (editor tipo documento). <b>No se descarga el documento.</b></li>
+            <li>Para el salón: <b>Imprimir</b> (no archivo editable que se fugue).</li>
+            <li>Cada edición genera <b>señal pasiva</b> (qué mejorar) y sube el costo de salida.</li>
+            <li>Excepciones que SÍ se descargan: <b>muestra gratis</b> (lead magnet) y <b>factura</b>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Programa de aportes (estrellitas 🌟)</h4>
+        <table class="kvt">
+          <tr><th>Acción que suma</th><th>Pts</th><th>Nivel</th><th>Desbloquea</th></tr>
+          <tr><td>Calificar una actividad</td><td>+5</td><td>🤝 Aportadora (100)</td><td>Votar el próximo tema</td></tr>
+          <tr><td>Compartir adaptación con foto</td><td>+15</td><td>🏆 Destacada (300)</td><td>Acceso anticipado + spotlight + plantillas premium</td></tr>
+          <tr><td>Que tu adaptación se cure a la biblioteca</td><td>+50</td><td>🌟 Embajadora (600)</td><td>25% comisión + eliges el tema + masterclass</td></tr>
+          <tr><td>Responder duda / asistir Q&amp;A / invitar colega</td><td>+10 / +10 / +40</td><td>—</td><td>—</td></tr>
+        </table>
+        <div class="note"><b>Recompensas no canibalizan ingreso:</b> estatus, influencia (votar/elegir tema), timing (acceso anticipado) y comisión auto-financiada. Nunca meses gratis ni descuentos al plan.</div>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Suscripción — comportamientos clave</h4>
+        <ul class="clean">
+          <li><b>Pausa de verano:</b> pausa 2 meses (jul–ago) sin cobro; <b>reanuda automáticamente</b> el 1 de septiembre. Conserva planes personalizados, nivel 🌟 y comunidad.</li>
+          <li><b>Garantía:</b> devolución de 7 días sin preguntas.</li>
+          <li><b>Cancelación:</b> ofrece la pausa de verano como retención antes de cancelar; mantiene acceso hasta fin de ciclo.</li>
+          <li><b>Referidas:</b> 25% de comisión (al llegar a Embajadora) + 50% el primer mes para la colega referida.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STRIPE -->
+    <section id="stripe">
+      <span class="eyebrow">08 · Pagos</span>
+      <h2 class="s">Mapeo de Stripe</h2>
+      <p class="lead">Crea estos objetos en el dashboard de Stripe (modo test primero). Guarda los <code>price_id</code> en variables de entorno o en una tabla <code>plan_prices</code>.</p>
+      <div class="card">
+        <table class="kvt">
+          <tr><th>Producto Stripe</th><th>Precios (recurring)</th><th>Notas</th></tr>
+          <tr><td><b>Maestra Solo</b></td><td>ES, EN, BI × (mensual, anual) = 6 prices</td><td>Anual = mensual×10.</td></tr>
+          <tr><td><b>Maestra Plus</b></td><td>ES, EN, BI × (mensual, anual) = 6 prices</td><td></td></tr>
+          <tr><td><b>Plan Escuela</b></td><td>ES, EN, BI × (mensual, anual) = 6 prices</td><td>5 asientos lógicos en la app.</td></tr>
+          <tr><td><b>Add-on Grado extra</b></td><td>$97/mes (price, cantidad variable)</td><td>Se agrega como <code>subscription item</code>.</td></tr>
+          <tr><td><b>Add-on Maestra adicional</b></td><td>$197/mes</td><td>Solo Escuela.</td></tr>
+        </table>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Flujos a implementar</h4>
+          <ul class="clean">
+            <li><b>Alta:</b> Payment Element en el checkout (Día 6), crea Customer + Subscription server-side.</li>
+            <li><b>Cambio de plan/modalidad:</b> actualizar el price del subscription item con prorrateo.</li>
+            <li><b>Add-ons:</b> agregar/quitar subscription items.</li>
+            <li><b>Anual:</b> cambiar al price anual.</li>
+            <li><b>Pausa de verano:</b> <code>pause_collection</code> + <code>resumes_at</code> (1 sep) — reanuda solo.</li>
+            <li><b>Cancelación:</b> <code>cancel_at_period_end</code>.</li>
+            <li><b>Garantía 7 días:</b> reembolso vía API dentro de la ventana.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Webhooks (Día 7)</h4>
+          <ul class="clean">
+            <li><code>invoice.paid</code> → activar/renovar, guardar factura.</li>
+            <li><code>invoice.payment_failed</code> → estado past_due + secuencia de dunning.</li>
+            <li><code>customer.subscription.updated</code> → sincronizar plan/estado/pausa.</li>
+            <li><code>customer.subscription.deleted</code> → cancelar acceso al fin de ciclo.</li>
+            <li>Verificar firma del webhook. Idempotencia por event id.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES -->
+    <section id="roles">
+      <span class="eyebrow">09 · Seguridad</span>
+      <h2 class="s">Roles y seguridad (RLS)</h2>
+      <div class="card">
+        <table class="kvt">
+          <tr><th>Rol</th><th>Ve / puede</th></tr>
+          <tr><td><b>teacher</b> (maestra)</td><td>Su propio contenido, personalizaciones, suscripción, comunidad. Solo grados/modalidad de su plan activo.</td></tr>
+          <tr><td><b>coordinator</b> (Plan Escuela)</td><td>Lo de teacher + panel de su escuela: invitar/gestionar hasta 5 maestras, ver cobertura del equipo.</td></tr>
+          <tr><td><b>admin</b> (interno)</td><td>Todo el backend: contenidos, planes, flywheel, señal, usuarias, CRM, correos.</td></tr>
+        </table>
+        <div class="note"><b>RLS obligatorio en Supabase:</b> cada tabla con datos de usuaria debe filtrar por <code>auth.uid()</code>. El acceso a actividades depende de una suscripción <b>activa</b> y de que el grado/modalidad esté en su plan. El admin pasa por un rol verificado del lado servidor, nunca por un flag del cliente.</div>
+      </div>
+    </section>
+
+    <!-- ==== DÍA POR DÍA (se agrega en las siguientes partes) ==== -->
+    <section id="plan">
+      <span class="eyebrow">10 · Ejecución</span>
+      <h2 class="s">Plan día por día</h2>
+      <p class="lead"><b>22 jornadas de ~8 horas.</b> El trabajo se reparte en 22 días para dar holgura donde más se atora (pagos 3 días, editor 2, admin 4, QA 2). <b>Cada día está armado para que solo ejecutes:</b> (1) los <b>comandos exactos</b> que pegas en la terminal, (2) el <b>prompt detallado</b> que pegas en Claude Code, (3) <b>cómo verificar</b> que quedó bien (clic por clic) y (4) qué hacer <b>si algo truena</b>. Los días con ⏱ son los de mayor riesgo: no avances con la verificación incompleta.</p>
+    </section>
+
+
+
+    <!-- DÍA 0 -->
+    <div class="day" id="d0">
+      <div class="day-h"><span class="dn">Día 0</span><div><h3>Prepara tu computadora y tus cuentas</h3><div class="sub">Sin esto no se puede empezar. Tómalo con calma.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> instalar los programas, crear las cuentas, juntar todas las "llaves" (contraseñas técnicas) en un archivo y descargar el prototipo dentro del proyecto.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Instala estos programas (descarga e instala como cualquier app)</span></div>
+        <ul class="clean">
+          <li><b>Node.js</b> (versión LTS) — de <a href="https://nodejs.org" target="_blank">nodejs.org</a>. Es el motor que corre el proyecto.</li>
+          <li><b>Git</b> — de <a href="https://git-scm.com" target="_blank">git-scm.com</a>. Guarda el historial del código.</li>
+          <li><b>Visual Studio Code</b> — de <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>. El editor donde verás el código.</li>
+          <li><b>Claude Code</b> — sigue las instrucciones de <a href="https://claude.com/claude-code" target="_blank">claude.com/claude-code</a>. Es quien escribirá el código por ti.</li>
+        </ul>
+        <p class="lead" style="margin:6px 0">Para confirmar que Node y Git quedaron, abre la Terminal (en Mac: app "Terminal"; en Windows: "PowerShell") y pega:</p>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>node -v
+git -v</div>
+        <p class="lead" style="margin:4px 0">Debe responder con números de versión (ej. <code>v20.x.x</code>). Si dice "command not found", reinstala ese programa.</p>
+
+        <div class="step"><span class="n">2</span><span class="t">Crea estas cuentas (todas tienen plan gratis para empezar)</span></div>
+        <ul class="clean">
+          <li><b>GitHub</b> (<a href="https://github.com" target="_blank">github.com</a>) — guarda el código en la nube. Crea un repositorio nuevo vacío llamado <code>clasemaestra-app</code>.</li>
+          <li><b>Vercel</b> (<a href="https://vercel.com" target="_blank">vercel.com</a>) — publica la página en internet. Regístrate "con GitHub".</li>
+          <li><b>Supabase</b> (<a href="https://supabase.com" target="_blank">supabase.com</a>) — base de datos y login. Crea un proyecto nuevo; <b>guarda la contraseña</b> que te pida.</li>
+          <li><b>Stripe</b> (<a href="https://stripe.com" target="_blank">stripe.com</a>) — cobros. Quédate en "modo prueba" (Test mode) por ahora.</li>
+          <li><b>Resend</b> (<a href="https://resend.com" target="_blank">resend.com</a>) — envío de correos.</li>
+        </ul>
+
+        <div class="step"><span class="n">3</span><span class="t">Junta todas las "llaves" en un archivo</span></div>
+        <p class="lead" style="margin:4px 0 8px">Cada servicio te da llaves en su panel (sección "API keys" o "Settings"). Crea un archivo de texto llamado <code>.env.local</code> con esto y rellena lo que falta entre comillas:</p>
+        <div class="prompt"><span class="lbl">.env.local</span><button class="copybtn">Copiar</button>NEXT_PUBLIC_SUPABASE_URL="https://xxxxx.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="..."
+SUPABASE_SERVICE_ROLE_KEY="..."
+STRIPE_SECRET_KEY="sk_test_..."
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+RESEND_API_KEY="re_..."
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"</div>
+        <div class="note red"><b>Nunca</b> compartas este archivo ni lo subas a GitHub. Trátalo como un manojo de contraseñas.</div>
+
+        <div class="step"><span class="n">4</span><span class="t">Crea la carpeta del proyecto y descarga el prototipo dentro</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>mkdir clasemaestra-app
+cd clasemaestra-app
+mkdir -p referencia/assets
+curl -L -o referencia/prototipo.html "https://quadrant-agency.github.io/clasemaestra/prototipo.html"
+curl -L -o referencia/manual-identidad.html "https://quadrant-agency.github.io/clasemaestra/manual-identidad.html"</div>
+
+        <div class="step"><span class="n">5</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li><code>node -v</code> y <code>git -v</code> responden con versiones.</li>
+          <li>Tienes cuenta y puedes entrar a GitHub, Vercel, Supabase, Stripe y Resend.</li>
+          <li>El archivo <code>.env.local</code> tiene todas las llaves rellenadas.</li>
+          <li>Abres <code>referencia/prototipo.html</code> en el navegador y se ve el prototipo.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si <code>curl</code> no funciona en Windows, abre la URL del prototipo en el navegador y guárdala con "Guardar como" dentro de la carpeta <code>referencia</code>. Si una llave de Stripe no aparece, asegúrate de estar en "Developers → API keys" con "Test mode" activado.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 1 -->
+    <div class="day" id="d1">
+      <div class="day-h"><span class="dn">Día 1</span><div><h3>Cimientos del proyecto</h3><div class="sub">Crear la app, ponerle la marca y publicarla en internet.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> tener una página en blanco pero con los colores y la tipografía de clasemaestra, ya publicada en internet con Vercel, y el archivo <code>CLAUDE.md</code> con las reglas.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal (dentro de la carpeta del proyecto)</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+npm run dev</div>
+        <p class="lead" style="margin:4px 0">El segundo comando abre la app en <code>http://localhost:3000</code>. Déjalo corriendo en esa ventana; abre OTRA ventana de terminal para lo demás. Para apagarlo: <code>Ctrl + C</code>.</p>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Eres mi pair-programmer en este proyecto Next.js 14 (App Router, TypeScript, Tailwind). Primero, lee el manual de marca en referencia/manual-identidad.html. Luego configura el sistema de diseño de "clasemaestra":
+1) En tailwind.config.ts define estos colores exactos como tokens: carbon #243240, cian #29C0F5, cian-d #1192c4, amarillo #F7A823, rojo #E8483B, gris #8A8C8E, fondo #F6F9FB, line #e4e9ef. Radios 12-16px y sombras suaves.
+2) En src/app/globals.css carga la fuente Archivo desde Google Fonts (pesos 400 a 900) y ponla como fuente base; fondo de la app color fondo (#F6F9FB); color de texto carbon.
+3) Crea la estructura de carpetas src/components, src/lib, y archivos vacíos src/lib/pricing.ts, src/lib/frameworks.ts y la carpeta src/lib/billing.
+4) Copia las imágenes de referencia/assets a la carpeta public/assets del proyecto.
+5) Crea un layout raíz con el wordmark de clasemaestra (public/assets/wordmark-transparente.png) arriba a la izquierda y un texto de bienvenida centrado.
+6) Crea en la raíz un archivo CLAUDE.md y pega dentro: la REGLA #1 de fidelidad al prototipo (te la doy aparte), el stack, los tokens de color y que el rojo es SOLO para alertas y el CTA primario es cian con texto carbon, y que NUNCA se mencione IA en el texto visible al usuario.
+Reglas: titulares en mayúscula de oración. Cuando termines, dime exactamente qué archivos creaste/cambiaste y cómo verlo en el navegador.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Publica en internet (Vercel)</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>git init
+git add .
+git commit -m "Dia 1: cimientos y marca"
+git branch -M main
+git remote add origin https://github.com/TU-USUARIO/clasemaestra-app.git
+git push -u origin main</div>
+        <p class="lead" style="margin:4px 0">Luego entra a Vercel → "Add New Project" → elige el repo <code>clasemaestra-app</code> → en "Environment Variables" pega las llaves de tu <code>.env.local</code> → "Deploy". (Cambia <code>TU-USUARIO</code> por tu usuario de GitHub.)</p>
+
+        <div class="step"><span class="n">4</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>En <code>localhost:3000</code> ves el wordmark de clasemaestra y el fondo color niebla.</li>
+          <li>Vercel te da una URL pública (ej. <code>clasemaestra-app.vercel.app</code>) y se ve igual.</li>
+          <li>Existe el archivo <code>CLAUDE.md</code> en la raíz con las reglas.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si el push a GitHub pide usuario/contraseña y falla, crea un "Personal Access Token" en GitHub y úsalo como contraseña. Si Vercel marca error de build, abre el log: casi siempre es una variable de entorno que falta.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/manual-identidad.html">manual de identidad</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 2 -->
+    <div class="day" id="d2">
+      <div class="day-h"><span class="dn">Día 2</span><div><h3>Login y base de datos</h3><div class="sub">Que la gente pueda registrarse y que cada quien vea solo lo suyo.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> la base de datos con todas las tablas, el login funcionando (registrarse, entrar, salir) y la seguridad para que una maestra nunca vea los datos de otra.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install @supabase/supabase-js @supabase/ssr</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a la pantalla #login para copiar su diseño exacto. Hoy integramos Supabase (base de datos + login).
+1) Conecta Supabase con render del lado servidor usando cookies (clientes server y browser con @supabase/ssr). Usa las variables de .env.local.
+2) Crea migraciones SQL con estas tablas (con sus columnas típicas y llaves foráneas): profiles (id liga a auth.users, nombre, rol con valores teacher/coordinator/admin, school_id, created_at), schools, subscriptions (plan solo/plus/escuela, modalidad es/en/bi, status active/paused/past_due/canceled, billing monthly/annual, stripe_customer_id, stripe_subscription_id, current_period_end, pause_until), subscription_addons, grades, teacher_grades, bundles (mes, grade_id, modalidad), activities (bundle_id, grade_id, campo_formativo, semana, titulo, descripcion, frameworks jsonb, content jsonb, status), personalizations, brand_kits, ratings, edit_events, subforums, posts, comments, likes, points_ledger, referrals, qa_sessions, invoices, leads, campaigns.
+3) Crea un trigger que, al registrarse un usuario, cree su fila en profiles con rol teacher por defecto.
+4) Construye las pantallas de registro, login (email+contraseña y enlace mágico), cerrar sesión y recuperar contraseña, copiando el diseño de #login del prototipo.
+5) Activa Row-Level Security (RLS) en TODAS las tablas con datos de usuaria, de modo que cada quien solo lea/escriba lo suyo (filtrando por auth.uid()); el acceso a activities exige una suscripción activa y que el grado y la modalidad estén en el plan.
+6) Crea un middleware que proteja las rutas /app (maestra) y /admin (solo rol admin verificado en el servidor, nunca confiando en el navegador).
+7) Crea un seed que inserte 9 grados (3 de preescolar y 6 de primaria), los 4 campos formativos del plan NEM y un usuario admin de prueba.
+8) Escribe una prueba que confirme que una usuaria NO puede leer filas de otra.
+Cuando termines, dime cómo registrar un usuario de prueba y cómo correr el seed.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Puedes registrarte, entrar y salir; en Supabase → Table editor aparece tu fila en <code>profiles</code>.</li>
+          <li>La pantalla de login se ve igual que #login del prototipo.</li>
+          <li>En Supabase → Table editor ves las tablas creadas y los 9 grados del seed.</li>
+          <li>La prueba de "una usuaria no ve datos de otra" pasa.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si el login no manda correos, en Supabase → Authentication revisa que el proveedor "Email" esté activado. Si una tabla no se crea, lee el error del SQL: casi siempre es una llave foránea apuntando a una tabla que aún no existe (ajusta el orden).</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#login">#login</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 3 -->
+    <div class="day" id="d3">
+      <div class="day-h"><span class="dn">Día 3</span><div><h3>Las piezas reutilizables (design system)</h3><div class="sub">Botones, tarjetas, menús… que se usan en todas las pantallas.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> una "caja de piezas" (botones, tarjetas, formularios, menús laterales) idénticas al prototipo, para que las demás pantallas se armen rápido y consistentes.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y observa los componentes que se repiten en TODAS las pantallas. Crea una librería de componentes reutilizables en src/components/ui, copiando su estilo exacto del prototipo:
+- Button con variantes: cta (fondo cian, texto carbon), ghost (borde, fondo claro), ink (fondo carbon, texto blanco) y amber (amarillo); tamaños normal, pequeño y de ancho completo.
+- Card (tarjeta blanca con borde suave y sombra ligera), Pill (etiqueta redonda en verde/amarillo/cian/gris), Chip (filtro seleccionable), Field (Input, Select y Textarea con su etiqueta arriba y ancho completo), Modal (ventana emergente con overlay, encabezado, cuerpo y pie), Toast (aviso flotante), Table (que en celular se desliza horizontal), ProgressBar y Tabs.
+- Shell de la maestra: barra lateral con los enlaces Inicio, Bundle del mes, Mi estilo, Mi suscripción, Pago, Mi escuela, Comunidad, Perfil; y una barra superior con el título de la pantalla, buscador, campana de notificaciones y avatar. En celular la barra lateral se vuelve un menú hamburguesa.
+- Shell de admin: barra lateral con Dashboard, Contenidos, Subir, Planes, Flywheel, Señal, Usuarias, CRM, Correos.
+- Componentes Wordmark y Kipi (usa public/assets) y estados reutilizables de Cargando, Vacío y Error.
+Publica una página interna en /dev/ui que muestre todos los componentes juntos para revisarlos. Respeta los tokens de color y compáralo contra el prototipo. Dime cómo abrir /dev/ui.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Abres <code>localhost:3000/dev/ui</code> y ves todos los botones, tarjetas y formularios.</li>
+          <li>Se ven iguales que en el prototipo (mismos colores, bordes y forma).</li>
+          <li>Achicas la ventana (o abres en el celular) y el menú lateral se convierte en hamburguesa.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si los colores no salen, es que el componente usó un color escrito a mano en vez del token de Tailwind; pídele a Claude Code que use solo los tokens (bg-cian, text-carbon, etc.).</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-dashboard">#u-dashboard</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-dashboard">#a-dashboard</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 4 -->
+    <div class="day" id="d4">
+      <div class="day-h"><span class="dn">Día 4</span><div><h3>Página pública de inicio (landing)</h3><div class="sub">Lo primero que ve quien llega; donde se decide la compra.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> la página de inicio completa, idéntica al prototipo, con precios que cambian solos al elegir idioma (Español/Inglés/Bilingüe) y mensual/anual.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #landing. Construye la página pública de inicio (ruta /) replicándola EXACTAMENTE: mismo orden de secciones, mismos textos visibles, misma jerarquía. Usa los componentes de src/components/ui y los tokens de color. Secciones, en este orden:
+1) Barra de anuncio de temporada arriba del todo.
+2) Header: wordmark a la izquierda; navegación a "Cómo funciona", "Qué incluye", "Precios", "Preguntas" y "Para colegios"; en celular, menú hamburguesa.
+3) Hero: titular grande en mayúscula de oración, subtítulo, DOS botones (el primario cian "Empezar ahora" lleva a /checkout; el secundario "Descargar muestra gratis" lleva a /muestra), una línea de confianza con el claim "Calificadas por miss reales: sí jalan en el salón", y la imagen de Kipi (public/assets/kipi-planea.png).
+4) Franja de prueba social (logos o números de confianza).
+5) "Cómo funciona" en 3 pasos.
+6) "Qué incluye" en una grilla de 6 (incluye "Comunidad de miss").
+7) "Enfoques internacionales": tarjetas de PYP, CASEL, Montessori y Cambridge. IMPORTANTE: la tarjeta de Cambridge SOLO debe mostrarse cuando la modalidad elegida es Inglés o Bilingüe. Usa el lenguaje "compatible con" (nunca "afiliado" ni "certificado") e incluye la nota "no somos proveedor oficial de estos marcos".
+8) Precios: con dos interruptores, uno de idioma (Español / Inglés / Bilingüe) y otro de ciclo (Mensual / Anual). Los precios se calculan desde src/lib/pricing.ts con esta matriz mensual en pesos: Maestra Solo 147, Maestra Plus 297, Plan Escuela 997; recargo de Inglés +50 (Solo) / +100 (Plus); recargo de Bilingüe +100 (Solo) / +200 (Plus); Escuela: ES 997, EN 1497, BI 1997. El plan Anual = precio mensual × 10 (paga 10, recibe 12). Muestra también una tabla comparativa de los 3 planes y un sello de "Garantía de 7 días".
+9) Testimonios de maestras.
+10) Equipo pedagógico (expertos en educación).
+11) Bloque para colegios con botón a /colegios.
+12) Preguntas frecuentes; incluye la pregunta "¿Por qué no usar solo ChatGPT?".
+13) Footer.
+REGLAS: titulares en mayúscula de oración; CERO menciones de inteligencia artificial en el texto visible; el botón primario siempre cian con texto carbon; el rojo solo para alertas; todo responsive. Al terminar, confirma que comparaste contra #landing y lista qué quedó.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Cambias el interruptor a "Inglés" y los precios suben +50/+100; aparece la tarjeta de Cambridge. En "Español" desaparece.</li>
+          <li>Cambias a "Anual" y el precio es el mensual × 10.</li>
+          <li>El botón "Empezar ahora" te lleva a /checkout y "Descargar muestra gratis" a /muestra.</li>
+          <li>No hay ninguna palabra sobre IA en la página.</li>
+          <li>Se ve idéntica a #landing y funciona en celular.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si los precios no cambian, el cálculo quedó "quemado" en la página en vez de leer src/lib/pricing.ts; pídele a Claude Code que centralice TODO el cálculo en ese archivo.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#landing">#landing</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 5 -->
+    <div class="day" id="d5">
+      <div class="day-h"><span class="dn">Día 5</span><div><h3>Colegios, muestra gratis y login</h3><div class="sub">La página para escuelas y el regalo que capta correos.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> la página para colegios con su formulario, y la "muestra gratis" que pide nombre y correo y envía una actividad de regalo (esto reemplaza la "prueba gratis").</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install resend</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #colegios y #sample. Construye dos páginas copiando su diseño exacto:
+(A) /colegios (#colegios): hero para escuelas (ej. "~32 horas ahorradas por maestra"), franja de retorno de inversión, 6 beneficios, "cómo se implementa" en 3 pasos, enfoques internacionales, un testimonio de coordinadora, el bloque de precio del Plan Escuela (Español 997, Inglés 1497, Bilingüe 1997) y un FORMULARIO con: nombre del colegio, nombre de contacto, cargo, número de maestras, correo, teléfono, niveles que imparten y modalidad. Al enviarlo, guarda una fila en la tabla leads (tipo = colegio) y manda un correo con Resend al equipo avisando del nuevo prospecto.
+(B) /muestra (#sample): un "imán de leads". Formulario corto con nombre, correo y grado. Al enviarlo, guarda en leads (tipo = sample) y envía por correo (Resend) la actividad de muestra. NO uses en ningún lado la frase "prueba gratis".
+Pule también la pantalla /login para que calce con #login. Usa los componentes de ui y los tokens. Confirma que comparaste contra los deep-links.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Llenas el formulario de /colegios y aparece una fila nueva en la tabla <code>leads</code> de Supabase; llega el correo de aviso.</li>
+          <li>En /muestra dejas tu correo y te llega la actividad de muestra.</li>
+          <li>No aparece la frase "prueba gratis" en ningún lugar.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si los correos no llegan, en Resend debes verificar tu dominio (o usar el dominio de pruebas que te da Resend). Revisa también que <code>RESEND_API_KEY</code> esté en las variables de entorno.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#colegios">#colegios</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#sample">#sample</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 6 -->
+    <div class="day" id="d6">
+      <div class="day-h"><span class="dn">Día 6 ⏱</span><div><h3>Cobros con Stripe · el checkout</h3><div class="sub">Que una maestra pueda pagar y volverse suscriptora.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> el carrito de 4 pasos donde la maestra elige plan, idioma, pone sus datos y paga con tarjeta de prueba. Al pagar, se crea su cuenta y su suscripción.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Primero, crea los productos en Stripe (en su panel, modo prueba)</span></div>
+        <p class="lead" style="margin:4px 0 8px">En Stripe → "Product catalog" crea 3 productos: Maestra Solo, Maestra Plus, Plan Escuela. A cada uno agrégale precios recurrentes (mensual y anual) para las 3 modalidades, según la matriz (Solo 147 / Plus 297 / Escuela 997, con los recargos de inglés y bilingüe; anual = mensual × 10). Crea también 2 productos de add-on: "Grado extra" 97 y "Maestra adicional" 197. Copia cada <code>price_id</code> (empieza con <code>price_...</code>); los pondrás en el siguiente paso.</p>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install stripe @stripe/stripe-js @stripe/react-stripe-js</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #checkout. Integra Stripe (modo prueba) y construye el checkout copiando ese diseño exacto.
+1) En src/lib/billing crea un archivo que mapee cada combinación (plan, modalidad, ciclo) a su price_id de Stripe, y los add-ons grado_extra y maestra_adicional a su price_id. Yo te pasaré los price_id que copié de Stripe; déjalos como constantes claras.
+2) Construye el checkout en 4 pasos (ruta /checkout): Paso 1 elegir plan (Solo/Plus/Escuela); Paso 2 elegir modalidad (Español/Inglés/Bilingüe) y ciclo (Mensual/Anual = mensual×10); Paso 3 datos de la cuenta (nombre, correo, contraseña: aquí se crea el usuario); Paso 4 pago con el Stripe Payment Element embebido (tarjeta).
+3) Muestra a la derecha un resumen que recalcula el total EN VIVO usando src/lib/pricing.ts cuando cambian plan, modalidad o ciclo.
+4) En una server action: crea el Customer y la Subscription en Stripe; cuando el pago se confirme, crea el perfil del usuario y su fila en la tabla subscriptions (como espejo) y asígnale los grados según el plan (Solo = 1 grado, Plus = 2 grados).
+5) Página de éxito que da la bienvenida y lleva al dashboard.
+6) Maneja errores de pago con un mensaje claro en rojo (el rojo solo para errores).
+Para probar usa la tarjeta 4242 4242 4242 4242, cualquier fecha futura y cualquier CVC. Confirma que comparaste contra #checkout y dime cómo probar el flujo completo.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Completas los 4 pasos con la tarjeta 4242… y llegas a la página de éxito.</li>
+          <li>El total del resumen coincide con la matriz para cada combinación que pruebes.</li>
+          <li>En Stripe → Payments ves el pago; en Supabase aparece la suscripción.</li>
+          <li>Entras al dashboard y ya tienes tu(s) grado(s) según el plan.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si el pago no procesa, casi siempre es un <code>price_id</code> mal copiado o que mezclaste claves de test con productos de live. Verifica que todo esté en "modo prueba".</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#checkout">#checkout</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 7 -->
+    <div class="day" id="d7">
+      <div class="day-h"><span class="dn">Día 7 ⏱</span><div><h3>Stripe se sincroniza solo + pantalla de pago</h3><div class="sub">Que cobrar, renovar y fallar un pago actualicen el acceso automáticamente.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> que Stripe le "avise" a tu sistema cada vez que pasa algo (pago hecho, pago fallido, cancelación) y eso ajuste el acceso solo; más la pantalla donde la maestra ve sus facturas y cambia su tarjeta.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal (para probar los avisos de Stripe en tu compu)</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>brew install stripe/stripe-cli/stripe   # Mac. En Windows: descarga de stripe.com/docs/stripe-cli
+stripe login
+stripe listen --forward-to localhost:3000/api/stripe/webhook</div>
+        <p class="lead" style="margin:4px 0">El último comando te imprime un <code>whsec_...</code>: cópialo a <code>STRIPE_WEBHOOK_SECRET</code> en <code>.env.local</code> y deja esa ventana abierta mientras pruebas.</p>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-billing. Implementa dos cosas:
+1) El receptor de avisos de Stripe (webhook) en /api/stripe/webhook. Verifica la firma con STRIPE_WEBHOOK_SECRET y evita procesar dos veces el mismo aviso (idempotencia por id del evento). Maneja estos casos: invoice.paid (activa o renueva la suscripción y guarda la factura en la tabla invoices con su PDF), invoice.payment_failed (marca la suscripción como past_due y dispara una secuencia de cobranza por correo con Resend), customer.subscription.updated (sincroniza plan, modalidad, estado y pausa en la tabla subscriptions) y customer.subscription.deleted (quita el acceso al terminar el ciclo). El acceso a las actividades SIEMPRE debe depender del estado real de la suscripción.
+2) Dispara correos automáticos de bienvenida (al primer pago) y de pago recuperado.
+3) Crea una server action de reembolso para la garantía de 7 días: solo permite reembolsar dentro de los 7 días desde el primer pago.
+4) Construye la pantalla de pago en /app/pago copiando #u-billing: método de pago actual con opción de actualizar la tarjeta (vía Stripe) y la lista de facturas con su descarga (la factura SÍ se puede descargar).
+Confirma que comparaste contra #u-billing. Dime cómo simular un pago y un pago fallido con la Stripe CLI.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Con la Stripe CLI corriendo, haces un pago de prueba y la suscripción queda "active" en Supabase.</li>
+          <li>Simulas un pago fallido y la cuenta pasa a "past_due" y llega el correo de cobranza.</li>
+          <li>En /app/pago ves tus facturas y puedes actualizar la tarjeta.</li>
+          <li>El reembolso de garantía funciona dentro de 7 días y se rechaza después.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si el webhook da error de "firma inválida", el <code>whsec_</code> no coincide; vuelve a copiarlo del <code>stripe listen</code>. Si nada llega, revisa que la ventana de <code>stripe listen</code> siga abierta.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-billing">#u-billing</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 8 -->
+    <div class="day" id="d8">
+      <div class="day-h"><span class="dn">Día 8 ⏱</span><div><h3>Gestión de la suscripción</h3><div class="sub">Cambiar de plan, agregar grados, la pausa de verano y cancelar.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> que la maestra administre su plan: subir/bajar de plan, cambiar idioma, pasarse a anual, agregar add-ons, activar la pausa de verano (2 meses sin cobro que se reanudan solos) y cancelar.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-subscription. Construye la pantalla /app/suscripcion copiando ese diseño, con todo conectado a Stripe mediante server actions:
+1) Muestra el plan actual (plan, modalidad, ciclo, próxima fecha de cobro).
+2) Cambiar de plan (Solo/Plus/Escuela) y de modalidad (Español/Inglés/Bilingüe): actualiza el precio del item de la suscripción en Stripe con prorrateo (cobro proporcional por lo que resta del periodo). Al cambiar de plan, ajusta también cuántos grados puede elegir.
+3) Cambiar a Anual: cambia al precio anual (mensual × 10).
+4) Add-ons: "Grado extra" (+97, solo disponible en Plus y Escuela) y "Maestra adicional" (+197, solo Escuela), agregándolos como items extra de la suscripción.
+5) PAUSA DE VERANO: un botón que pausa el cobro 2 meses usando pause_collection de Stripe con fecha de reanudación automática el 1 de septiembre. Durante la pausa la maestra conserva sus planeaciones personalizadas, su nivel de aportes y la comunidad. Debe reanudarse sola.
+6) Cancelar: PRIMERO ofrece la pausa de verano como alternativa para retenerla; si aun así cancela, usa cancel_at_period_end (conserva acceso hasta que termine el ciclo pagado).
+Todos los cambios deben reflejarse en la tabla subscriptions a través de los webhooks del Día 7. Confirma que comparaste contra #u-subscription.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Cambias de Solo a Plus y en Stripe ves el ajuste con prorrateo; ahora puedes elegir 2 grados.</li>
+          <li>Activas la pausa de verano: el cobro se detiene y queda programada la reanudación al 1 de septiembre.</li>
+          <li>Intentas cancelar y primero te ofrece la pausa; si confirmas, conservas acceso hasta fin de ciclo.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si el prorrateo no aparece, revisa que estés actualizando el "subscription item" existente y no creando una suscripción nueva. La pausa usa <code>pause_collection</code> con <code>resumes_at</code>; verifica la fecha.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-subscription">#u-subscription</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 9 -->
+    <div class="day" id="d9">
+      <div class="day-h"><span class="dn">Día 9</span><div><h3>Inicio de la maestra + biblioteca</h3><div class="sub">Su panel y el paquete del mes (Modelo A).</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> el panel de inicio de la maestra y su biblioteca, donde ve el paquete completo del mes ordenado por campo formativo y semana, y navega entre meses con una tira del ciclo escolar.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-dashboard y #u-library. Construye dos pantallas copiando su diseño exacto, leyendo datos reales de Supabase:
+1) /app (inicio, #u-dashboard): saludo con Kipi, tarjetas de indicadores (grados activos, horas ahorradas este mes, número de actividades, descargadas), el paquete del mes destacado y, para cuentas nuevas, un onboarding de 3 pasos.
+2) /app/biblioteca (#u-library) con el MODELO A: el paquete (bundle) mensual COMPLETO se muestra de una vez, organizado por los 4 campos formativos NEM (Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; De lo humano y lo comunitario) y por semana sugerida. NADA de liberar por goteo ni candados por semana. La navegación entre meses es una TIRA horizontal del ciclo escolar (de Agosto a Julio); los meses anteriores quedan disponibles. Cada tarjeta de actividad muestra sus etiquetas de enfoque (PYP/CASEL/Montessori; Cambridge solo si la modalidad es Inglés o Bilingüe) y al hacer clic abre /app/actividad/[id].
+3) Control de acceso: la maestra solo ve los grados y la modalidad de su plan activo; lo que no incluye su plan se muestra como "vista previa" con un botón para mejorar el plan.
+Confirma que comparaste contra los deep-links.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>En la biblioteca ves el paquete completo del mes, separado por los 4 campos formativos y por semana.</li>
+          <li>La tira de meses cambia el contenido y puedes volver a meses anteriores.</li>
+          <li>Solo ves tus grados y tu modalidad; lo demás aparece como vista previa con CTA de mejora.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si la biblioteca sale vacía, falta cargar contenido (eso se hace en el Día 18 desde el admin); pídele a Claude Code que cree unos datos de ejemplo para poder ver la pantalla mientras tanto.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-dashboard">#u-dashboard</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-library">#u-library</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 10 -->
+    <div class="day" id="d10">
+      <div class="day-h"><span class="dn">Día 10</span><div><h3>La actividad por dentro + calificación</h3><div class="sub">Verla, decir si "jaló en el salón" y entrar a personalizarla.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> la pantalla de una actividad, con su calificación "¿funcionó en tu salón?", el botón para personalizarla, e imprimir. Aquí NO se descarga el documento (es a propósito).</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-activity. Construye /app/actividad/[id] copiando ese diseño:
+1) Muestra el contenido de la actividad, sus etiquetas de enfoque y una nota de la modalidad.
+2) Tarjeta de calificación "¿Funcionó en tu salón?" con estrellas del 1 al 5 y un campo opcional "¿qué le cambiaste?"; al enviar, guarda en la tabla ratings.
+3) Botón principal "Abrir y personalizar" que lleva al editor (/app/editor/[id]). Botón secundario "Imprimir para mi clase". MUY IMPORTANTE: NO pongas ningún botón para descargar el documento (ni Word, ni PDF, ni ZIP); a propósito solo se personaliza en línea o se imprime.
+4) Un enlace a la comunidad: "Comparte cómo te quedó en el foro de [tu grado]".
+5) Registra un edit_event cuando se abre y cuando se imprime (para la señal de contenido).
+Confirma que comparaste contra #u-activity.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Calificas con estrellas y aparece guardado (revisa la tabla <code>ratings</code>).</li>
+          <li>No existe ningún botón de descarga del documento; sí "Abrir y personalizar" e "Imprimir".</li>
+          <li>El enlace de comunidad te lleva al foro del grado correcto.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si "Imprimir" se ve feo, pídele a Claude Code una "vista de impresión" limpia (estilos @media print) que oculte menús y botones.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-activity">#u-activity</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 11 -->
+    <div class="day" id="d11">
+      <div class="day-h"><span class="dn">Día 11 ⏱</span><div><h3>El editor (parte 1: escribir y mover bloques)</h3><div class="sub">Editar la planeación como un documento, por bloques.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> un editor tipo documento donde la maestra cambia textos y agrega, mueve o quita bloques (encabezado, párrafo, lista, imagen). Hoy es solo el editor; guardar y la señal van mañana.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install @tiptap/react @tiptap/starter-kit @tiptap/extension-image</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-editor. Construye el núcleo del editor en /app/editor/[id] usando TipTap (React), copiando ese diseño:
+1) El documento tiene un encabezado con el logo y los datos de la maestra, y un cuerpo de bloques editables: título, datos generales, encabezados de sección, párrafos, listas e imágenes.
+2) La maestra puede editar cualquier texto haciendo clic directamente sobre él.
+3) Un panel "Agregar bloque" permite insertar Encabezado, Párrafo, Lista o Imagen. Cada bloque tiene controles para moverlo hacia arriba/abajo (↑ ↓) y para quitarlo (✕).
+4) El contenido se representa internamente como JSON, en una estructura compatible con cómo se muestra la actividad normal.
+Hoy todavía NO guardamos en la base de datos (eso es mañana). Confirma que comparaste contra #u-editor y dime cómo abrir el editor de una actividad.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Abres una actividad en el editor y puedes cambiar un texto escribiendo encima.</li>
+          <li>Agregas un bloque nuevo, lo mueves de lugar y lo eliminas.</li>
+          <li>El editor se parece a #u-editor.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si TipTap marca error de versiones, pídele a Claude Code que use versiones compatibles entre <code>@tiptap/react</code> y <code>@tiptap/starter-kit</code>.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-editor">#u-editor</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 12 -->
+    <div class="day" id="d12">
+      <div class="day-h"><span class="dn">Día 12</span><div><h3>El editor (parte 2: guardar, imprimir y datos de uso)</h3><div class="sub">Que la versión de la maestra se guarde y deje señal.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> que el editor guarde la versión personalizada, permita subir imágenes e imprimir, y que registre en silencio qué se edita (para saber qué mejorar del contenido).</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Continúa el editor de /app/editor/[id] (#u-editor). Agrega:
+1) Subir imágenes a Supabase Storage e insertarlas en los bloques de imagen.
+2) Botón "Guardar mi versión" que guarda el contenido (JSON) en la tabla personalizations por (maestra, actividad), y que al volver a abrir reaparezca exactamente igual. Agrega guardado automático cada pocos segundos.
+3) Botón "Imprimir" con una vista de impresión limpia (sin menús ni botones). Recuerda: NO debe haber descarga de archivo editable.
+4) CAPTURA DE SEÑAL (silenciosa, sin molestar a la maestra): registra edit_events conforme edita, con tipos como section_deleted (borró una sección), section_added (agregó), text_replaced (cambió texto), logo_added (puso su logo) y reuse (reutilizó). Guarda datos útiles (qué sección, qué actividad) para el panel de Señal del admin.
+5) Asegúrate de que funcione bien en celular.
+Confirma que comparaste contra #u-editor.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Editas, guardas, sales y al volver a entrar tu versión sigue igual.</li>
+          <li>Insertas una imagen y se sube y se ve.</li>
+          <li>En la tabla <code>edit_events</code> aparecen registros cuando borras o cambias secciones.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si la imagen no sube, en Supabase → Storage crea un "bucket" (ej. <code>uploads</code>) y dale permisos de subida al usuario autenticado.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-editor">#u-editor</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 13 -->
+    <div class="day" id="d13">
+      <div class="day-h"><span class="dn">Día 13</span><div><h3>"Mi estilo" (su sello personal)</h3><div class="sub">Define logo, color y tipografía una vez y se aplica a todo.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> una pantalla donde la maestra sube su logo, elige su color y su tipografía, y con un clic eso se aplica a TODAS sus planeaciones.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-style. Construye /app/mi-estilo copiando ese diseño:
+1) Controles: subir logo (a Supabase Storage); color de acento con 5 muestras rápidas más un selector de color completo (rueda); tipografía elegida de una lista de Google Fonts reales (Archivo, Poppins, Nunito, Montserrat, Quicksand, Lora, Merriweather, Patrick Hand, Caveat), cargándolas de verdad; y estilo de encabezado (Con barra / Minimal / Franja lateral).
+2) A la derecha, una vista previa grande EN VIVO y, debajo, una grilla de miniaturas de varias actividades. Cuando la maestra cambia el color, la tipografía o el encabezado, la vista previa Y todas las miniaturas se actualizan al instante (aplica el color con una variable CSS --doc-accent y la tipografía a todos los documentos .doc).
+3) Guarda el estilo en la tabla brand_kits (logo, color, tipografía, estilo de encabezado).
+4) Botón "Aplicar a todas mis actividades": hace que el contenido de cada documento de esa maestra (en el editor y al ver una actividad) use su estilo.
+5) Mete una versión compacta de este panel dentro del editor del Día 11-12.
+Confirma que comparaste contra #u-style.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Cambias el color y la tipografía y la vista previa y las miniaturas cambian al instante.</li>
+          <li>Pulsas "Aplicar a todas" y al abrir cualquier actividad ya sale con tu estilo.</li>
+          <li>Tu logo aparece en el encabezado del documento.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si la tipografía no cambia, es que no se está cargando esa Google Font; pídele a Claude Code que las importe dinámicamente al seleccionarlas.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-style">#u-style</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 14 -->
+    <div class="day" id="d14">
+      <div class="day-h"><span class="dn">Día 14</span><div><h3>Panel de escuela (para coordinadoras)</h3><div class="sub">Administrar hasta 5 maestras de un colegio.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> el panel del Plan Escuela, donde una coordinadora invita a sus maestras, les asigna grados y modalidad, y ve qué cubre cada una.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-school. Construye /app/escuela para el rol coordinator del Plan Escuela, copiando ese diseño:
+1) Invitar maestras por correo: se crea una invitación y, al aceptarla, la maestra queda dada de alta con nivel Plus.
+2) Asignar a cada maestra sus grados y su modalidad.
+3) Gestionar hasta 5 cuentas; si necesita más, el add-on "Maestra adicional". Elegir la modalidad del colegio. Reenviar invitaciones pendientes.
+4) Una vista de cobertura del equipo: qué grados y cuántas actividades cubre cada maestra.
+Respeta la seguridad: la coordinadora solo ve a las maestras de SU colegio. Confirma que comparaste contra #u-school.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Invitas un correo y, al aceptar, esa maestra aparece en tu escuela con nivel Plus.</li>
+          <li>Le asignas grados y modalidad y se reflejan en su cuenta.</li>
+          <li>No puedes ver maestras de otra escuela.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si la invitación no llega, revisa Resend (igual que el Día 5). Si la maestra invitada ve datos que no debería, falta una regla RLS por <code>school_id</code>.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-school">#u-school</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 15 -->
+    <div class="day" id="d15">
+      <div class="day-h"><span class="dn">Día 15 ⏱</span><div><h3>Comunidad (parte 1)</h3><div class="sub">Foros por grado, publicaciones con foto y Q&amp;A en vivo.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> la comunidad donde las maestras comparten (con foto), comentan y se juntan; incluida en todos los planes. Más la tarjeta de la sesión de preguntas y respuestas en vivo del mes.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-community. Construye /app/comunidad copiando ese diseño. La comunidad está disponible en TODOS los planes.
+1) Subforos por grado y subforos generales; al elegir uno, el muro (feed) se filtra.
+2) Un muro con un cuadro para publicar "foto primero" (subir imagen a Supabase Storage + texto), con reacciones (me gusta) y comentarios. Todo se guarda en las tablas posts, comments y likes, con seguridad para que cada quien edite/borre lo suyo.
+3) Bloques superiores: "Maestra de la semana", el ritual "Lunes de pre-clase" y el "Reto de temporada".
+4) Una tarjeta de "Q&amp;A en vivo mensual" con la próxima sesión (botón de "Voy" que registra 10 estrellitas) y una lista de grabaciones anteriores (tabla qa_sessions).
+5) Permite que solo el admin/curador marque una publicación como "Destacada".
+Confirma que comparaste contra #u-community.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Con cualquier plan entras a la comunidad (no está bloqueada).</li>
+          <li>Publicas con una foto, comentas y das me gusta, y se guarda.</li>
+          <li>Eliges un grado y el muro se filtra a ese subforo.</li>
+          <li>La tarjeta de Q&amp;A muestra la próxima sesión y las grabaciones.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si la foto no sube, revisa el bucket de Storage (igual que el Día 12). Si cualquiera puede borrar publicaciones ajenas, falta una regla RLS por autor.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-community">#u-community</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 16 -->
+    <div class="day" id="d16">
+      <div class="day-h"><span class="dn">Día 16 ⏱</span><div><h3>Estrellitas y referidas</h3><div class="sub">El sistema de puntos, niveles y "invita a una colega".</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> que participar dé "estrellitas" y suba de nivel (Aportadora, Destacada, Embajadora) con recompensas, y que cada maestra pueda invitar colegas con su enlace (50% el primer mes para la colega, 25% de comisión para ella).</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html (bloque de comunidad/aportes). Implementa el programa de aportes ("estrellitas") y las referidas:
+1) Una bitácora de puntos en la tabla points_ledger que sume: calificar una actividad +5, compartir una adaptación con foto +15, que tu adaptación sea curada a la biblioteca +50, responder una duda +10, asistir al Q&amp;A +10, invitar a una colega que se suscribe +40.
+2) El nivel se calcula por el total acumulado: Aportadora (100), Destacada (300), Embajadora (600), con una barra de progreso hacia el siguiente nivel.
+3) Recompensas por nivel: votar/elegir el tema del próximo paquete, acceso anticipado al paquete, aparecer destacada (spotlight) y plantillas premium. REGLA: ninguna recompensa puede ser meses gratis ni descuento al plan (no deben canibalizar el ingreso).
+4) Un "Reto del mes" con barra de progreso (ejemplo: comparte 3 adaptaciones y desbloqueas el siguiente paquete una semana antes).
+5) Referidas: cada maestra tiene su enlace propio. La colega referida recibe 50% de descuento el primer mes (usando un cupón de Stripe) y la maestra que refiere gana 25% de comisión cuando alcanza el nivel Embajadora. Registra todo en la tabla referrals.
+Confirma que comparaste contra el prototipo.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Calificar o publicar con foto suma estrellitas y la barra de nivel avanza.</li>
+          <li>Al llegar a un nivel se desbloquea su recompensa.</li>
+          <li>Compartes tu enlace de referida y, al registrarse la colega, se le aplica el 50% y queda registrada la comisión.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si el descuento de la colega no se aplica, revisa que el cupón exista en Stripe y que el checkout lo reciba por el enlace de referida.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-community">#u-community</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 17 -->
+    <div class="day" id="d17">
+      <div class="day-h"><span class="dn">Día 17</span><div><h3>Admin (parte 1): tablero, usuarias y CRM</h3><div class="sub">El panel interno para operar el negocio.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> el panel de administración con los números del negocio, la lista de usuarias y la ficha de cada una (su historial y notas internas).</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #a-dashboard, #a-users y #a-crm. Construye el panel de admin (solo accesible para el rol admin, verificado en el servidor), copiando esos diseños:
+1) /admin (#a-dashboard): indicadores reales (ingreso mensual recurrente, suscriptoras activas, altas del mes, cancelaciones/churn) y gráficas.
+2) /admin/usuarias (#a-users): lista de usuarias con filtros por plan y un buscador.
+3) /admin/crm (#a-crm): ficha de una usuaria con sus datos, una línea de tiempo de su actividad real (descargas, pagos, cambios de plan), notas internas que el equipo puede escribir, y acciones (enviarle un correo o un enlace).
+Todo lee de Supabase respetando que solo el admin entra. Confirma que comparaste contra los deep-links.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Entras a /admin solo si tu usuario tiene rol admin (con una cuenta normal te rebota).</li>
+          <li>Ves números reales y puedes buscar y filtrar usuarias.</li>
+          <li>Abres una ficha y ves su historial; puedes dejar una nota.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si una cuenta normal logra entrar a /admin, el rol se está validando en el navegador y no en el servidor; pídele a Claude Code que lo valide en el servidor (en el middleware y en cada acción).</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-dashboard">#a-dashboard</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-users">#a-users</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-crm">#a-crm</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 18 -->
+    <div class="day" id="d18">
+      <div class="day-h"><span class="dn">Día 18</span><div><h3>Admin (parte 2): contenidos y carga</h3><div class="sub">Subir las planeaciones para llenar la biblioteca.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> el lugar donde el equipo sube las planeaciones y arma los paquetes del mes; con esto la biblioteca de las maestras deja de estar vacía.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #a-content y #a-upload. Construye:
+1) /admin/contenidos (#a-content): administrar actividades y paquetes por mes, grado y modalidad, con estados (publicado, programado, borrador) y un "estado vacío" claro cuando un mes todavía no tiene contenido.
+2) /admin/subir (#a-upload): subir actividades y sus archivos (a Supabase Storage), asignándoles grado, campo formativo, semana y modalidad, con validación del mapa de enfoques (PYP/CASEL/Montessori/Reggio/Cambridge según el grado y la modalidad; Cambridge solo en inglés/bilingüe; Reggio solo preescolar; Montessori preescolar y primaria baja).
+Lo que se suba debe aparecer en la biblioteca de las maestras correspondientes. Confirma que comparaste contra los deep-links y dime cómo subir una actividad de prueba.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Subes una actividad de prueba y aparece en la biblioteca de una maestra con ese grado y modalidad.</li>
+          <li>Si un mes no tiene contenido, se ve un estado vacío y no un error.</li>
+          <li>Cambridge solo deja asignarse en inglés/bilingüe.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si subes una actividad y no aparece para la maestra, revisa que el grado y la modalidad coincidan con su plan.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-content">#a-content</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-upload">#a-upload</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 19 -->
+    <div class="day" id="d19">
+      <div class="day-h"><span class="dn">Día 19</span><div><h3>Admin (parte 3): planes, flywheel y señal</h3><div class="sub">Editar precios y ver el "foso" del negocio.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> editar planes y precios desde el admin, y ver dos tableros: el "flywheel" (cómo crece el negocio) y la "señal de contenido" (qué planeaciones mejorar, según lo que las maestras califican y editan).</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #a-plans, #a-flywheel y #a-signal. Construye:
+1) /admin/planes (#a-plans): un editor de planes, precios y add-ons que se conecta con el catálogo de Stripe.
+2) /admin/flywheel (#a-flywheel): el tablero del "foso" con el diagrama del flywheel (réplica del dibujo del prototipo con indicadores en cada nodo), la "Fuerza del foso" (datos acumulados, catálogo curado, permanencia), la "Velocidad de cada vuelta", las métricas del programa de aportes y la sección "Lo que ChatGPT no replica".
+3) /admin/senal (#a-signal): la "Señal de contenido" por grado y campo formativo, calculada a partir de las calificaciones (ratings) y de lo que las maestras editan (edit_events): calificación promedio "en el salón", porcentaje que personaliza, cuál sección se borra más y una acción sugerida; más una sección de curaduría que convierte las mejores adaptaciones de la comunidad en actividades de la biblioteca, dando crédito a la autora.
+Confirma que comparaste contra los deep-links.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Editas un precio en /admin/planes y se refleja correctamente.</li>
+          <li>El flywheel y la señal muestran datos reales (de las calificaciones y ediciones).</li>
+          <li>Curas una adaptación de la comunidad y aparece en la biblioteca con crédito.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si la señal sale vacía, es que aún hay pocas calificaciones/ediciones; genera datos de prueba para ver el tablero.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-plans">#a-plans</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-flywheel">#a-flywheel</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-signal">#a-signal</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 20 -->
+    <div class="day" id="d20">
+      <div class="day-h"><span class="dn">Día 20</span><div><h3>Admin (parte 4): correos</h3><div class="sub">Escribir campañas y dejar correos automáticos.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> el módulo para enviar correos a grupos de maestras y dejar configurados los correos automáticos (bienvenida, cobranza, nuevo paquete, reactivación).</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #a-email. Construye /admin/correos copiando ese diseño:
+1) Redactar y enviar correos a un segmento (por plan, por nivel de aportes, por estado de pago) usando Resend, con plantillas con la marca clasemaestra.
+2) Dejar configuradas las secuencias automáticas: bienvenida (al darse de alta), cobranza/recuperación de pago (cuando una cuenta queda en past_due), aviso de nuevo paquete disponible (fin de mes) y reactivación (para canceladas).
+3) Mostrar estadísticas básicas (enviados y abiertos).
+Confirma que comparaste contra #a-email.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Envías un correo de prueba a un segmento y llega.</li>
+          <li>Existen las 4 secuencias automáticas configuradas.</li>
+          <li>Las plantillas se ven con la marca (colores, wordmark).</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> mismos chequeos de Resend que el Día 5 (dominio verificado y API key presente).</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#a-email">#a-email</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 21 -->
+    <div class="day" id="d21">
+      <div class="day-h"><span class="dn">Día 21</span><div><h3>Pruebas y seguridad</h3><div class="sub">Que nada se rompa y que nadie vea lo que no debe.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> revisar a fondo que cada rol vea solo lo suyo y que los caminos importantes (registro, pago, cambio de plan, editor, comunidad) funcionen de principio a fin sin fallar.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install -D @playwright/test
+npx playwright install</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Fase de pruebas y seguridad.
+1) Audita la seguridad por roles: escribe pruebas que confirmen que una maestra (teacher), una coordinadora (coordinator) y un admin solo pueden ver y hacer lo que les corresponde, y que el acceso de admin se valida en el servidor (no solo en el navegador).
+2) Revisa el control de acceso al contenido según plan, grado, modalidad y estado de la suscripción (active, past_due, paused, canceled).
+3) Escribe pruebas automáticas de principio a fin (con Playwright) de los caminos críticos: registrarse, iniciar sesión, completar el checkout, recibir el aviso de pago, cambiar de plan, activar la pausa de verano, guardar en el editor y publicar en la comunidad.
+4) Revisa el manejo de errores de pago y los casos raros de suscripción.
+Al terminar, dame una lista de lo que pasó y lo que falló, y arregla lo que falle.</div>
+
+        <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Las pruebas de roles confirman que no hay fugas de datos entre usuarias.</li>
+          <li>Las pruebas de los caminos críticos pasan en verde.</li>
+          <li>Una cuenta con pago vencido pierde acceso al contenido.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si una prueba falla, pídele a Claude Code que primero te explique en palabras simples qué encontró y luego lo corrija; vuelve a correr las pruebas.</div>
+      </div>
+    </div>
+
+    <!-- DÍA 22 -->
+    <div class="day" id="d22">
+      <div class="day-h"><span class="dn">Día 22</span><div><h3>Últimos detalles y salir a producción</h3><div class="sub">Dejarlo bonito en celular, legal y publicado de verdad.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> revisar que todo se vea bien en celular, agregar avisos legales, activar los cobros reales (Stripe en modo live), poner el dominio y publicar la versión final.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Fase final de pulido y lanzamiento.
+1) Revisa que TODAS las pantallas se vean bien en celular (menús hamburguesa, tablas que se deslizan, el editor en móvil), comparando contra referencia/prototipo.html.
+2) Asegura que cada pantalla tenga sus estados de Cargando, Vacío y Error, y haz un repaso visual para que todo se parezca al prototipo.
+3) Agrega los textos de posicionamiento para buscadores (meta etiquetas) en las páginas públicas, las páginas legales de Aviso de privacidad y Términos, y el favicon (el busto de Kipi).
+4) Optimiza el desempeño (imágenes con next/image, carga por partes) y la accesibilidad básica (etiquetas, foco, contraste).
+5) Dame una lista de pasos clara para: cambiar Stripe de modo prueba a modo real (live), crear los productos/precios en live, conectar el dominio en Vercel y poner las variables de producción. Luego ayúdame a hacer el despliegue final.
+Confirma qué quedó y qué riesgos ves.</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Abres la app en tu celular y todo se ve y funciona bien.</li>
+          <li>Existen Aviso de privacidad y Términos, y el favicon de Kipi aparece en la pestaña.</li>
+          <li>Stripe está en modo real, el dominio funciona y la versión final está publicada.</li>
+          <li>Haces una compra real de prueba (puedes reembolsarla) y todo el flujo funciona en producción.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> antes de cobrar de verdad, confirma que TODAS las variables de entorno en Vercel sean las de "live" (no las de prueba), incluida la del webhook (crea el webhook de producción en Stripe y copia su nuevo <code>whsec_</code>).</div>
+      </div>
+    </div>
+
+    <!-- DOD -->
+    <section id="dod">
+      <span class="eyebrow">11 · Calidad</span>
+      <h2 class="s">Definición de "terminado" (funcional)</h2>
+      <p class="lead">El sistema se considera terminado cuando, en producción:</p>
+      <div class="card">
+        <ul class="acc">
+          <li>Una maestra se suscribe (Stripe en vivo), entra, ve su paquete del mes, abre una actividad, la personaliza en el editor con su estilo, la imprime y la califica.</li>
+          <li>Cambia de plan/modalidad, agrega un grado, activa la pausa de verano y la reanuda sola.</li>
+          <li>Participa en la comunidad (publica con foto, comenta, gana estrellitas, sube de nivel) e invita a una colega.</li>
+          <li>Una coordinadora da de alta su escuela y a sus maestras.</li>
+          <li>El admin sube contenido, ve los números, la señal de contenido y el flywheel, y envía un correo por segmento.</li>
+          <li>Los avisos de Stripe mantienen el acceso sincronizado con el pago, y la garantía de 7 días reembolsa.</li>
+          <li>Todo es responsive, seguro (cada quien ve solo lo suyo), con la marca clasemaestra, sin menciones de IA en lo público y sin descarga del documento de planeación.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- QUÉ FALTA -->
+    <section id="falta">
+      <span class="eyebrow">12 · Pendientes</span>
+      <h2 class="s">Qué más se necesita (decisiones e insumos)</h2>
+      <p class="lead">Para que el programador "solo ejecute", el negocio debe entregar esto en paralelo:</p>
+      <div class="grid2">
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Credenciales y servicios</h4>
+          <ul class="clean">
+            <li>Cuentas y llaves: Supabase, Stripe (prueba + real), Resend, Vercel.</li>
+            <li>Dominio y correos del negocio (soporte, colegios@).</li>
+            <li>Webhook signing secret de Stripe (prueba y real).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Marca y contenido</h4>
+          <ul class="clean">
+            <li>Tipografía Helvetica Now Display (licencia) o se usa Archivo.</li>
+            <li>Assets de Kipi/wordmark (ya en <code>/assets</code>) y favicon.</li>
+            <li><b>Al menos un paquete real por grado</b> para llenar la biblioteca + la actividad de muestra gratis.</li>
+            <li>Textos finales de testimonios y equipo (o consentimiento para fotos).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Legal y fiscal</h4>
+          <ul class="clean">
+            <li>Aviso de privacidad y términos (clasemaestra).</li>
+            <li>Facturación (CFDI) en México: ¿v1 o v2? Stripe no emite CFDI; requiere un PAC/Facturapi.</li>
+            <li>Nota legal de enfoques ("no somos proveedor oficial").</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 8px">Decisiones a confirmar</h4>
+          <ul class="clean">
+            <li>¿Métodos de pago locales (OXXO/SPEI) en el lanzamiento?</li>
+            <li>¿Q&amp;A en vivo con qué herramienta (Zoom/Meet) y dónde se aloja la grabación?</li>
+            <li>¿La factura fiscal (CFDI) entra en v1 o v2?</li>
+            <li>Política exacta de prorrateo al cambiar de plan.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><b>Camino crítico si hay prisa:</b> para tener "negocio vivo" (alguien ya se suscribe y usa contenido) bastan los Días <b>1→2→3→4→6→7→9→10</b>. La gestión de cambios (Día 8), el editor (11–12), Mi estilo (13), escuela (14), comunidad (15–16) y el admin (17–20) pueden seguir en paralelo o justo después, antes de pruebas y lanzamiento (21–22).</div>
+    </section>
+
+    <!-- CONVENCIONES -->
+    <section id="conv">
+      <span class="eyebrow">13 · Trabajo</span>
+      <h2 class="s">Reglas para trabajar con Claude Code</h2>
+      <div class="card">
+        <ul class="clean">
+          <li><b>El prototipo manda.</b> En cada día, exige que Claude Code lea <code>referencia/prototipo.html</code> y compare contra el <code>#hash</code> de la pantalla antes de darla por buena.</li>
+          <li><b>CLAUDE.md</b> en la raíz con: la regla de fidelidad al prototipo, el stack, los colores y las reglas de negocio (precios, enfoques, Modelo A, no descargar el documento, sin IA en lo público). Es lo primero que lee Claude Code.</li>
+          <li><b>Una rama por día</b> (<code>dia-NN-tema</code>) y un commit al terminar cada día.</li>
+          <li><b>Las llaves van en <code>.env.local</code></b> (local) y en Vercel (producción); nunca en GitHub.</li>
+          <li>Al final de cada día, usa la checklist de "Cómo verificar" antes de avanzar. No avances con deuda.</li>
+          <li>Sin lenguaje de IA en lo visible; el rojo solo para alertas; titulares en mayúscula de oración.</li>
+        </ul>
+        <div class="callout">
+          <h4>Pega esto al iniciar cada sesión de Claude Code</h4>
+          <p style="margin:6px 0 0">"Lee CLAUDE.md y abre referencia/prototipo.html. Hoy trabajamos el <b>Día N</b>. Respeta los colores y la marca de clasemaestra, las reglas de negocio, y replica EXACTAMENTE la(s) pantalla(s) del prototipo (su #hash). No agregues menciones de IA al texto visible ni inventes copy. Al terminar, dime qué archivos tocaste, cómo verlo en el navegador y qué quedó pendiente."</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      clasemaestra · Guía del programador (paso a paso) · Fuente de verdad: <a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">prototipo</a> · Marca: <a href="https://quadrant-agency.github.io/clasemaestra/manual-identidad.html" target="_blank">manual de identidad</a>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.prompt').forEach(function(pre){
+  var btn=pre.querySelector('.copybtn'); if(!btn) return;
+  btn.addEventListener('click',function(){
+    var clone=pre.cloneNode(true);
+    clone.querySelectorAll('.lbl,.copybtn').forEach(function(e){e.remove();});
+    var text=(clone.innerText||clone.textContent).trim();
+    navigator.clipboard.writeText(text).then(function(){
+      var o=btn.textContent; btn.textContent='¡Copiado!';
+      setTimeout(function(){btn.textContent=o;},1500);
+    });
+  });
+});
+var links=document.querySelectorAll('.toc a');
+var obs=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){
+      links.forEach(function(l){l.style.background='';l.style.borderLeftColor='transparent';l.style.color='';});
+      var a=document.querySelector('.toc a[href="#'+e.target.id+'"]');
+      if(a){a.style.background='#fff';a.style.borderLeftColor='var(--cian)';a.style.color='var(--carbon)';}
+    }
+  });
+},{rootMargin:'-60px 0px -75% 0px'});
+document.querySelectorAll('section[id],div.day[id]').forEach(function(s){obs.observe(s);});
+</script>
+</body>
+</html>
