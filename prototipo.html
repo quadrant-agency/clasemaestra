@@ -1024,12 +1024,13 @@ tbody tr:hover{background:var(--bg)}
                 <div class="flex"><span style="font-size:18px">🌎</span><span class="muted" style="font-size:13px">Disponible también en inglés.</span></div>
                 <button class="btn btn-ghost btn-sm btn-block mt" onclick="nav('u-subscription')">Activar modalidad bilingüe</button>
               </div>
-              <div class="card mb" style="border:1.5px solid var(--cyan)">
-                <b>¿Funcionó en tu salón?</b>
-                <div class="muted" style="font-size:12.5px">Tu opinión ayuda a otras miss y mejora el contenido.</div>
-                <div id="rateStars" data-r="0" style="font-size:28px;cursor:pointer;margin:8px 0;color:var(--amber)"><span onclick="rate(1)">☆</span><span onclick="rate(2)">☆</span><span onclick="rate(3)">☆</span><span onclick="rate(4)">☆</span><span onclick="rate(5)">☆</span></div>
-                <input class="field" style="margin:0" placeholder="¿Qué le cambiaste? (opcional)">
-                <button class="btn btn-cta btn-sm btn-block mt" onclick="toast('⭐ ¡Gracias! Tu opinión mejora el contenido')">Enviar</button>
+              <div class="card mb rate-card">
+                <div class="rate-emoji">🌟</div>
+                <b style="font-size:16px;display:block">¿Funcionó en tu salón?</b>
+                <div class="muted" style="font-size:12.5px;max-width:300px;margin:4px auto 0">Tu opinión ayuda a otras miss y mejora el contenido.</div>
+                <div id="rateStars" data-r="0" class="rate-stars"><span onclick="rate(1)">☆</span><span onclick="rate(2)">☆</span><span onclick="rate(3)">☆</span><span onclick="rate(4)">☆</span><span onclick="rate(5)">☆</span></div>
+                <input class="field rate-note" placeholder="¿Le cambiaste algo? Cuéntanos (opcional)">
+                <button class="btn btn-cta btn-block" style="margin-top:12px" onclick="toast('⭐ ¡Gracias! Tu opinión mejora el contenido')">Enviar mi opinión</button>
               </div>
               <div class="card" style="background:linear-gradient(120deg,#fff,rgba(247,168,35,.12))">
                 <b>📷 ¿Cómo te quedó?</b>
@@ -1839,6 +1840,12 @@ updatePricing();
 .demo-card p{color:#5A6672;font-size:15px;margin-bottom:20px}
 .demo-card .mic{color:var(--gray);font-size:12.5px;margin-top:14px;margin-bottom:0}
 .cmod.on{background:var(--cyan)!important;color:var(--ink)!important;border-color:var(--cyan)!important}
+.rate-card{border:none!important;background:linear-gradient(135deg,#FFF6E6,#E9F7FE);text-align:center;padding:22px 20px}
+.rate-emoji{font-size:30px;line-height:1}
+.rate-stars{font-size:34px;cursor:pointer;margin:12px 0 14px;color:var(--amber);display:flex;gap:9px;justify-content:center}
+.rate-stars span{transition:transform .12s ease;line-height:1;filter:drop-shadow(0 1px 2px rgba(247,168,35,.35))}
+.rate-stars span:hover{transform:scale(1.25)}
+.rate-note{margin:0 auto;max-width:340px;text-align:center;border-radius:12px}
 </style>
 <div id="demoBanner">
   <span class="dpill">VISTA DEMO</span>
