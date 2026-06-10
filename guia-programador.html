@@ -165,15 +165,16 @@ ul.clean li{margin:5px 0}
     <a class="day" href="#d11">Día 11 · Editor I</a>
     <a class="day" href="#d12">Día 12 · Editor II + señal</a>
     <a class="day" href="#d13">Día 13 · Mi estilo</a>
-    <a class="day" href="#d14">Día 14 · Panel de escuela</a>
-    <a class="day" href="#d15">Día 15 · Comunidad I</a>
-    <a class="day" href="#d16">Día 16 · Aportes + referidas</a>
-    <a class="day" href="#d17">Día 17 · Admin I</a>
-    <a class="day" href="#d18">Día 18 · Admin II</a>
-    <a class="day" href="#d19">Día 19 · Admin III</a>
-    <a class="day" href="#d20">Día 20 · Admin IV · correos</a>
-    <a class="day" href="#d21">Día 21 · QA + seguridad</a>
-    <a class="day" href="#d22">Día 22 · Responsive + lanzamiento</a>
+    <a class="day" href="#d14">Día 14 · Demo interactivo</a>
+    <a class="day" href="#d15">Día 15 · Panel de escuela</a>
+    <a class="day" href="#d16">Día 16 · Comunidad I</a>
+    <a class="day" href="#d17">Día 17 · Aportes + referidas</a>
+    <a class="day" href="#d18">Día 18 · Admin I</a>
+    <a class="day" href="#d19">Día 19 · Admin II</a>
+    <a class="day" href="#d20">Día 20 · Admin III</a>
+    <a class="day" href="#d21">Día 21 · Admin IV · correos</a>
+    <a class="day" href="#d22">Día 22 · QA + seguridad</a>
+    <a class="day" href="#d23">Día 23 · Responsive + lanzamiento</a>
     <h5>Cierre</h5>
     <a href="#dod">Definición de "terminado"</a>
     <a href="#falta">Qué más se necesita</a>
@@ -350,11 +351,12 @@ Fuente Archivo. Titulares en mayúscula de oración. El CTA primario es cian con
 - Add-ons: Grado extra +97 (solo Plus/Escuela); Maestra adicional +197 (solo Escuela).
 - NO existe Pack NEE ni plan "Total". No hay descuentos por defecto.
 - Entrega MODELO A: el bundle mensual COMPLETO se libera al inicio del mes (sin goteo ni candados), organizado por los 4 campos formativos NEM y por semana. Navegación por tira del ciclo escolar (Ago→Jul).
-- USO: la maestra edita su planeación EN la plataforma y la imprime. NUNCA se descarga el documento de planeación. Únicas descargas permitidas: la muestra gratis (lead magnet) y la factura.
+- USO: la maestra edita su planeación EN la plataforma y la imprime. NUNCA se descarga el documento de planeación. Únicas descargas permitidas: la factura. El demo NO descarga nada; el documento de planeación nunca se descarga.
 - Enfoques (lenguaje "compatible con", nunca "afiliado/certificado/oficial"; nota "no somos proveedor oficial"): PYP = preescolar + toda primaria, todo idioma; CASEL = todos, donde haya socioemocional; Montessori = preescolar + primaria baja (1º-3º); Reggio = solo preescolar; Cambridge = cualquier grado pero SOLO en modalidad inglés/bilingüe.
 - Comunidad en todos los planes; programa de aportes (estrellitas) con niveles Aportadora (100), Destacada (300), Embajadora (600); recompensas que NO canibalizan ingreso (estatus, votar/elegir tema, acceso anticipado, spotlight) — nunca meses gratis ni descuentos al plan.
 - Pausa de verano: 2 meses sin cobro que se reanudan solos el 1 de septiembre.
 - Garantía de 7 días. Referidas: 50% el primer mes para la colega + 25% de comisión para la referidora (al ser Embajadora).
+- DEMO interactivo (reemplaza la muestra; principal gancho de conversión): entrada SIN registro a la plataforma real en "modo demo" con 1 semana de actividades demo de un grado. La visitante SÍ puede personalizar (editar + Mi estilo). Imprimir, guardar permanente y descargar están bloqueados; descargar el documento de planeación NUNCA se permite. Para conservar su personalización debe crear cuenta: al registrarse se migra su sesión de demo (demo_sessions) a su cuenta -> personalizations + brand_kits (lock-in). Comunidad en solo lectura dentro del demo.
 
 ## SEGURIDAD
 RLS en todas las tablas con datos de usuaria (filtrar por auth.uid()). Acceso a actividades solo con suscripción activa y grado/modalidad del plan. El rol admin se valida en el SERVIDOR, nunca en el navegador.
@@ -446,8 +448,9 @@ Una rama por día. Al terminar cada día, lista qué archivos tocaste, cómo ver
           <tr><td><code>referrals</code></td><td>id, referrer_id, referred_email, status, stripe_coupon, comision</td><td>Embajadoras 25% + 50% colega.</td></tr>
           <tr><td><code>qa_sessions</code></td><td>id, fecha, tema, recording_url, rsvps</td><td>Q&A en vivo mensual + grabaciones.</td></tr>
           <tr><td><code>invoices</code></td><td>id, profile_id, stripe_invoice_id, monto, status, fecha, pdf_url</td><td>Historial de facturación (espejo de Stripe).</td></tr>
-          <tr><td><code>leads</code></td><td>id, tipo (sample/colegio), nombre, correo, datos (jsonb), created_at</td><td>Muestra gratis (F1) y formulario de colegios.</td></tr>
+          <tr><td><code>leads</code></td><td>id, tipo (demo/colegio), nombre, correo, datos (jsonb), created_at</td><td>Correo capturado en el demo y formulario de colegios.</td></tr>
           <tr><td><code>campaigns</code></td><td>id, asunto, cuerpo, segmento, status, sent_at, stats</td><td>Correos del admin + secuencias automáticas.</td></tr>
+          <tr><td><code>demo_sessions</code></td><td>id (anónimo), grade_id, content (jsonb), brand_kit (jsonb), claimed_by, created_at</td><td>Lo que personaliza un visitante en el demo. Al registrarse se "reclama" y migra a su cuenta.</td></tr>
         </table>
       </div>
     </section>
@@ -523,8 +526,9 @@ create table qa_sessions (id uuid primary key default gen_random_uuid(), fecha t
 
 -- ===== FACTURACIÓN / MARKETING =====
 create table invoices (id uuid primary key default gen_random_uuid(), profile_id uuid references profiles(id) on delete set null, stripe_invoice_id text, monto numeric, status text, fecha timestamptz, pdf_url text);
-create table leads (id uuid primary key default gen_random_uuid(), tipo text not null check (tipo in ('sample','colegio')), nombre text, correo text, datos jsonb, created_at timestamptz default now());
+create table leads (id uuid primary key default gen_random_uuid(), tipo text not null check (tipo in ('demo','colegio')), nombre text, correo text, datos jsonb, created_at timestamptz default now());
 create table campaigns (id uuid primary key default gen_random_uuid(), asunto text, cuerpo text, segmento text, status text default 'draft', sent_at timestamptz, stats jsonb);
+create table demo_sessions (id uuid primary key default gen_random_uuid(), grade_id int references grades(id), content jsonb, brand_kit jsonb, claimed_by uuid references profiles(id), created_at timestamptz default now());
 
 -- ===== RLS (ejemplo; repítelo en cada tabla con datos de usuaria) =====
 alter table personalizations enable row level security;
@@ -591,7 +595,7 @@ create trigger on_auth_user_created after insert on auth.users for each row exec
             <li>La maestra <b>edita su plan en plataforma</b> (editor tipo documento). <b>No se descarga el documento.</b></li>
             <li>Para el salón: <b>Imprimir</b> (no archivo editable que se fugue).</li>
             <li>Cada edición genera <b>señal pasiva</b> (qué mejorar) y sube el costo de salida.</li>
-            <li>Excepciones que SÍ se descargan: <b>muestra gratis</b> (lead magnet) y <b>factura</b>.</li>
+            <li>Única descarga permitida: la <b>factura</b>. El demo no descarga nada.</li>
           </ul>
         </div>
       </div>
@@ -740,7 +744,7 @@ create trigger on_auth_user_created after insert on auth.users for each row exec
     <section id="plan">
       <span class="eyebrow">10 · Ejecución</span>
       <h2 class="s">Plan día por día</h2>
-      <p class="lead"><b>22 jornadas de ~8 horas.</b> El trabajo se reparte en 22 días para dar holgura donde más se atora (pagos 3 días, editor 2, admin 4, QA 2). <b>Cada día está armado para que solo ejecutes:</b> (1) los <b>comandos exactos</b> que pegas en la terminal, (2) el <b>prompt detallado</b> que pegas en Claude Code, (3) <b>cómo verificar</b> que quedó bien (clic por clic) y (4) qué hacer <b>si algo truena</b>. Los días con ⏱ son los de mayor riesgo: no avances con la verificación incompleta.</p>
+      <p class="lead"><b>23 jornadas de ~8 horas.</b> El trabajo se reparte en 23 días para dar holgura donde más se atora (pagos 3 días, editor 2, demo 1, admin 4, QA 2). <b>Cada día está armado para que solo ejecutes:</b> (1) los <b>comandos exactos</b> que pegas en la terminal, (2) el <b>prompt detallado</b> que pegas en Claude Code, (3) <b>cómo verificar</b> que quedó bien (clic por clic) y (4) qué hacer <b>si algo truena</b>. Los días con ⏱ son los de mayor riesgo: no avances con la verificación incompleta.</p>
     </section>
 
 
@@ -937,7 +941,7 @@ Publica una página interna en /dev/ui que muestre todos los componentes juntos 
         <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #landing. Construye la página pública de inicio (ruta /) replicándola EXACTAMENTE: mismo orden de secciones, mismos textos visibles, misma jerarquía. Usa los componentes de src/components/ui y los tokens de color. Secciones, en este orden:
 1) Barra de anuncio de temporada arriba del todo.
 2) Header: wordmark a la izquierda; navegación a "Cómo funciona", "Qué incluye", "Precios", "Preguntas" y "Para colegios"; en celular, menú hamburguesa.
-3) Hero: titular grande en mayúscula de oración, subtítulo, DOS botones (el primario cian "Empezar ahora" lleva a /checkout; el secundario "Descargar muestra gratis" lleva a /muestra), una línea de confianza con el claim "Calificadas por miss reales: sí jalan en el salón", y la imagen de Kipi (public/assets/kipi-planea.png).
+3) Hero: titular grande en mayúscula de oración, subtítulo, DOS botones (el primario cian "Empezar ahora" lleva a /checkout; el secundario "Ver la plataforma por dentro" lleva a /demo), una línea de confianza con el claim "Calificadas por miss reales: sí jalan en el salón", y la imagen de Kipi (public/assets/kipi-planea.png).
 4) Franja de prueba social (logos o números de confianza).
 5) "Cómo funciona" en 3 pasos.
 6) "Qué incluye" en una grilla de 6 (incluye "Comunidad de miss").
@@ -954,7 +958,7 @@ REGLAS: titulares en mayúscula de oración; CERO menciones de inteligencia arti
         <div class="verify"><ul class="acc">
           <li>Cambias el interruptor a "Inglés" y los precios suben +50/+100; aparece la tarjeta de Cambridge. En "Español" desaparece.</li>
           <li>Cambias a "Anual" y el precio es el mensual × 10.</li>
-          <li>El botón "Empezar ahora" te lleva a /checkout y "Descargar muestra gratis" a /muestra.</li>
+          <li>El botón "Empezar ahora" te lleva a /checkout y "Ver la plataforma por dentro" a /demo.</li>
           <li>No hay ninguna palabra sobre IA en la página.</li>
           <li>Se ve idéntica a #landing y funciona en celular.</li>
         </ul></div>
@@ -965,9 +969,9 @@ REGLAS: titulares en mayúscula de oración; CERO menciones de inteligencia arti
 
     <!-- DÍA 5 -->
     <div class="day" id="d5">
-      <div class="day-h"><span class="dn">Día 5</span><div><h3>Colegios, muestra gratis y login</h3><div class="sub">La página para escuelas y el regalo que capta correos.</div></div></div>
+      <div class="day-h"><span class="dn">Día 5</span><div><h3>Colegios, entrada al demo y login</h3><div class="sub">La página para escuelas y la puerta al demo interactivo.</div></div></div>
       <div class="day-b">
-        <div class="goal"><b>Qué vas a lograr hoy:</b> la página para colegios con su formulario, y la "muestra gratis" que pide nombre y correo y envía una actividad de regalo (esto reemplaza la "prueba gratis").</div>
+        <div class="goal"><b>Qué vas a lograr hoy:</b> la página para colegios con su formulario, y la <b>entrada pública al demo</b> (sin registro). Ya no hay "muestra gratis" en PDF: el gancho es el demo interactivo, que se arma completo en el Día 14.</div>
 
         <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal</span></div>
         <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install resend</div>
@@ -975,14 +979,14 @@ REGLAS: titulares en mayúscula de oración; CERO menciones de inteligencia arti
         <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
         <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #colegios y #sample. Construye dos páginas copiando su diseño exacto:
 (A) /colegios (#colegios): hero para escuelas (ej. "~32 horas ahorradas por maestra"), franja de retorno de inversión, 6 beneficios, "cómo se implementa" en 3 pasos, enfoques internacionales, un testimonio de coordinadora, el bloque de precio del Plan Escuela (Español 997, Inglés 1497, Bilingüe 1997) y un FORMULARIO con: nombre del colegio, nombre de contacto, cargo, número de maestras, correo, teléfono, niveles que imparten y modalidad. Al enviarlo, guarda una fila en la tabla leads (tipo = colegio) y manda un correo con Resend al equipo avisando del nuevo prospecto.
-(B) /muestra (#sample): un "imán de leads". Formulario corto con nombre, correo y grado. Al enviarlo, guarda en leads (tipo = sample) y envía por correo (Resend) la actividad de muestra. NO uses en ningún lado la frase "prueba gratis".
+(B) /demo (la pantalla #sample del prototipo ES ahora esta entrada): una pantalla pública SIN registro que invita a "Ver la plataforma por dentro". La visitante elige su grado y entra. Explica con claridad que podrá personalizar las planeaciones con su logo y colores, y que para CONSERVAR esa personalización creará su cuenta. Hoy solo construyes esta entrada y el ruteo a la biblioteca en "modo demo"; toda la experiencia interactiva (editar, Mi estilo, bloquear impresión/descarga y "reclamar al registrarse") se construye en el Día 14. NO uses en ningún lado las frases "prueba gratis" ni "muestra gratis".
 Pule también la pantalla /login para que calce con #login. Usa los componentes de ui y los tokens. Confirma que comparaste contra los deep-links.</div>
 
         <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
         <div class="verify"><ul class="acc">
           <li>Llenas el formulario de /colegios y aparece una fila nueva en la tabla <code>leads</code> de Supabase; llega el correo de aviso.</li>
-          <li>En /muestra dejas tu correo y te llega la actividad de muestra.</li>
-          <li>No aparece la frase "prueba gratis" en ningún lugar.</li>
+          <li>En /demo puedes elegir tu grado y entrar sin registrarte.</li>
+          <li>No aparecen las frases "prueba gratis" ni "muestra gratis" en ningún lugar.</li>
         </ul></div>
         <div class="trouble"><b>Si truena:</b> si los correos no llegan, en Resend debes verificar tu dominio (o usar el dominio de pruebas que te da Resend). Revisa también que <code>RESEND_API_KEY</code> esté en las variables de entorno.</div>
         <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#colegios">#colegios</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#sample">#sample</a></div>
@@ -1039,7 +1043,7 @@ console.log(JSON.stringify(out, null, 2));</div>
 3) Muestra a la derecha un resumen que recalcula el total EN VIVO usando src/lib/pricing.ts cuando cambian plan, modalidad o ciclo.
 4) Manejo de la cuenta (importante): la cuenta se crea SOLO cuando el pago se confirma (no antes, para no dejar cuentas huérfanas si el pago falla). Si el correo ya existe, ofrece iniciar sesión en vez de duplicar. Si la maestra ya está logueada, permite que compre o mejore su plan sin volver a capturar datos.
 5) En una server action: crea el Customer y la Subscription en Stripe; al confirmarse el pago, crea (o actualiza) el perfil y su fila en subscriptions (espejo). La maestra DEBE elegir cuáles grados imparte (un selector de grados en el Paso 2 o en un onboarding inmediato): Solo elige 1 grado, Plus elige 2. Guárdalos en teacher_grades.
-6) Si el plan es Escuela: crea además una fila en la tabla schools y marca a la compradora con rol coordinator (es quien administrará el panel de escuela del Día 14).
+6) Si el plan es Escuela: crea además una fila en la tabla schools y marca a la compradora con rol coordinator (es quien administrará el panel de escuela del Día 15).
 7) Página de éxito que da la bienvenida y lleva al dashboard.
 8) Maneja errores de pago con un mensaje claro en rojo (el rojo solo para errores).
 Para probar usa la tarjeta 4242 4242 4242 4242, cualquier fecha futura y cualquier CVC. Confirma que comparaste contra #checkout y dime cómo probar el flujo completo.</div>
@@ -1135,7 +1139,7 @@ Confirma que comparaste contra los deep-links.</div>
           <li>La tira de meses cambia el contenido y puedes volver a meses anteriores.</li>
           <li>Solo ves tus grados y tu modalidad; lo demás aparece como vista previa con CTA de mejora.</li>
         </ul></div>
-        <div class="trouble"><b>Si truena:</b> si la biblioteca sale vacía, falta cargar contenido (eso se hace en el Día 18 desde el admin); pídele a Claude Code que cree unos datos de ejemplo para poder ver la pantalla mientras tanto.</div>
+        <div class="trouble"><b>Si truena:</b> si la biblioteca sale vacía, falta cargar contenido (eso se hace en el Día 19 desde el admin); pídele a Claude Code que cree unos datos de ejemplo para poder ver la pantalla mientras tanto.</div>
         <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-dashboard">#u-dashboard</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-library">#u-library</a></div>
       </div>
     </div>
@@ -1246,9 +1250,41 @@ Confirma que comparaste contra #u-style.</div>
       </div>
     </div>
 
-    <!-- DÍA 14 -->
+    <!-- DÍA 14 (DEMO) -->
     <div class="day" id="d14">
-      <div class="day-h"><span class="dn">Día 14</span><div><h3>Panel de escuela (para coordinadoras)</h3><div class="sub">Administrar hasta 5 maestras de un colegio.</div></div></div>
+      <div class="day-h"><span class="dn">Día 14 ⏱</span><div><h3>Demo interactivo (gancho de conversión)</h3><div class="sub">Que prueben la plataforma, la personalicen y no quieran perderlo.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> convertir las pantallas que ya construiste (biblioteca, actividad, editor, Mi estilo) en un <b>demo público sin registro</b> con 1 semana de contenido de ejemplo, donde la visitante personaliza; y lograr que, al crear cuenta, <b>conserve</b> esa personalización (ese es el gancho).</div>
+        <div class="note"><b>Por qué este día importa tanto:</b> el demo es nuestra apuesta de conversión. La visitante invierte esfuerzo poniéndole su logo y su estilo a una planeación; al ver el resultado "ya es suyo" y no quiere perderlo. Crear cuenta = conservarlo.</div>
+
+        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
+        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html: usa #sample como la ENTRADA del demo, y reutiliza las pantallas #u-library, #u-activity, #u-editor y #u-style que ya construiste. Monta el DEMO interactivo (reemplaza la "muestra gratis" y es nuestro principal gancho de conversión):
+1) Ruta pública /demo (SIN registro). Al entrar, la visitante elige su grado y entra a la biblioteca en "modo demo", que muestra SOLO 1 semana de actividades demo (4 actividades, una por campo formativo) de ese grado. El resto del mes y los demás grados se ven con candado y el mensaje "disponible al suscribirte".
+2) En modo demo reutiliza las MISMAS pantallas de actividad, editor (TipTap) y "Mi estilo". La visitante PUEDE editar el contenido y aplicar su estilo (subir logo, color, tipografía). Desde el inicio, empújala a poner el logo y los colores de su escuela ("Ponle tu sello").
+3) Guarda lo que personaliza en una sesión temporal: una fila en la tabla demo_sessions ligada a un id anónimo guardado en una cookie (NO en una cuenta, sin login).
+4) Bloquea en modo demo: Imprimir, Guardar permanente y cualquier descarga. Esos botones se ven, pero al pulsarlos abren el momento de conversión: "Ya quedó con tu estilo. Crea tu cuenta para CONSERVAR esta personalización y desbloquear el mes completo."
+5) La comunidad, en modo demo, es de SOLO LECTURA (se ve, no se publica).
+6) CLAVE (lock-in): cuando la visitante crea su cuenta o se suscribe desde el demo, MIGRA su demo_session (contenido personalizado + kit de marca) a su cuenta real: copia a personalizations y brand_kits, y marca claimed_by. Así no pierde nada. Si no se registra, la sesión demo es efímera.
+7) Opcional: al pulsar guardar/imprimir, ofrece capturar su correo para enviarle el bundle de su grado (esto reemplaza la captura de leads que antes hacía la muestra; guarda en leads tipo=demo).
+8) Pon una marca de agua sutil "VISTA DEMO" en el documento.
+Reglas: NUNCA permitir descargar el documento de planeación (ni en demo ni pagando); cero menciones de IA; titulares en mayúscula de oración. Confirma que comparaste contra el prototipo y dime cómo entrar al demo y cómo probar el "reclamar al registrarse".</div>
+
+        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
+        <div class="verify"><ul class="acc">
+          <li>Entras a /demo sin registrarte, eliges grado y ves 1 semana de actividades demo; el resto está con candado.</li>
+          <li>Editas una actividad y le pones tu logo y color; los cambios se mantienen mientras navegas el demo.</li>
+          <li>Imprimir / Guardar / Descargar NO funcionan en demo: abren el llamado a crear cuenta.</li>
+          <li>Al crear cuenta desde el demo, tu personalización ya aparece en tu cuenta real (no la perdiste).</li>
+          <li>La comunidad en demo es solo lectura.</li>
+        </ul></div>
+        <div class="trouble"><b>Si truena:</b> si al crear cuenta se pierde la personalización, revisa que (1) el id anónimo de la cookie del demo se pase al registro y (2) el "reclamo" copie demo_sessions → personalizations y brand_kits ANTES de limpiar la sesión. Si la visitante logra imprimir o descargar en demo, falta deshabilitar esos botones en modo demo.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#sample">#sample (entrada)</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-library">#u-library</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-editor">#u-editor</a><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-style">#u-style</a></div>
+      </div>
+    </div>
+
+    <!-- DÍA 15 -->
+    <div class="day" id="d15">
+      <div class="day-h"><span class="dn">Día 15</span><div><h3>Panel de escuela (para coordinadoras)</h3><div class="sub">Administrar hasta 5 maestras de un colegio.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> el panel del Plan Escuela, donde una coordinadora invita a sus maestras, les asigna grados y modalidad, y ve qué cubre cada una.</div>
 
@@ -1271,9 +1307,9 @@ Respeta la seguridad: la coordinadora solo ve a las maestras de SU colegio. Conf
       </div>
     </div>
 
-    <!-- DÍA 15 -->
-    <div class="day" id="d15">
-      <div class="day-h"><span class="dn">Día 15 ⏱</span><div><h3>Comunidad (parte 1)</h3><div class="sub">Foros por grado, publicaciones con foto y Q&amp;A en vivo.</div></div></div>
+    <!-- DÍA 16 -->
+    <div class="day" id="d16">
+      <div class="day-h"><span class="dn">Día 16 ⏱</span><div><h3>Comunidad (parte 1)</h3><div class="sub">Foros por grado, publicaciones con foto y Q&amp;A en vivo.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> la comunidad donde las maestras comparten (con foto), comentan y se juntan; incluida en todos los planes. Más la tarjeta de la sesión de preguntas y respuestas en vivo del mes.</div>
 
@@ -1298,9 +1334,9 @@ Confirma que comparaste contra #u-community.</div>
       </div>
     </div>
 
-    <!-- DÍA 16 -->
-    <div class="day" id="d16">
-      <div class="day-h"><span class="dn">Día 16 ⏱</span><div><h3>Estrellitas y referidas</h3><div class="sub">El sistema de puntos, niveles y "invita a una colega".</div></div></div>
+    <!-- DÍA 17 -->
+    <div class="day" id="d17">
+      <div class="day-h"><span class="dn">Día 17 ⏱</span><div><h3>Estrellitas y referidas</h3><div class="sub">El sistema de puntos, niveles y "invita a una colega".</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> que participar dé "estrellitas" y suba de nivel (Aportadora, Destacada, Embajadora) con recompensas, y que cada maestra pueda invitar colegas con su enlace (50% el primer mes para la colega, 25% de comisión para ella).</div>
 
@@ -1325,9 +1361,9 @@ Confirma que comparaste contra el prototipo.</div>
       </div>
     </div>
 
-    <!-- DÍA 17 -->
-    <div class="day" id="d17">
-      <div class="day-h"><span class="dn">Día 17</span><div><h3>Admin (parte 1): tablero, usuarias y CRM</h3><div class="sub">El panel interno para operar el negocio.</div></div></div>
+    <!-- DÍA 18 -->
+    <div class="day" id="d18">
+      <div class="day-h"><span class="dn">Día 18</span><div><h3>Admin (parte 1): tablero, usuarias y CRM</h3><div class="sub">El panel interno para operar el negocio.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> el panel de administración con los números del negocio, la lista de usuarias y la ficha de cada una (su historial y notas internas).</div>
 
@@ -1349,9 +1385,9 @@ Todo lee de Supabase respetando que solo el admin entra. Confirma que comparaste
       </div>
     </div>
 
-    <!-- DÍA 18 -->
-    <div class="day" id="d18">
-      <div class="day-h"><span class="dn">Día 18</span><div><h3>Admin (parte 2): contenidos y carga</h3><div class="sub">Subir las planeaciones para llenar la biblioteca.</div></div></div>
+    <!-- DÍA 19 -->
+    <div class="day" id="d19">
+      <div class="day-h"><span class="dn">Día 19</span><div><h3>Admin (parte 2): contenidos y carga</h3><div class="sub">Subir las planeaciones para llenar la biblioteca.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> el lugar donde el equipo sube las planeaciones y arma los paquetes del mes; con esto la biblioteca de las maestras deja de estar vacía.</div>
 
@@ -1372,9 +1408,9 @@ Lo que se suba debe aparecer en la biblioteca de las maestras correspondientes. 
       </div>
     </div>
 
-    <!-- DÍA 19 -->
-    <div class="day" id="d19">
-      <div class="day-h"><span class="dn">Día 19</span><div><h3>Admin (parte 3): planes, flywheel y señal</h3><div class="sub">Editar precios y ver el "foso" del negocio.</div></div></div>
+    <!-- DÍA 20 -->
+    <div class="day" id="d20">
+      <div class="day-h"><span class="dn">Día 20</span><div><h3>Admin (parte 3): planes, flywheel y señal</h3><div class="sub">Editar precios y ver el "foso" del negocio.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> editar planes y precios desde el admin, y ver dos tableros: el "flywheel" (cómo crece el negocio) y la "señal de contenido" (qué planeaciones mejorar, según lo que las maestras califican y editan).</div>
 
@@ -1396,9 +1432,9 @@ Confirma que comparaste contra los deep-links.</div>
       </div>
     </div>
 
-    <!-- DÍA 20 -->
-    <div class="day" id="d20">
-      <div class="day-h"><span class="dn">Día 20</span><div><h3>Admin (parte 4): correos</h3><div class="sub">Escribir campañas y dejar correos automáticos.</div></div></div>
+    <!-- DÍA 21 -->
+    <div class="day" id="d21">
+      <div class="day-h"><span class="dn">Día 21</span><div><h3>Admin (parte 4): correos</h3><div class="sub">Escribir campañas y dejar correos automáticos.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> el módulo para enviar correos a grupos de maestras y dejar configurados los correos automáticos (bienvenida, cobranza, nuevo paquete, reactivación).</div>
 
@@ -1420,9 +1456,9 @@ Confirma que comparaste contra #a-email.</div>
       </div>
     </div>
 
-    <!-- DÍA 21 -->
-    <div class="day" id="d21">
-      <div class="day-h"><span class="dn">Día 21</span><div><h3>Pruebas y seguridad</h3><div class="sub">Que nada se rompa y que nadie vea lo que no debe.</div></div></div>
+    <!-- DÍA 22 -->
+    <div class="day" id="d22">
+      <div class="day-h"><span class="dn">Día 22</span><div><h3>Pruebas y seguridad</h3><div class="sub">Que nada se rompa y que nadie vea lo que no debe.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> revisar a fondo que cada rol vea solo lo suyo y que los caminos importantes (registro, pago, cambio de plan, editor, comunidad) funcionen de principio a fin sin fallar.</div>
 
@@ -1448,9 +1484,9 @@ Al terminar, dame una lista de lo que pasó y lo que falló, y arregla lo que fa
       </div>
     </div>
 
-    <!-- DÍA 22 -->
-    <div class="day" id="d22">
-      <div class="day-h"><span class="dn">Día 22</span><div><h3>Últimos detalles y salir a producción</h3><div class="sub">Dejarlo bonito en celular, legal y publicado de verdad.</div></div></div>
+    <!-- DÍA 23 -->
+    <div class="day" id="d23">
+      <div class="day-h"><span class="dn">Día 23</span><div><h3>Últimos detalles y salir a producción</h3><div class="sub">Dejarlo bonito en celular, legal y publicado de verdad.</div></div></div>
       <div class="day-b">
         <div class="goal"><b>Qué vas a lograr hoy:</b> revisar que todo se vea bien en celular, agregar avisos legales, activar los cobros reales (Stripe en modo live), poner el dominio y publicar la versión final.</div>
 
@@ -1482,6 +1518,7 @@ Confirma qué quedó y qué riesgos ves.</div>
       <div class="card">
         <ul class="acc">
           <li>Una maestra se suscribe (Stripe en vivo), entra, ve su paquete del mes, abre una actividad, la personaliza en el editor con su estilo, la imprime y la califica.</li>
+          <li>Una visitante prueba el demo SIN registrarse, lo personaliza con su logo y colores, y al crear su cuenta esa personalización se conserva (no la pierde).</li>
           <li>Cambia de plan/modalidad, agrega un grado, activa la pausa de verano y la reanuda sola.</li>
           <li>Participa en la comunidad (publica con foto, comenta, gana estrellitas, sube de nivel) e invita a una colega.</li>
           <li>Una coordinadora da de alta su escuela y a sus maestras.</li>
@@ -1512,7 +1549,7 @@ Confirma qué quedó y qué riesgos ves.</div>
           <ul class="clean">
             <li>Tipografía Helvetica Now Display (licencia) o se usa Archivo.</li>
             <li>Assets de Kipi/wordmark (ya en <code>/assets</code>) y favicon.</li>
-            <li><b>Al menos un paquete real por grado</b> para llenar la biblioteca + la actividad de muestra gratis.</li>
+            <li><b>Al menos un paquete real por grado</b> para llenar la biblioteca + 1 semana de actividades demo por grado (para el demo).</li>
             <li>Textos finales de testimonios y equipo (o consentimiento para fotos).</li>
           </ul>
         </div>
@@ -1535,7 +1572,7 @@ Confirma qué quedó y qué riesgos ves.</div>
           </ul>
         </div>
       </div>
-      <div class="note"><b>Camino crítico si hay prisa:</b> para tener "negocio vivo" (alguien ya se suscribe y usa contenido) bastan los Días <b>1→2→3→4→6→7→9→10</b>. La gestión de cambios (Día 8), el editor (11–12), Mi estilo (13), escuela (14), comunidad (15–16) y el admin (17–20) pueden seguir en paralelo o justo después, antes de pruebas y lanzamiento (21–22).</div>
+      <div class="note"><b>Camino crítico si hay prisa:</b> para tener "negocio vivo" (alguien ya se suscribe y usa contenido) bastan los Días <b>1→2→3→4→6→7→9→10</b>. La gestión de cambios (Día 8), el editor (11–12), Mi estilo (13), el demo (14), escuela (15), comunidad (16–17) y el admin (18–21) pueden seguir en paralelo o justo después, antes de pruebas y lanzamiento (22–23). El <b>demo (Día 14) es clave para conversión</b>: priorízalo apenas estén listos el editor y Mi estilo.</div>
     </section>
 
     <!-- CONVENCIONES -->
