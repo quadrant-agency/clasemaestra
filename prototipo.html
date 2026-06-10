@@ -363,6 +363,9 @@ tbody tr:hover{background:var(--bg)}
 .empty b{color:var(--ink)}
 /* foto testimonio */
 .tphoto{width:52px;height:52px;border-radius:50%;flex:none;overflow:hidden}
+/* barra de progreso (lealtad / retos) */
+.prog{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.prog>i{display:block;height:100%;background:var(--cyan);border-radius:99px}
 </style>
 </head>
 <body class="ctx-public">
@@ -1085,10 +1088,54 @@ tbody tr:hover{background:var(--bg)}
             <div class="card" style="border:1.5px solid var(--amber)"><div class="flex"><span style="font-size:22px">🏆</span><b>Maestra de la semana</b></div><div class="flex mt" style="gap:11px"><div class="avatar" style="background:var(--amber)">P</div><div><b style="font-size:14px">Miss Paola</b><div class="muted" style="font-size:12px">Su adaptación del Mercadito se sumó a la biblioteca, con su crédito 🎉</div></div></div></div>
             <div class="card" style="border:1.5px solid var(--cyan)"><div class="flex"><span style="font-size:22px">📌</span><b>Lunes de pre-clase</b></div><p class="muted mt">¿Qué vas a dar esta semana? Cuéntanos y llévate ideas de otras miss.</p><span class="pill pill-cyan" style="margin-top:10px">🎃 Reto de temporada: comparte tu actividad de fin de ciclo</span></div>
           </div>
+          <div class="cards c2 mb" style="align-items:start">
+            <div class="card" style="border:1.5px solid var(--ink)">
+              <div class="flex"><span style="font-size:22px">🎥</span><b>Q&amp;A en vivo · mensual</b></div>
+              <p class="muted mt">Sesión en vivo con el equipo pedagógico. Trae tus dudas del bundle del mes.</p>
+              <div class="kv"><span class="k">Próxima</span><b>Jue 26 jun · 6:00 pm</b></div>
+              <div class="kv"><span class="k">Tema</span><b>Cierre de ciclo y evaluación</b></div>
+              <div class="flex wrapf mt"><button class="btn btn-cta btn-sm" onclick="toast('📅 ¡Apartado! Te enviamos el enlace')">Apartar mi lugar</button><button class="btn btn-ghost btn-sm" onclick="toast('🔔 Te recordaremos · +10 🌟 por asistir')">Recordarme</button></div>
+            </div>
+            <div class="card">
+              <div class="flex"><span style="font-size:20px">▶️</span><b>Grabaciones anteriores</b></div>
+              <div class="kv"><span><b style="font-size:14px">Proyectos por campo formativo</b><div class="muted" style="font-size:12px">may · 38 min</div></span><span class="link" onclick="toast('▶️ Reproduciendo (demo)')">Ver</span></div>
+              <div class="kv"><span><b style="font-size:14px">Socioemocional en preescolar</b><div class="muted" style="font-size:12px">abr · 42 min</div></span><span class="link" onclick="toast('▶️ Reproduciendo (demo)')">Ver</span></div>
+              <div class="kv"><span><b style="font-size:14px">Evaluación formativa sin estrés</b><div class="muted" style="font-size:12px">mar · 35 min</div></span><span class="link" onclick="toast('▶️ Reproduciendo (demo)')">Ver</span></div>
+            </div>
+          </div>
+          <div class="cards c2 mb" style="align-items:start">
+            <div class="card" style="border:1.5px solid var(--amber)">
+              <div class="flex" style="justify-content:space-between"><div class="flex"><span style="font-size:22px">🌟</span><b>Tu nivel de aporte</b></div><span class="pill pill-amber">🏆 Destacada</span></div>
+              <div class="flex mt" style="justify-content:space-between"><span class="muted" style="font-size:13px">240 estrellitas</span><span class="muted" style="font-size:13px">Embajadora a las 600</span></div>
+              <div class="prog mt"><i style="width:40%"></i></div>
+              <div class="divider"></div>
+              <div class="muted" style="font-size:12px;font-weight:700;margin-bottom:6px">Cómo ganas estrellitas 🌟</div>
+              <div class="kv"><span class="k">Calificar una actividad</span><b>+5</b></div>
+              <div class="kv"><span class="k">Compartir adaptación con foto</span><b>+15</b></div>
+              <div class="kv"><span class="k">Que tu adaptación se sume a la biblioteca</span><b>+50</b></div>
+              <div class="kv"><span class="k">Responder la duda de una colega</span><b>+10</b></div>
+              <div class="kv"><span class="k">Invitar a una colega que se suscribe</span><b>+40</b></div>
+            </div>
+            <div>
+              <div class="card mb" style="background:linear-gradient(120deg,#fff,rgba(247,168,35,.14))">
+                <div class="flex"><span style="font-size:22px">🎁</span><b>Reto del mes</b></div>
+                <p class="muted mt">Comparte <b>3 adaptaciones</b> este mes y desbloquea el <b>bundle de julio una semana antes</b>.</p>
+                <div class="flex" style="justify-content:space-between;margin-top:8px"><span class="muted" style="font-size:13px">Llevas 1 de 3</span><b style="font-size:13px">+20 🌟</b></div>
+                <div class="prog mt"><i style="width:33%"></i></div>
+                <button class="btn btn-amber btn-sm btn-block mt" onclick="toast('📷 Comparte tu adaptación')">Compartir ahora</button>
+              </div>
+              <div class="card">
+                <div class="flex"><span style="font-size:20px">🎟️</span><b>Qué desbloqueas</b></div>
+                <div class="kv"><span class="k">🤝 Aportadora · 100</span><span style="font-size:12px;text-align:right">Votas el próximo tema</span></div>
+                <div class="kv"><span class="k">🏆 Destacada · 300</span><span style="font-size:12px;text-align:right">Acceso anticipado + spotlight + plantillas premium</span></div>
+                <div class="kv"><span class="k">🌟 Embajadora · 600</span><span style="font-size:12px;text-align:right">25% de comisión + eliges el tema + masterclass</span></div>
+              </div>
+            </div>
+          </div>
           <div class="card mb"><div class="flex"><div class="avatar">M</div><input class="field" style="flex:1;margin:0" placeholder="Comparte cómo te quedó en 2.º..."><button class="btn btn-ghost btn-sm" onclick="toast('📷 Selector de foto (demo)')">📷 Foto</button><button class="btn btn-cta btn-sm" onclick="toast('Publicado en el foro de 2.º ✨')">Publicar</button></div></div>
           <div class="card mb"><div class="flex mb"><div class="avatar" style="background:var(--amber)">P</div><div><b>Miss Paola <span class="pill pill-amber" style="font-size:10px">⭐ Destacada</span></b><div class="muted" style="font-size:12px">hace 2 h · foro de 2.º</div></div></div><p>Adapté el Mercadito de fracciones para mi grupo de 32 y quedó increíble 👇</p><div style="height:120px;border-radius:10px;background:linear-gradient(135deg,#dfeaf2,#eef3f7);display:grid;place-items:center;color:var(--gray);margin:10px 0">📷 Foto del salón</div><div class="flex mt"><span class="muted" style="font-size:13px">❤️ 24</span><span class="muted" style="font-size:13px">💬 7 respuestas</span></div></div>
           <div class="card mb"><div class="flex mb"><div class="avatar" style="background:var(--ink);color:#fff">L</div><div><b>Miss Lucía</b><div class="muted" style="font-size:12px">ayer · foro de 2.º</div></div></div><p>¿Cómo manejaron el cierre del proyecto? A mí me sobró tiempo, le quité una sesión y mejor 🙌</p><div class="flex mt"><span class="muted" style="font-size:13px">❤️ 12</span><span class="muted" style="font-size:13px">💬 9 respuestas</span></div></div>
-          <div class="card" style="background:linear-gradient(120deg,#fff,rgba(41,192,245,.10))"><div class="flex"><span style="font-size:24px">🌟</span><div style="flex:1"><b>Programa de embajadoras</b><div class="muted" style="font-size:13px">Las miss más activas ganan visibilidad y <b>25% de comisión</b> por cada colega que invitan.</div></div><button class="btn btn-cta btn-sm" onclick="showModal(modalRefer())">Quiero ser embajadora</button></div></div>
+          <div class="card" style="background:linear-gradient(120deg,#fff,rgba(41,192,245,.10))"><div class="flex"><span style="font-size:24px">🌟</span><div style="flex:1"><b>Programa de embajadoras</b><div class="muted" style="font-size:13px">Al llegar a <b>Nivel Embajadora</b> (600 🌟) ganas visibilidad y <b>25% de comisión</b> por cada colega que invitas.</div></div><button class="btn btn-cta btn-sm" onclick="showModal(modalRefer())">Quiero ser embajadora</button></div></div>
         </div>
 
         <!-- PROFILE -->
@@ -1127,6 +1174,7 @@ tbody tr:hover{background:var(--bg)}
       <a data-link="a-dashboard" onclick="nav('a-dashboard')"><span class="em">📊</span> Dashboard</a>
       <a data-link="a-content" onclick="nav('a-content')"><span class="em">📚</span> Contenidos</a>
       <a data-link="a-plans" onclick="nav('a-plans')"><span class="em">⭐</span> Planes y precios</a>
+      <a data-link="a-flywheel" onclick="nav('a-flywheel')"><span class="em">🔄</span> Flywheel</a>
       <a data-link="a-signal" onclick="nav('a-signal')"><span class="em">📈</span> Señal de contenido</a>
       <div class="grp">Personas</div>
       <a data-link="a-users" onclick="nav('a-users')"><span class="em">👥</span> Usuarias</a>
@@ -1173,6 +1221,43 @@ tbody tr:hover{background:var(--bg)}
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- FLYWHEEL -->
+        <div class="view" data-v="a-flywheel">
+          <div class="page-intro"><h2>Flywheel del foso</h2><p>Cómo el producto se vuelve más fuerte con cada maestra. El catálogo se comoditiza; <b>la data, el lock-in y la comunidad no</b>. Quien entre tarde no compite contra el producto: compite contra todas las vueltas ya dadas.</p></div>
+          <div class="section-card mb"><div class="sc-body" style="padding:24px"><svg viewBox="0 0 800 560" width="100%" style="max-width:760px;display:block;margin:0 auto" font-family="Archivo,sans-serif"><ellipse cx="400" cy="278" rx="255" ry="188" fill="none" stroke="#29C0F5" stroke-width="2.5" opacity="0.45"/><g transform="translate(527.5,115.2) rotate(30)"><path d="M-7 -7 L6 0 L-7 7" fill="none" stroke="#29C0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(655.0,278.0) rotate(90)"><path d="M-7 -7 L6 0 L-7 7" fill="none" stroke="#29C0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(527.5,440.8) rotate(150)"><path d="M-7 -7 L6 0 L-7 7" fill="none" stroke="#29C0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(272.5,440.8) rotate(210)"><path d="M-7 -7 L6 0 L-7 7" fill="none" stroke="#29C0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(145.0,278.0) rotate(270)"><path d="M-7 -7 L6 0 L-7 7" fill="none" stroke="#29C0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(272.5,115.2) rotate(330)"><path d="M-7 -7 L6 0 L-7 7" fill="none" stroke="#29C0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><g><rect x="300.0" y="61.0" width="200" height="58" rx="13" fill="#fff" stroke="#243240" stroke-width="1.6"/><text x="400.0" y="84.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#243240">1 · Generación con IA</text><text x="400.0" y="103.0" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1192c4">1,240 actividades</text></g><g><rect x="520.8" y="155.0" width="200" height="58" rx="13" fill="#fff" stroke="#243240" stroke-width="1.6"/><text x="620.8" y="178.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#243240">2 · Personalización + uso</text><text x="620.8" y="197.0" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1192c4">63% personaliza</text></g><g><rect x="520.8" y="343.0" width="200" height="58" rx="13" fill="#fff" stroke="#243240" stroke-width="1.6"/><text x="620.8" y="366.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#243240">3 · Data: edición + rating</text><text x="620.8" y="385.0" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1192c4">4.6/5 · 8.9k señales</text></g><g><rect x="300.0" y="437.0" width="200" height="58" rx="13" fill="#fff" stroke="#243240" stroke-width="1.6"/><text x="400.0" y="460.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#243240">4 · Generación afinada</text><text x="400.0" y="479.0" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1192c4">210 mejoras aplicadas</text></g><g><rect x="79.2" y="343.0" width="200" height="58" rx="13" fill="#fff" stroke="#243240" stroke-width="1.6"/><text x="179.2" y="366.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#243240">5 · Mejor en el salón</text><text x="179.2" y="385.0" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1192c4">91% «sí jala»</text></g><g><rect x="79.2" y="155.0" width="200" height="58" rx="13" fill="#fff" stroke="#243240" stroke-width="1.6"/><text x="179.2" y="178.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#243240">6 · Más maestras</text><text x="179.2" y="197.0" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1192c4">+312 este mes</text></g><rect x="295" y="246" width="210" height="64" rx="16" fill="#243240"/><text x="400" y="272" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">El foso se compone</text><text x="400" y="292" text-anchor="middle" font-size="11.5" fill="#9fb2c2">cada vuelta fortalece la siguiente</text></svg></div></div>
+          <div class="page-intro" style="margin-bottom:10px"><h2 style="font-size:18px">Fuerza del foso</h2><p>Métricas que <b>se acumulan</b> mes con mes y no se pueden comprar.</p></div>
+          <div class="cards c4 mb">
+            <div class="card stat"><div class="lbl">Data de salón acumulada</div><div class="val">8,900</div><div class="chg up">▲ crece cada mes</div></div>
+            <div class="card stat"><div class="lbl">Catálogo curado por comunidad</div><div class="val">38</div><div class="chg up">▲ no copiable</div></div>
+            <div class="card stat"><div class="lbl">Con plan personalizado guardado</div><div class="val">63%</div><div class="chg muted">lock-in de plataforma</div></div>
+            <div class="card stat"><div class="lbl">Activas en comunidad</div><div class="val">71%</div><div class="chg muted">costo de salida social</div></div>
+          </div>
+          <div class="cards c2" style="align-items:start">
+            <div class="section-card" style="margin:0"><div class="sc-head"><span style="font-size:20px">⚙️</span><h3>Velocidad de cada vuelta</h3></div><div class="sc-body">
+              <div class="kv"><span class="k">Actividades generadas</span><b>1,240</b></div>
+              <div class="kv"><span class="k">→ usadas / descargadas</span><b>11,300</b></div>
+              <div class="kv"><span class="k">→ calificadas «sí jala»</span><b>91%</b></div>
+              <div class="kv"><span class="k">→ señales aplicadas a la generación</span><b>210</b></div>
+              <div class="kv"><span class="k">→ mejora medida en rating</span><b class="up" style="color:#1a8f4a">+0.4 vs ciclo anterior</b></div>
+            </div></div>
+            <div class="section-card" style="margin:0"><div class="sc-head"><span style="font-size:20px">🛡️</span><h3>Lo que ChatGPT no replica</h3></div><div class="sc-body">
+              <div class="kv"><span class="k">Qué planes sí jalan en salón</span><span class="pill pill-green">solo nuestra</span></div>
+              <div class="kv"><span class="k">El trabajo personalizado guardado</span><span class="pill pill-green">lock-in</span></div>
+              <div class="kv"><span class="k">La comunidad de sus pares</span><span class="pill pill-green">no generable</span></div>
+              <div class="kv"><span class="k">El catálogo curado por maestras</span><span class="pill pill-green">no copiable</span></div>
+            </div></div>
+          </div>
+          <div class="section-card"><div class="sc-head"><span style="font-size:20px">🌟</span><h3>Programa de aportes (acelerador del flywheel)</h3><div class="sp"></div><button class="btn btn-ghost btn-sm" onclick="toast('Editor de recompensas (demo)')">Configurar recompensas</button></div><div class="sc-body">
+            <p class="muted" style="font-size:12.5px;margin-bottom:14px">Cada recompensa premia una conducta que construye el foso: calificar, compartir, curar, responder, invitar.</p>
+            <div class="cards c4">
+              <div class="card stat"><div class="lbl">Contribuidoras activas</div><div class="val">612</div></div>
+              <div class="card stat"><div class="lbl">Estrellitas repartidas</div><div class="val">48k</div></div>
+              <div class="card stat"><div class="lbl">Adaptaciones aportadas</div><div class="val">154</div></div>
+              <div class="card stat"><div class="lbl">Embajadoras activas</div><div class="val">23</div></div>
+            </div>
+          </div></div>
         </div>
 
         <!-- SIGNAL -->
@@ -1398,7 +1483,7 @@ var TITLES={
   'u-dashboard':'Inicio','u-library':'Bundle del mes','u-activity':'Actividad','u-subscription':'Mi suscripción',
   'u-billing':'Pago y facturación','u-school':'Mi escuela','u-community':'Comunidad','u-profile':'Perfil',
   'a-dashboard':'Dashboard','a-content':'Contenidos','a-upload':'Subir contenido','a-plans':'Planes y precios',
-  'a-users':'Usuarias','a-crm':'CRM','a-email':'Correos y campañas','a-signal':'Señal de contenido','u-editor':'Personalizar plan'
+  'a-users':'Usuarias','a-crm':'CRM','a-email':'Correos y campañas','a-signal':'Señal de contenido','a-flywheel':'Flywheel','u-editor':'Personalizar plan'
 };
 function render(v){
   var ctx = v.indexOf('u-')===0?'user':v.indexOf('a-')===0?'admin':'public';
