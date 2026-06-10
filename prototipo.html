@@ -421,6 +421,13 @@ tbody tr:hover{background:var(--bg)}
           <button data-lang="en" onclick="setLang('en')">Inglés</button>
           <button data-lang="bi" onclick="setLang('bi')">Bilingüe</button>
         </div></div>
+        <div class="center"><div class="compat" style="justify-content:center;align-items:center;margin:-16px 0 32px;gap:8px">
+          <span style="font-size:12.5px;font-weight:700;color:var(--text-2);margin-right:2px">Compatible con:</span>
+          <span class="cmp cmp-pyp">PYP</span>
+          <span class="cmp cmp-casel">CASEL</span>
+          <span class="cmp cmp-mont">Montessori · preescolar</span>
+          <span class="cmp cmp-camb" id="fwCambridge" style="display:none">Cambridge</span>
+        </div></div>
         <div class="plans">
           <div class="plan">
             <h3>Maestra Solo</h3><p class="desc">Un grado. Las materias que más tiempo te quitan.</p>
@@ -1098,6 +1105,7 @@ var PRICES={es:{solo:147,plus:297,note:"Precios de contenido en español. El Pla
   bi:{solo:247,plus:497,note:"Modalidad bilingüe: cada planeación en español e inglés, lista para escuelas bilingües."}};
 function setLang(l){
   document.querySelectorAll('.lang-switch button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===l);});
+  var camb=document.getElementById('fwCambridge'); if(camb) camb.style.display=(l==='en'||l==='bi')?'inline-flex':'none';
   document.querySelector('[data-price="solo"]').textContent=PRICES[l].solo;
   document.querySelector('[data-price="plus"]').textContent=PRICES[l].plus;
   document.querySelector('[data-note]').textContent=PRICES[l].note;
