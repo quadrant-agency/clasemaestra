@@ -940,10 +940,14 @@ tbody tr:hover{background:var(--bg)}
             </div>
             <div class="summary">
               <div class="card mb">
-                <button class="btn btn-ink btn-block mb" onclick="nav('u-editor')">✏️ Personalizar y hacerlo mío</button>
-                <button class="btn btn-cta btn-block mb" onclick="toast('⬇️ Descargando paquete completo...')">⬇️ Descargar todo (ZIP)</button>
-                <button class="btn btn-ghost btn-block mb" onclick="toast('⬇️ Descargando PDF...')">Secuencia (PDF)</button>
-                <button class="btn btn-ghost btn-block" onclick="toast('⬇️ Descargando editable...')">Versión editable (DOCX)</button>
+                <div style="background:linear-gradient(135deg,rgba(41,192,245,.13),rgba(247,168,35,.10));border-radius:12px;padding:14px;margin-bottom:14px">
+                  <b style="font-size:15px">✏️ Hazlo tuyo</b>
+                  <div class="muted" style="font-size:12.5px;margin:4px 0 11px">Edítalo aquí: ponle tu logo, ajusta secciones y textos. Se guarda en tu cuenta para reusarlo el próximo ciclo.</div>
+                  <button class="btn btn-cta btn-block" onclick="nav('u-editor')">Personalizar y editar</button>
+                </div>
+                <div class="muted" style="font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:9px">O SOLO DESCARGA</div>
+                <button class="btn btn-ghost btn-block mb" onclick="toast('⬇️ Descargando paquete completo...')">⬇️ Descargar todo (ZIP)</button>
+                <button class="btn btn-ghost btn-block" onclick="toast('⬇️ Descargando PDF...')">Secuencia para imprimir (PDF)</button>
                 <div class="divider"></div>
                 <div class="flex"><span style="font-size:18px">🌎</span><span class="muted" style="font-size:13px">Disponible también en inglés.</span></div>
                 <button class="btn btn-ghost btn-sm btn-block mt" onclick="nav('u-subscription')">Activar modalidad bilingüe</button>
