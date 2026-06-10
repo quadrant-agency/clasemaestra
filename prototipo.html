@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito:wght@400;700;800&family=Montserrat:wght@400;700&family=Quicksand:wght@400;700&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Patrick+Hand&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#243240; --cyan:#29C0F5; --cyan-dark:#1A9BD0; --amber:#F7A823;
@@ -388,6 +389,10 @@ tbody tr:hover{background:var(--bg)}
 .blk-ctrl button:hover{background:var(--niebla)}
 .swatch{width:28px;height:28px;border-radius:8px;cursor:pointer;box-shadow:0 0 0 1.5px var(--line)}
 .swatch.on{box-shadow:0 0 0 2px var(--ink)}
+.doc.hd-minimal .doc-header{background:#fff;color:var(--ink);border-bottom:3px solid var(--doc-accent)}
+.doc.hd-minimal .doc-logo{background:rgba(36,50,64,.07)}
+.doc.hd-side .doc-header{background:#fff;color:var(--ink);border-left:7px solid var(--doc-accent);border-bottom:1px solid var(--line)}
+.doc.hd-side .doc-logo{background:rgba(36,50,64,.07)}
 </style>
 </head>
 <body class="ctx-public">
@@ -875,6 +880,7 @@ tbody tr:hover{background:var(--bg)}
       <a data-link="u-dashboard" onclick="nav('u-dashboard')"><span class="em">🏠</span> Inicio</a>
       <a data-link="u-library" onclick="nav('u-library')"><span class="em">📚</span> Bundle del mes</a>
       <a data-link="u-community" onclick="nav('u-community')"><span class="em">💬</span> Comunidad</a>
+      <a data-link="u-style" onclick="nav('u-style')"><span class="em">🎨</span> Mi estilo</a>
       <div class="grp">Mi cuenta</div>
       <a data-link="u-subscription" onclick="nav('u-subscription')"><span class="em">⭐</span> Mi suscripción</a>
       <a data-link="u-billing" onclick="nav('u-billing')"><span class="em">💳</span> Pago y facturación</a>
@@ -1024,12 +1030,46 @@ tbody tr:hover{background:var(--bg)}
                 <label style="font-size:12px;font-weight:700">Logo de la escuela</label>
                 <div class="stripe-box" style="border-style:dashed;justify-content:center;padding:14px;cursor:pointer;margin:6px 0 14px" onclick="toast('🏫 Sube tu logo (demo)')">🏫 Subir logo</div>
                 <label style="font-size:12px;font-weight:700">Color de acento</label>
-                <div class="flex mt" style="gap:9px;margin-bottom:15px"><span class="swatch on" style="background:#29C0F5" onclick="edAccent('#29C0F5',this)"></span><span class="swatch" style="background:#F7A823" onclick="edAccent('#F7A823',this)"></span><span class="swatch" style="background:#243240" onclick="edAccent('#243240',this)"></span><span class="swatch" style="background:#E8483B" onclick="edAccent('#E8483B',this)"></span><span class="swatch" style="background:#2f8f53" onclick="edAccent('#2f8f53',this)"></span></div>
-                <label style="font-size:12px;font-weight:700">Tipografía</label>
-                <div class="flex mt" style="gap:6px;margin-bottom:16px"><span class="chip on" onclick="edFont('Archivo,sans-serif',this)">Moderna</span><span class="chip" onclick="edFont('Georgia,serif',this)">Clásica</span><span class="chip" onclick="edFont('Trebuchet MS,sans-serif',this)">Redonda</span></div>
+                <div class="flex mt" style="gap:9px;margin-bottom:15px;align-items:center;flex-wrap:wrap"><span class="swatch on" style="background:#29C0F5" onclick="edAccent('#29C0F5',this)"></span><span class="swatch" style="background:#F7A823" onclick="edAccent('#F7A823',this)"></span><span class="swatch" style="background:#243240" onclick="edAccent('#243240',this)"></span><span class="swatch" style="background:#E8483B" onclick="edAccent('#E8483B',this)"></span><span class="swatch" style="background:#2f8f53" onclick="edAccent('#2f8f53',this)"></span><input type="color" value="#29C0F5" oninput="edAccent(this.value,null)" title="Cualquier color" style="width:34px;height:34px;border:none;background:none;cursor:pointer;padding:0"></div>
+                <label style="font-size:12px;font-weight:700">Tipografía (Google Fonts)</label>
+                <select class="field" onchange="edFont(this.value)" style="margin:6px 0 16px"><option value="Archivo,sans-serif" style="font-family:Archivo">Archivo · Moderna</option><option value="Poppins,sans-serif" style="font-family:Poppins">Poppins</option><option value="Nunito,sans-serif" style="font-family:Nunito">Nunito · Amigable</option><option value="Montserrat,sans-serif" style="font-family:Montserrat">Montserrat</option><option value="Quicksand,sans-serif" style="font-family:Quicksand">Quicksand · Redonda</option><option value="Lora,serif" style="font-family:Lora">Lora · Serif</option><option value="Merriweather,serif" style="font-family:Merriweather">Merriweather · Serif</option><option value="'Patrick Hand',cursive" style="font-family:'Patrick Hand'">Patrick Hand · Manuscrita</option><option value="Caveat,cursive" style="font-family:Caveat">Caveat · Cursiva</option></select>
                 <button class="btn btn-ghost btn-sm btn-block mb" onclick="edSaveStyle()">Guardar como «Mi estilo»</button>
                 <button class="btn btn-cta btn-sm btn-block" onclick="edApplyAll()">🪄 Aplicar mi estilo a mis 8 actividades</button>
               </div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MI ESTILO -->
+        <div class="view" data-v="u-style">
+          <div class="page-intro"><h2>Mi estilo</h2><p>Tu kit de marca: logo, color y tipografía. Lo defines <b>una vez</b> aquí y se aplica a <b>todas</b> tus planeaciones con un clic.</p></div>
+          <div class="cards c2" style="grid-template-columns:1fr 1.15fr;align-items:start">
+            <div class="section-card" style="margin:0"><div class="sc-body">
+              <b style="font-size:14px">🏫 Logo de la escuela</b>
+              <div class="stripe-box" style="border-style:dashed;justify-content:center;padding:18px;cursor:pointer;margin:8px 0 18px" onclick="toast('🏫 Sube tu logo (demo)')">Subir logo</div>
+              <b style="font-size:14px">🎨 Color de acento</b>
+              <div class="flex mt" style="gap:9px;margin:8px 0 18px;align-items:center;flex-wrap:wrap"><span class="swatch on" style="background:#29C0F5" onclick="edAccent('#29C0F5',this)"></span><span class="swatch" style="background:#F7A823" onclick="edAccent('#F7A823',this)"></span><span class="swatch" style="background:#243240" onclick="edAccent('#243240',this)"></span><span class="swatch" style="background:#E8483B" onclick="edAccent('#E8483B',this)"></span><span class="swatch" style="background:#2f8f53" onclick="edAccent('#2f8f53',this)"></span><input type="color" value="#29C0F5" oninput="edAccent(this.value,null)" title="Cualquier color" style="width:34px;height:34px;border:none;background:none;cursor:pointer;padding:0"></div>
+              <b style="font-size:14px">🔤 Tipografía (Google Fonts)</b>
+              <select class="field" onchange="edFont(this.value)" style="margin:8px 0 18px"><option value="Archivo,sans-serif" style="font-family:Archivo">Archivo · Moderna</option><option value="Poppins,sans-serif" style="font-family:Poppins">Poppins</option><option value="Nunito,sans-serif" style="font-family:Nunito">Nunito · Amigable</option><option value="Montserrat,sans-serif" style="font-family:Montserrat">Montserrat</option><option value="Quicksand,sans-serif" style="font-family:Quicksand">Quicksand · Redonda</option><option value="Lora,serif" style="font-family:Lora">Lora · Serif</option><option value="Merriweather,serif" style="font-family:Merriweather">Merriweather · Serif</option><option value="'Patrick Hand',cursive" style="font-family:'Patrick Hand'">Patrick Hand · Manuscrita</option><option value="Caveat,cursive" style="font-family:Caveat">Caveat · Cursiva</option></select>
+              <b style="font-size:14px">🧱 Estilo de encabezado</b>
+              <div class="flex mt" style="gap:6px;margin:8px 0 20px"><span class="chip on" onclick="dkHeader('',this)">Con barra</span><span class="chip" onclick="dkHeader('hd-minimal',this)">Minimal</span><span class="chip" onclick="dkHeader('hd-side',this)">Franja lateral</span></div>
+              <button class="btn btn-cta btn-block mb" onclick="edApplyAll()">🪄 Aplicar a mis 8 actividades</button>
+              <button class="btn btn-ghost btn-sm btn-block" onclick="edSaveStyle()">Guardar cambios</button>
+            </div></div>
+            <div>
+              <div class="muted" style="font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:8px">VISTA PREVIA</div>
+              <div class="doc" id="styleDoc">
+                <div class="doc-header"><div class="doc-logo">🏫</div><div><div style="font-weight:800;font-size:15px">Colegio Montessori del Valle</div><div style="font-size:12px;opacity:.92">Miss Mariana · 2.º A</div></div></div>
+                <div class="doc-body">
+                  <div class="doc-title">Mercadito de fracciones</div>
+                  <div class="doc-meta" style="margin-bottom:8px">2.º primaria · Matemáticas · NEM 2022</div>
+                  <div class="doc-h">Objetivo de aprendizaje</div>
+                  <div class="doc-p">Que las y los estudiantes comprendan fracciones a través del juego y la repartición.</div>
+                  <div class="doc-h">Desarrollo</div>
+                  <div class="doc-p">Montan un mercadito donde venden y reparten productos en fracciones.</div>
+                </div>
+              </div>
+              <p class="muted" style="font-size:12px;margin-top:10px">Así se verán todas tus planeaciones con tu estilo aplicado.</p>
             </div>
           </div>
         </div>
@@ -1048,6 +1088,14 @@ tbody tr:hover{background:var(--bg)}
               <div style="margin-top:16px"><div class="muted" style="font-size:13px;margin-bottom:6px">Enfoques de tu contenido</div><div class="compat" style="margin:0"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-casel">CASEL</span><span class="cmp cmp-mont">Montessori</span></div></div>
               <div class="divider"></div>
               <div class="flex wrapf"><button class="btn btn-ink" onclick="showModal(modalPlan())">Cambiar de plan</button><button class="btn btn-ghost" onclick="showModal(modalCancel())" style="border:1.5px solid var(--red);color:var(--red)">Cancelar suscripción</button></div>
+            </div>
+          </div>
+
+          <div class="section-card mb" style="border:1.5px solid var(--cyan)">
+            <div class="sc-head"><span style="font-size:20px">🏖️</span><h3>Pausa de verano</h3><div class="sp"></div><span class="pill pill-cyan">Jul – Ago</span></div>
+            <div class="sc-body">
+              <p class="muted">¿Te vas de vacaciones? Pausa tu suscripción <b>2 meses (julio y agosto) sin ningún cobro</b>. Conservas tus planes personalizados, tu nivel de aporte 🌟 y tu lugar en la comunidad, y <b>se reanuda automáticamente el 1 de septiembre</b> — sin que tengas que hacer nada.</p>
+              <div class="flex wrapf mt" style="align-items:center;gap:12px"><button class="btn btn-cta btn-sm" onclick="showModal(modalSummer())">Pausar en verano</button><span class="muted" style="font-size:12.5px">Mejor que cancelar: no pierdes tu historial.</span></div>
             </div>
           </div>
 
@@ -1521,7 +1569,7 @@ El equipo de clasemaestra</textarea></div>
 // ---- Router ----
 var TITLES={
   'u-dashboard':'Inicio','u-library':'Bundle del mes','u-activity':'Actividad','u-subscription':'Mi suscripción',
-  'u-billing':'Pago y facturación','u-school':'Mi escuela','u-community':'Comunidad','u-profile':'Perfil',
+  'u-billing':'Pago y facturación','u-school':'Mi escuela','u-community':'Comunidad','u-style':'Mi estilo','u-profile':'Perfil',
   'a-dashboard':'Dashboard','a-content':'Contenidos','a-upload':'Subir contenido','a-plans':'Planes y precios',
   'a-users':'Usuarias','a-crm':'CRM','a-email':'Correos y campañas','a-signal':'Señal de contenido','a-flywheel':'Flywheel','u-editor':'Personalizar plan'
 };
@@ -1651,8 +1699,11 @@ function modalSchool(){return mHead('Subir a Plan Escuela')+
  '<div class="modal-body"><p class="muted mb">5 cuentas nivel Plus para tu colegio, panel de coordinación y onboarding del equipo. Disponible en español, inglés o bilingüe.</p><div class="flex" style="justify-content:space-between"><span class="muted">Plan Escuela · Español</span><b>$997/mes</b></div><div class="flex" style="justify-content:space-between;margin-top:4px"><span class="muted">Inglés</span><b>$1,497/mes</b></div><div class="flex" style="justify-content:space-between;margin-top:4px"><span class="muted">Bilingüe</span><b>$1,997/mes</b></div></div>'+
  '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal()">Ahora no</button><button class="btn btn-cta btn-sm" onclick="mDone(\'🏫 ¡Listo! Te guiamos para dar de alta tu colegio\')">Subir a Escuela</button></div>';}
 
+function modalSummer(){return mHead('Pausa de verano')+
+ '<div class="modal-body"><p class="muted mb">Tu suscripción se pausa <b>2 meses</b> sin cobro y se reanuda sola — no tienes que hacer nada.</p><div class="kv"><span class="k">Se pausa</span><b>1 jul 2026</b></div><div class="kv"><span class="k">Se reanuda automáticamente</span><b>1 sep 2026</b></div><div class="kv"><span class="k">Cobro durante la pausa</span><b>$0</b></div><div class="card" style="background:rgba(41,192,245,.06);margin-top:10px"><p class="muted" style="font-size:12.5px;margin:0">Conservas tus planes personalizados, tu nivel de aporte 🌟 y tu lugar en la comunidad.</p></div></div>'+
+ '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal()">Ahora no</button><button class="btn btn-cta btn-sm" onclick="mDone(\'🏖️ Pausa activada · se reanuda sola el 1 de septiembre\')">Confirmar pausa</button></div>';}
 function modalCancel(){return mHead('¿Cancelar tu suscripción?')+
- '<div class="modal-body"><p class="muted mb">Si cancelas, conservas el acceso hasta el final de tu ciclo actual y luego perderás el bundle del mes y la comunidad.</p><div class="card" style="background:rgba(41,192,245,.06)"><b>¿Y si mejor la pausas?</b><p class="muted" style="font-size:13px;margin-top:4px">Pausamos tu cuenta un mes sin cobro y la retomas cuando quieras.</p></div></div>'+
+ '<div class="modal-body"><p class="muted mb">Si cancelas, conservas el acceso hasta el final de tu ciclo actual y luego perderás el bundle del mes y la comunidad.</p><div class="card" style="background:rgba(41,192,245,.06)"><b>🏖️ ¿Y si mejor la pausas en verano?</b><p class="muted" style="font-size:13px;margin:4px 0 10px">Pausa 2 meses sin cobro (jul–ago) y se reanuda sola el 1 de septiembre. No pierdes tu historial, tu nivel 🌟 ni la comunidad.</p><button class="btn btn-cta btn-sm btn-block" onclick="showModal(modalSummer())">Pausar en vez de cancelar</button></div></div>'+
  '<div class="modal-foot"><button class="btn btn-ghost btn-sm" style="border:1.5px solid var(--red);color:var(--red)" onclick="mDone(\'Tu suscripción se cancelará al final del ciclo\')">Cancelar de todos modos</button><button class="btn btn-cta btn-sm" onclick="mDone(\'😊 ¡Gracias por quedarte!\')">Mantener mi plan</button></div>';}
 
 function modalAnnual(){return mHead('Cambiar a pago anual')+
@@ -1684,8 +1735,11 @@ function edBlk(t){var c='<div class="blk-ctrl"><button onclick="edMove(this,-1)"
 function edAdd(t){var b=document.getElementById('docBody');if(!b)return;b.insertAdjacentHTML('beforeend',edBlk(t));var bl=b.querySelectorAll('.blk');var ce=bl[bl.length-1].querySelector('[contenteditable]');if(ce)ce.focus();}
 function edDel(btn){btn.closest('.blk').remove();}
 function edMove(btn,d){var b=btn.closest('.blk'),p=b.parentNode;if(d<0&&b.previousElementSibling)p.insertBefore(b,b.previousElementSibling);else if(d>0&&b.nextElementSibling)p.insertBefore(b.nextElementSibling,b);}
-function edAccent(c,el){var d=document.getElementById('doc');if(d)d.style.setProperty('--doc-accent',c);el.parentNode.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('on');});el.classList.add('on');}
-function edFont(f,el){var d=document.getElementById('doc');if(d)d.style.fontFamily=f;el.parentNode.querySelectorAll('.chip').forEach(function(s){s.classList.remove('on');});el.classList.add('on');}
+function dkAccent(c){['doc','styleDoc'].forEach(function(id){var d=document.getElementById(id);if(d)d.style.setProperty('--doc-accent',c);});}
+function dkFont(f){['doc','styleDoc'].forEach(function(id){var d=document.getElementById(id);if(d)d.style.fontFamily=f;});}
+function dkHeader(s,el){['doc','styleDoc'].forEach(function(id){var d=document.getElementById(id);if(d){d.classList.remove('hd-minimal','hd-side');if(s)d.classList.add(s);}});if(el){el.parentNode.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}}
+function edAccent(c,el){dkAccent(c);if(el){el.parentNode.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('on');});el.classList.add('on');}}
+function edFont(f,el){dkFont(f);if(el){el.parentNode.querySelectorAll('.chip').forEach(function(s){s.classList.remove('on');});el.classList.add('on');}}
 function edSaveStyle(){toast('💾 Guardado como «Mi estilo»');}
 function edApplyAll(){toast('🪄 Tu estilo se aplicó a tus 8 actividades');}
 var PLAN_RANK={solo:1,plus:2,escuela:3};
