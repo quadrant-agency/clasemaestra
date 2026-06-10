@@ -355,6 +355,14 @@ tbody tr:hover{background:var(--bg)}
 @media(max-width:760px){
   table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
 }
+/* barra de temporada */
+.annbar{background:var(--ink);color:#fff;text-align:center;padding:10px 16px;font-size:13.5px;font-weight:600}
+.annbar a{color:var(--cyan);font-weight:800;cursor:pointer;text-decoration:underline}
+/* estados vacíos */
+.empty{text-align:center;padding:46px 20px;color:var(--text-2)}
+.empty b{color:var(--ink)}
+/* foto testimonio */
+.tphoto{width:52px;height:52px;border-radius:50%;flex:none;overflow:hidden}
 </style>
 </head>
 <body class="ctx-public">
@@ -366,12 +374,13 @@ tbody tr:hover{background:var(--bg)}
 
   <!-- ===== LANDING ===== -->
   <div class="view on" data-v="landing">
+    <div class="annbar">📣 Prepara tu regreso a clases: los bundles de agosto ya vienen. <a onclick="nav('checkout')">Suscríbete hoy →</a></div>
     <header class="pub-head">
       <div class="wrap">
         <a class="wm" onclick="nav('landing')"><span class="a">clase</span><span class="b">maestra</span></a>
         <nav class="pub-nav">
           <a href="#como">Cómo funciona</a><a href="#incluye">Qué incluye</a>
-          <a href="#precios">Precios</a><a href="#faq">Preguntas</a>
+          <a href="#precios">Precios</a><a href="#faq">Preguntas</a><a onclick="nav('colegios')" style="cursor:pointer">Para colegios</a>
         </nav>
         <div class="acts">
           <button class="btn btn-ghost btn-sm" onclick="nav('login')">Iniciar sesión</button>
@@ -521,7 +530,7 @@ tbody tr:hover{background:var(--bg)}
             <h3>Plan Escuela</h3><p class="desc">5 maestras de tu colegio, cada una nivel Plus.</p>
             <div class="price">$<span data-price="escuela">997</span> <small class="suf" data-plan="escuela">MXN/mes</small></div><div class="muted anote" data-plan="escuela" style="font-size:12px;margin-top:2px;min-height:15px"></div>
             <ul><li>5 cuentas nivel Plus</li><li>Panel para la coordinación</li><li>Integrantes extra disponibles</li><li>Onboarding del equipo</li></ul>
-            <li>Español, inglés o bilingüe</li><button class="btn btn-ghost btn-block" onclick="startPlan('escuela')">Cotizar Escuela</button>
+            <li>Español, inglés o bilingüe</li><button class="btn btn-ghost btn-block" onclick="nav('colegios')">Cotizar Escuela</button>
           </div>
         </div>
         <p class="note" data-note>Precios de contenido en español. Todos los planes —incluido Plan Escuela— están disponibles en inglés y bilingüe.</p>
@@ -545,9 +554,9 @@ tbody tr:hover{background:var(--bg)}
       <div class="wrap">
         <div class="sec-head"><span class="eyebrow">Testimonios</span><h2>Lo que dicen en la sala de maestros</h2></div>
         <div class="tgrid">
-          <div class="tcard"><div class="stars">★★★★★</div><p>"Pasé de planear 8 horas el domingo a revisar y adaptar en una tarde. El material socioemocional es buenísimo."</p><div class="who"><div class="avatar">M</div><div><b style="font-size:14px">Miss Mariana</b><div class="muted" style="font-size:12.5px">1.º primaria · CDMX</div></div></div></div>
-          <div class="tcard"><div class="stars">★★★★★</div><p>"Lo bilingüe me salvó. Tener la misma planeación en inglés y español lista para mi grupo de inmersión es oro."</p><div class="who"><div class="avatar" style="background:var(--amber)">P</div><div><b style="font-size:14px">Miss Paola</b><div class="muted" style="font-size:12.5px">3.º primaria · Mérida</div></div></div></div>
-          <div class="tcard"><div class="stars">★★★★★</div><p>"En el colegio lo tomamos para 6 maestras. La coordinación por fin ve todo en un solo lugar."</p><div class="who"><div class="avatar" style="background:var(--ink);color:#fff">R</div><div><b style="font-size:14px">Miss Regina</b><div class="muted" style="font-size:12.5px">Coordinadora · Monterrey</div></div></div></div>
+          <div class="tcard"><div class="stars">★★★★★</div><p>"Pasé de planear 8 horas el domingo a revisar y adaptar en una tarde. El material socioemocional es buenísimo."</p><div class="who"><span class="tphoto"><svg viewBox="0 0 100 100" width="52" height="52" style="display:block"><rect width="100" height="100" fill="#DCF3FB"/><path d="M16 100 C16 74 32 68 50 68 C68 68 84 74 84 100 Z" fill="#29C0F5"/><rect x="44" y="56" width="12" height="16" rx="6" fill="#F1C9A5"/><circle cx="50" cy="42" r="20" fill="#F1C9A5"/><path d="M28 44 C28 26 40 20 50 20 C60 20 72 26 72 44 C72 36 63 31 50 31 C37 31 28 36 28 44 Z" fill="#3A2A22"/><path d="M28 44 C26 54 28 62 32 66 L32 45 Z" fill="#3A2A22"/><path d="M72 44 C74 54 72 62 68 66 L68 45 Z" fill="#3A2A22"/><circle cx="43" cy="44" r="2" fill="#243240"/><circle cx="57" cy="44" r="2" fill="#243240"/><path d="M44 50 Q50 56 56 50" stroke="#243240" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><div><b style="font-size:14px">Miss Mariana</b><div class="muted" style="font-size:12.5px">1.º primaria · CDMX</div></div></div></div>
+          <div class="tcard"><div class="stars">★★★★★</div><p>"Lo bilingüe me salvó. Tener la misma planeación en inglés y español lista para mi grupo de inmersión es oro."</p><div class="who"><span class="tphoto"><svg viewBox="0 0 100 100" width="52" height="52" style="display:block"><rect width="100" height="100" fill="#FDEFD6"/><path d="M16 100 C16 74 32 68 50 68 C68 68 84 74 84 100 Z" fill="#F7A823"/><rect x="44" y="56" width="12" height="16" rx="6" fill="#E8B58A"/><circle cx="50" cy="42" r="20" fill="#E8B58A"/><path d="M28 44 C28 26 40 20 50 20 C60 20 72 26 72 44 C72 36 63 31 50 31 C37 31 28 36 28 44 Z" fill="#1A1410"/><path d="M28 44 C26 54 28 62 32 66 L32 45 Z" fill="#1A1410"/><path d="M72 44 C74 54 72 62 68 66 L68 45 Z" fill="#1A1410"/><circle cx="43" cy="44" r="2" fill="#243240"/><circle cx="57" cy="44" r="2" fill="#243240"/><path d="M44 50 Q50 56 56 50" stroke="#243240" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><div><b style="font-size:14px">Miss Paola</b><div class="muted" style="font-size:12.5px">3.º primaria · Mérida</div></div></div></div>
+          <div class="tcard"><div class="stars">★★★★★</div><p>"En el colegio lo tomamos para 6 maestras. La coordinación por fin ve todo en un solo lugar."</p><div class="who"><span class="tphoto"><svg viewBox="0 0 100 100" width="52" height="52" style="display:block"><rect width="100" height="100" fill="#EAEFF3"/><path d="M16 100 C16 74 32 68 50 68 C68 68 84 74 84 100 Z" fill="#243240"/><rect x="44" y="56" width="12" height="16" rx="6" fill="#C9966B"/><circle cx="50" cy="42" r="20" fill="#C9966B"/><path d="M28 44 C28 26 40 20 50 20 C60 20 72 26 72 44 C72 36 63 31 50 31 C37 31 28 36 28 44 Z" fill="#2A1D16"/><path d="M28 44 C26 54 28 62 32 66 L32 45 Z" fill="#2A1D16"/><path d="M72 44 C74 54 72 62 68 66 L68 45 Z" fill="#2A1D16"/><g stroke="#243240" stroke-width="1.6" fill="none"><circle cx="43" cy="44" r="6"/><circle cx="57" cy="44" r="6"/><line x1="49" y1="44" x2="51" y2="44"/></g><path d="M44 50 Q50 56 56 50" stroke="#243240" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><div><b style="font-size:14px">Miss Regina</b><div class="muted" style="font-size:12.5px">Coordinadora · Monterrey</div></div></div></div>
         </div>
       </div>
     </section>
@@ -572,7 +581,7 @@ tbody tr:hover{background:var(--bg)}
             <h2>¿Diriges o coordinas un colegio?</h2>
             <p>Equipa a todas tus maestras con planeaciones de vanguardia y dale a la coordinación un panel para dar seguimiento al equipo.</p>
             <div class="flex" style="margin-top:16px;gap:10px;flex-wrap:wrap"><span class="pill pill-cyan">5 cuentas Plus</span><span class="pill pill-cyan">Panel de coordinación</span><span class="pill pill-cyan">ES · EN · Bilingüe</span></div>
-            <button class="btn btn-cta" style="margin-top:22px" onclick="showModal(modalDemo())">Agenda una demo →</button>
+            <button class="btn btn-cta" style="margin-top:22px" onclick="nav('colegios')">Conoce el plan para colegios →</button>
           </div>
           <div style="background:rgba(255,255,255,.08);border-radius:16px;padding:26px;color:#fff">
             <div style="font-size:13px;color:#b9c4cf">Ahorro estimado por maestra</div>
@@ -595,13 +604,114 @@ tbody tr:hover{background:var(--bg)}
       <div class="wrap">
         <div class="cols">
           <div><a class="wm" style="font-size:22px"><span class="a">clase</span><span class="b" style="color:#fff">maestra</span></a><p style="margin-top:12px;font-size:13.5px;max-width:260px">Planeaciones de vanguardia, listas cada mes, para las miss de escuela privada en México.</p></div>
-          <div><h5>Producto</h5><a href="#como">Cómo funciona</a><a href="#precios">Precios</a><a onclick="nav('sample')">Muestra gratis</a></div>
+          <div><h5>Producto</h5><a href="#como">Cómo funciona</a><a href="#precios">Precios</a><a onclick="nav('sample')">Muestra gratis</a><a onclick="nav('colegios')">Para colegios</a></div>
           <div><h5>Cuenta</h5><a onclick="nav('login')">Iniciar sesión</a><a onclick="nav('checkout')">Crear cuenta</a><a onclick="showModal(modalRefer())">Invita a una colega 🎁</a><a onclick="nav('a-dashboard')">Admin (demo)</a></div>
           <div><h5>Contacto</h5><a>hola@clasemaestra.mx</a><a>WhatsApp</a><a>Instagram</a></div>
         </div>
         <div class="bottom"><span>© 2026 clasemaestra · Quadrant Agency</span><span>Aviso de privacidad · Términos</span></div>
       </div>
     </footer>
+  </div>
+
+  <!-- ===== LANDING COLEGIOS (B2B) ===== -->
+  <div class="view" data-v="colegios">
+    <div class="annbar" style="background:var(--cyan);color:var(--ink)">🏫 Solución para colegios privados · equipa a todo tu equipo docente</div>
+    <header class="pub-head"><div class="wrap">
+      <a class="wm" onclick="nav('landing')"><span class="a">clase</span><span class="b">maestra</span></a>
+      <nav class="pub-nav"><a href="#col-ben">Beneficios</a><a href="#col-como">Cómo funciona</a><a href="#col-precio">Precios</a></nav>
+      <div class="acts"><button class="btn btn-ghost btn-sm" onclick="nav('landing')">Soy maestra</button><a href="#col-form" class="btn btn-cta btn-sm">Agenda una demo</a></div>
+      <button class="burger" onclick="document.getElementById('col-form').scrollIntoView({behavior:'smooth'})">☰</button>
+    </div></header>
+
+    <section class="hero"><div class="wrap grid">
+      <div>
+        <span class="pill pill-amber">🏫 Para dirección y coordinación</span>
+        <h1>Equipa a todo tu colegio con planeaciones de vanguardia.</h1>
+        <p class="sub">Tus maestras recuperan ~32 horas de planeación al mes y la coordinación obtiene un panel para dar seguimiento a todo el equipo. Alineado a NEM 2022 y compatible con PYP, Cambridge, CASEL y Montessori.</p>
+        <div class="cta-row"><a href="#col-form" class="btn btn-cta">Agenda una demo →</a><a href="#col-precio" class="btn btn-ghost">Ver planes</a></div>
+        <div class="trust"><span>✓ <b>5 cuentas</b> nivel Plus</span><span>✓ Español, inglés o <b>bilingüe</b></span><span>✓ Onboarding del equipo</span></div>
+      </div>
+      <div class="hero-card">
+        <div class="month-tag"><span class="pill pill-cyan">Panel de coordinación</span><span class="muted" style="font-size:12px">5 maestras</span></div>
+        <div class="act-row"><div class="act-ico" style="background:rgba(41,192,245,.15)">👩‍🏫</div><div><b style="font-size:14px">Miss Mariana · 1.º y 2.º</b><div class="muted" style="font-size:12px">Español · 12 actividades</div></div></div>
+        <div class="act-row"><div class="act-ico" style="background:rgba(247,168,35,.18)">👩‍🏫</div><div><b style="font-size:14px">Miss Paola · 3.º</b><div class="muted" style="font-size:12px">Bilingüe · 9 actividades</div></div></div>
+        <div class="act-row"><div class="act-ico" style="background:rgba(36,50,64,.10)">👩‍🏫</div><div><b style="font-size:14px">Miss Lucía · Preescolar</b><div class="muted" style="font-size:12px">Español · 15 actividades</div></div></div>
+        <div style="text-align:center;margin-top:6px"><span class="muted" style="font-size:12.5px">+ 2 maestras del equipo</span></div>
+      </div>
+    </div></section>
+
+    <section class="proof"><div class="wrap"><div class="row">
+      <div class="stat-n"><b>~32 h</b><span>ahorradas / maestra / mes</span></div>
+      <div class="stat-n"><b>9 grados</b><span>preescolar a 6.º</span></div>
+      <div class="stat-n"><b>1 panel</b><span>para la coordinación</span></div>
+      <div class="stat-n"><b>4.9/5</b><span>satisfacción docente</span></div>
+    </div></div></section>
+
+    <section class="pub" id="col-ben"><div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Por qué colegios</span><h2>Por qué los colegios eligen clasemaestra</h2><p>Una sola plataforma para que todo tu equipo planee con la misma calidad y la coordinación tenga visibilidad total.</p></div>
+      <div class="incl-grid">
+        <div class="incl-card"><div class="ic">🎯</div><h4>Consistencia entre grados</h4><p>Toda la primaria y preescolar con la misma metodología de vanguardia, sin depender de cada maestra.</p></div>
+        <div class="incl-card"><div class="ic">📊</div><h4>Panel de coordinación</h4><p>Ve qué descarga cada maestra, qué grados están cubiertos y el avance del mes en un solo lugar.</p></div>
+        <div class="incl-card"><div class="ic">🌐</div><h4>Enfoques internacionales</h4><p>Contenido compatible con PYP, Cambridge, CASEL y Montessori, ideal para colegios bilingües.</p></div>
+        <div class="incl-card"><div class="ic">⏱️</div><h4>Tiempo docente recuperado</h4><p>~32 horas al mes por maestra que regresan a la enseñanza, no al papeleo.</p></div>
+        <div class="incl-card"><div class="ic">🤝</div><h4>Onboarding del equipo</h4><p>Damos de alta a tus maestras y las acompañamos para que arranquen desde el primer día.</p></div>
+        <div class="incl-card"><div class="ic">🛡️</div><h4>NEM 2022 garantizada</h4><p>Cumplimiento curricular como piso; metodologías de vanguardia como diferenciador.</p></div>
+      </div>
+    </div></section>
+
+    <section class="pub" id="col-como" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Implementación</span><h2>Así lo activas en tu colegio</h2></div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Agenda una demo</h3><p>Nos cuentas de tu colegio y te mostramos la plataforma con tus grados y modalidad.</p></div>
+        <div class="step"><div class="n">2</div><h3>Damos de alta a tu equipo</h3><p>Configuramos las cuentas de tus maestras, sus grados e idioma, con onboarding incluido.</p></div>
+        <div class="step"><div class="n">3</div><h3>La coordinación da seguimiento</h3><p>Desde el panel ves cobertura, descargas y avance de todo el equipo cada mes.</p></div>
+      </div>
+    </div></section>
+
+    <section class="pub"><div class="wrap">
+      <div class="tcard" style="max-width:720px;margin:0 auto;text-align:center">
+        <div class="stars" style="justify-content:center">★★★★★</div>
+        <p style="font-size:18px">"Tomamos clasemaestra para 6 maestras y la coordinación por fin ve todo en un solo lugar. La consistencia entre grados subió muchísimo y mis maestras llegan menos quemadas los lunes."</p>
+        <div class="flex" style="justify-content:center;gap:11px;margin-top:8px"><span class="tphoto" style="width:64px;height:64px"><svg viewBox="0 0 100 100" width="64" height="64" style="display:block"><rect width="100" height="100" fill="#EAEFF3"/><path d="M16 100 C16 74 32 68 50 68 C68 68 84 74 84 100 Z" fill="#243240"/><rect x="44" y="56" width="12" height="16" rx="6" fill="#C9966B"/><circle cx="50" cy="42" r="20" fill="#C9966B"/><path d="M28 44 C28 26 40 20 50 20 C60 20 72 26 72 44 C72 36 63 31 50 31 C37 31 28 36 28 44 Z" fill="#2A1D16"/><path d="M28 44 C26 54 28 62 32 66 L32 45 Z" fill="#2A1D16"/><path d="M72 44 C74 54 72 62 68 66 L68 45 Z" fill="#2A1D16"/><g stroke="#243240" stroke-width="1.6" fill="none"><circle cx="43" cy="44" r="6"/><circle cx="57" cy="44" r="6"/><line x1="49" y1="44" x2="51" y2="44"/></g><path d="M44 50 Q50 56 56 50" stroke="#243240" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><div style="text-align:left"><b style="font-size:14px">Miss Regina</b><div class="muted" style="font-size:12.5px">Coordinación académica · Monterrey</div></div></div>
+      </div>
+    </div></section>
+
+    <section class="pub" id="col-precio" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Inversión</span><h2>Plan Escuela</h2><p>5 cuentas nivel Plus para tu colegio. Disponible en español, inglés o bilingüe.</p></div>
+      <div class="center"><div class="plan featured" style="max-width:440px;width:100%">
+        <span class="pop pill pill-cyan" style="background:var(--cyan);color:var(--ink)">El plan de los colegios</span>
+        <h3>Plan Escuela</h3><p class="desc">Todo tu equipo docente con planeaciones de vanguardia.</p>
+        <div class="price">$997 <small>MXN/mes</small></div>
+        <p class="muted" style="font-size:12.5px;margin-top:-4px">Inglés $1,497 · Bilingüe $1,997 · maestra adicional +$197</p>
+        <ul><li>5 cuentas nivel Plus</li><li>Panel de coordinación</li><li>Todos los grados (preescolar a 6.º)</li><li>Compatible con PYP, CASEL, Montessori (y Cambridge en EN/BI)</li><li>Onboarding del equipo</li><li>Garantía de 7 días</li></ul>
+        <a href="#col-form" class="btn btn-cta btn-block">Agenda una demo</a>
+      </div></div>
+    </div></section>
+
+    <section class="pub" id="col-form" style="background:var(--ink)"><div class="wrap">
+      <div style="max-width:740px;margin:0 auto">
+        <div class="sec-head" style="margin-bottom:26px"><span class="eyebrow" style="color:var(--cyan)">Hablemos</span><h2 style="color:#fff">Cuéntanos de tu colegio</h2><p style="color:#b9c4cf">Déjanos tus datos y te contactamos en menos de 24 horas para agendar una demo y armar tu propuesta.</p></div>
+        <div class="panel">
+          <div class="flex"><div class="field" style="flex:1"><label>Nombre del colegio</label><input placeholder="Colegio..."></div><div class="field" style="flex:1"><label>Tu nombre</label><input placeholder="Nombre y apellido"></div></div>
+          <div class="flex"><div class="field" style="flex:1"><label>Cargo</label><input placeholder="Dirección / Coordinación"></div><div class="field" style="flex:1"><label>N.º de maestras (aprox.)</label><input placeholder="Ej. 12"></div></div>
+          <div class="flex"><div class="field" style="flex:1"><label>Correo</label><input placeholder="correo@colegio.mx"></div><div class="field" style="flex:1"><label>Teléfono / WhatsApp</label><input placeholder="10 dígitos"></div></div>
+          <div class="flex"><div class="field" style="flex:1"><label>Niveles</label><select><option>Preescolar y primaria</option><option>Solo preescolar</option><option>Solo primaria</option></select></div><div class="field" style="flex:1"><label>Modalidad</label><select><option>Español</option><option>Inglés</option><option>Bilingüe</option><option>Mixta</option></select></div></div>
+          <div class="field"><label>Mensaje (opcional)</label><textarea rows="3" placeholder="Cuéntanos qué buscas para tu colegio..."></textarea></div>
+          <button class="btn btn-cta btn-block" onclick="toast('📩 ¡Gracias! Te contactamos en menos de 24 h')">Solicitar información</button>
+          <p class="muted" style="font-size:11.5px;text-align:center;margin-top:10px">También puedes escribirnos a colegios@clasemaestra.mx</p>
+        </div>
+      </div>
+    </div></section>
+
+    <footer class="pub-foot"><div class="wrap">
+      <div class="cols">
+        <div><a class="wm" style="font-size:22px"><span class="a">clase</span><span class="b" style="color:#fff">maestra</span></a><p style="margin-top:12px;font-size:13.5px;max-width:260px">El equipo docente de tu colegio, planeando con metodologías de vanguardia.</p></div>
+        <div><h5>Colegios</h5><a href="#col-ben">Beneficios</a><a href="#col-precio">Precios</a><a href="#col-form">Agenda demo</a></div>
+        <div><h5>Maestras</h5><a onclick="nav('landing')">Planes individuales</a><a onclick="nav('sample')">Muestra gratis</a></div>
+        <div><h5>Contacto</h5><a>colegios@clasemaestra.mx</a><a>WhatsApp</a></div>
+      </div>
+      <div class="bottom"><span>© 2026 clasemaestra · Quadrant Agency</span><span>Aviso de privacidad · Términos</span></div>
+    </div></footer>
   </div>
 
   <!-- ===== MUESTRA GRATIS ===== -->
@@ -1020,12 +1130,13 @@ tbody tr:hover{background:var(--bg)}
           <div class="page-intro"><h2>Gestión de contenidos</h2><p>El contenido solo se publica y recibe sus tags cuando <b>pasa la validación de enfoques</b>. Si no cumple, regresa a corrección y se vuelve a revisar.</p></div>
           <div class="flex wrapf mb" style="justify-content:space-between">
             <div class="flex wrapf">
-              <select class="field" style="width:auto;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px"><option>📅 Junio 2026</option><option>Julio 2026</option></select>
+              <select id="cMonth" onchange="contentFilter(this.value)" class="field" style="width:auto;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px"><option>📅 Junio 2026</option><option>Julio 2026</option></select>
               <select class="field" style="width:auto;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px"><option>Todos los grados</option><option>2.º primaria</option></select>
             </div>
             <button class="btn btn-cta" onclick="nav('a-upload')">⬆️ Subir contenido</button>
           </div>
-          <div class="section-card">
+          <div class="section-card" id="cEmpty" style="display:none"><div class="sc-body"><div class="empty"><div style="font-size:42px">📭</div><b style="font-size:16px">Aún no hay contenido para este mes</b><p class="muted" style="margin:6px 0 16px">El bundle de julio todavía no se ha cargado.</p><button class="btn btn-cta btn-sm" onclick="nav('a-upload')">⬆️ Subir contenido</button></div></div></div>
+          <div class="section-card" id="cTable">
             <table>
               <thead><tr><th>Actividad</th><th>Grado</th><th>Idioma</th><th>Enfoques validados</th><th>Liberación</th><th>Estado</th><th></th></tr></thead>
               <tbody>
@@ -1348,6 +1459,7 @@ function modalUpsell(v){var d=UPSELL[v]||['Esta función','un plan superior','']
  '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal();nav(\''+v+'\')">Ver vista previa</button><button class="btn btn-cta btn-sm" onclick="mDone(\'⬆️ ¡Vamos a subir tu plan!\')">Subir a '+d[1]+'</button></div>';}
 
 // ===== Bloqueo de funciones por plan (teaser tachado en el menú) =====
+function contentFilter(v){var e=document.getElementById("cEmpty"),t=document.getElementById("cTable");if(!e||!t)return;var em=v.indexOf("Julio")>=0;e.style.display=em?"block":"none";t.style.display=em?"none":"block";}
 function toggleMenu(){var m=document.getElementById('mmenu'); if(m) m.classList.toggle('open');}
 function modalDemo(){return mHead('Agenda una demo para tu colegio')+
  '<div class="modal-body"><div class="field"><label>Colegio</label><input placeholder="Nombre del colegio"></div><div class="field"><label>Tu nombre y cargo</label><input placeholder="Coordinación / Dirección"></div><div class="field"><label>Correo</label><input placeholder="correo@colegio.mx"></div><div class="field"><label>N.º de maestras (aprox.)</label><input placeholder="Ej. 12"></div></div>'+
