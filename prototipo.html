@@ -421,13 +421,14 @@ tbody tr:hover{background:var(--bg)}
           <button data-lang="en" onclick="setLang('en')">Inglés</button>
           <button data-lang="bi" onclick="setLang('bi')">Bilingüe</button>
         </div></div>
-        <div class="center"><div class="compat" style="justify-content:center;align-items:center;margin:-16px 0 32px;gap:8px">
+        <div class="center"><div class="compat" style="justify-content:center;align-items:center;margin:-16px 0 10px;gap:8px">
           <span style="font-size:12.5px;font-weight:700;color:var(--text-2);margin-right:2px">Compatible con:</span>
           <span class="cmp cmp-pyp">PYP</span>
           <span class="cmp cmp-casel">CASEL</span>
           <span class="cmp cmp-mont">Montessori · preescolar</span>
           <span class="cmp cmp-camb" id="fwCambridge" style="display:none">Cambridge</span>
         </div></div>
+        <p class="note" style="margin:0 auto 30px;max-width:560px">Cada actividad se valida como compatible con estos enfoques antes de publicarse.</p>
         <div class="plans">
           <div class="plan">
             <h3>Maestra Solo</h3><p class="desc">Un grado. Las materias que más tiempo te quitan.</p>
@@ -468,7 +469,7 @@ tbody tr:hover{background:var(--bg)}
       <div class="wrap">
         <div class="sec-head"><span class="eyebrow">Dudas</span><h2>Lo que toda maestra pregunta primero</h2></div>
         <div class="faq-list">
-          <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Las planeaciones cumplen con la NEM 2022?<span>+</span></div><div class="faq-a">Sí. El cumplimiento NEM 2022 es nuestra base, pero vamos más allá con metodologías de vanguardia pensadas para escuela privada.</div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Las planeaciones cumplen con la NEM 2022?<span>+</span></div><div class="faq-a">Sí. El cumplimiento NEM 2022 es nuestra base, pero vamos más allá con metodologías de vanguardia pensadas para escuela privada.</div></div><div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Son compatibles con PYP, Cambridge o Montessori?<span>+</span></div><div class="faq-a">Sí. Cada actividad se diseña y revisa para ser compatible con los enfoques aplicables a tu grado e idioma: indagación tipo PYP, marco socioemocional CASEL y materiales de inspiración Montessori en preescolar. No somos proveedor oficial de esos programas: potencian tu programa, no lo sustituyen.</div></div><div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Mi colegio es bilingüe o Cambridge, ¿me sirve?<span>+</span></div><div class="faq-a">Mucho. En las modalidades inglés y bilingüe, cada planeación pasa además una validación con el enfoque Cambridge antes de publicarse, así que llega lista para tus aulas de inmersión.</div></div><div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué es el marco CASEL del contenido socioemocional?<span>+</span></div><div class="faq-a">CASEL es el estándar internacional de aprendizaje socioemocional, con cinco competencias. Nuestro contenido socioemocional se diseña con base en él para darle rigor, no solo buenas intenciones.</div></div>
           <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Puedo editar el material?<span>+</span></div><div class="faq-a">Sí, entregamos PDF para imprimir y versiones editables para que adaptes lo que necesites.</div></div>
           <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Cómo funciona la versión en inglés o bilingüe?<span>+</span></div><div class="faq-a">En Solo eliges un grado; en Plus, dos. Puedes agregar grados extra por +$97/mes. La modalidad bilingüe te entrega cada planeación en español e inglés.</div></div>
           <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Hay prueba gratis?<span>+</span></div><div class="faq-a">Puedes descargar una muestra gratis para conocer la calidad, y toda suscripción tiene garantía de devolución de 7 días sin preguntas.</div></div>
@@ -665,9 +666,9 @@ tbody tr:hover{background:var(--bg)}
           <div class="section-card">
             <div class="sc-head"><span style="font-size:20px">📅</span><h3>Bundle de junio · 2.º primaria</h3><div class="sp"></div><button class="btn btn-ghost btn-sm" onclick="nav('u-library')">Ver todo</button></div>
             <div class="sc-body"><div class="lib-grid">
-              <div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#29C0F5,#1A9BD0)">📐</div><div class="lib-body"><h4>Mercadito de fracciones</h4><div class="meta">Matemáticas · Proyecto · 5 sesiones</div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir</button></div></div>
-              <div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#F7A823,#e08f0a)">🌱</div><div class="lib-body"><h4>Mis emociones tienen nombre</h4><div class="meta">Socioemocional · 3 sesiones</div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir</button></div></div>
-              <div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#243240,#3a4d5e)">🔬</div><div class="lib-body"><h4>STEAM: El agua viajera</h4><div class="meta">Ciencias · 4 sesiones</div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir</button></div></div>
+              <div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#29C0F5,#1A9BD0)">📐</div><div class="lib-body"><h4>Mercadito de fracciones</h4><div class="meta">Matemáticas · Proyecto · 5 sesiones</div><div class="compat" style="margin:0"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir</button></div></div>
+              <div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#F7A823,#e08f0a)">🌱</div><div class="lib-body"><h4>Mis emociones tienen nombre</h4><div class="meta">Socioemocional · 3 sesiones</div><div class="compat" style="margin:0"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir</button></div></div>
+              <div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#243240,#3a4d5e)">🔬</div><div class="lib-body"><h4>STEAM: El agua viajera</h4><div class="meta">Ciencias · 4 sesiones</div><div class="compat" style="margin:0"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir</button></div></div>
             </div></div>
           </div>
           <div class="cards c2">
@@ -731,6 +732,7 @@ tbody tr:hover{background:var(--bg)}
                 <div><div class="muted" style="font-size:13px">Grados</div><b style="font-size:18px">1.º y 2.º primaria</b></div>
                 <div><div class="muted" style="font-size:13px">Cobro mensual</div><b style="font-size:18px">$297 MXN</b></div>
               </div>
+              <div style="margin-top:16px"><div class="muted" style="font-size:13px;margin-bottom:6px">Enfoques de tu contenido</div><div class="compat" style="margin:0"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-casel">CASEL</span><span class="cmp cmp-mont">Montessori</span></div></div>
               <div class="divider"></div>
               <div class="flex wrapf"><button class="btn btn-ink" onclick="toast('Selecciona un plan superior abajo')">Cambiar de plan</button><button class="btn btn-ghost btn-red" onclick="toast('Tu plan sigue activo. Puedes cancelar cuando quieras.')" style="border-color:var(--red);color:var(--red)">Cancelar suscripción</button></div>
             </div>
@@ -738,7 +740,7 @@ tbody tr:hover{background:var(--bg)}
 
           <div class="cards c2 mb">
             <div class="card"><div class="flex mb"><span style="font-size:24px">⬆️</span><b style="font-size:17px">Subir a Plan Escuela</b></div><p class="muted">5 cuentas nivel Plus para tu colegio + panel de coordinación.</p><div class="flex" style="margin-top:14px;justify-content:space-between"><b style="font-size:20px">$997/mes</b><button class="btn btn-cta btn-sm" onclick="toast('Te contactaremos para el alta de tu escuela 🏫')">Subir de plan</button></div></div>
-            <div class="card"><div class="flex mb"><span style="font-size:24px">🌎</span><b style="font-size:17px">Cambiar modalidad de idioma</b></div><div class="chips mt"><span class="chip on">Español</span><span class="chip" onclick="this.classList.add('on');toast('Modalidad inglés: +$100/mes')">Inglés +$100</span><span class="chip" onclick="this.classList.add('on');toast('Modalidad bilingüe: +$200/mes')">Bilingüe +$200</span></div><p class="muted" style="font-size:12.5px;margin-top:10px">El cambio aplica al siguiente ciclo de cobro.</p></div>
+            <div class="card"><div class="flex mb"><span style="font-size:24px">🌎</span><b style="font-size:17px">Cambiar modalidad de idioma</b></div><div class="chips mt"><span class="chip on">Español</span><span class="chip" onclick="this.classList.add('on');toast('Modalidad inglés: +$100/mes')">Inglés +$100</span><span class="chip" onclick="this.classList.add('on');toast('Modalidad bilingüe: +$200/mes')">Bilingüe +$200</span></div><p class="muted" style="font-size:12.5px;margin-top:10px">El cambio aplica al siguiente ciclo de cobro.</p><p style="font-size:12.5px;margin-top:8px;color:var(--cyan-dark);font-weight:700">🎓 Inglés y bilingüe suman compatibilidad Cambridge a tu contenido.</p></div>
           </div>
 
           <div class="section-card">
