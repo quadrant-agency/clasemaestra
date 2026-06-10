@@ -137,14 +137,21 @@ ul.clean li{margin:5px 0}
     <a href="#recursos">Recursos y ligas</a>
     <a href="#proto-acceso" style="font-weight:700;color:var(--carbon)">⭐ Acceso al prototipo</a>
     <a href="#claude">Cómo usar (paso a paso)</a>
+    <a href="#claudemd">CLAUDE.md (cópialo)</a>
     <a href="#stack">Stack recomendado</a>
     <a href="#tokens">Sistema de diseño</a>
     <a href="#datos">Modelo de datos</a>
+    <a href="#bloques">Formato de bloques</a>
+    <a href="#schema">Esquema SQL listo</a>
     <a href="#reglas">Reglas de negocio</a>
     <a href="#stripe">Mapeo Stripe</a>
     <a href="#roles">Roles y seguridad</a>
+    <a href="#env">Variables de entorno</a>
+    <a href="#carpetas">Mapa de carpetas</a>
+    <a href="#glosario">Glosario</a>
     <h5>Plan día por día</h5>
     <a class="day" href="#d0">Día 0 · Prerrequisitos</a>
+    <a class="day" href="#d05">Día 0.5 · Hablarle a Claude Code</a>
     <a class="day" href="#d1">Día 1 · Cimientos</a>
     <a class="day" href="#d2">Día 2 · Auth + BD</a>
     <a class="day" href="#d3">Día 3 · Design system</a>
@@ -319,6 +326,43 @@ Antes de construir CUALQUIER pantalla, abre y lee el archivo local referencia/pr
       <div class="note"><b>Nota:</b> Claude Code también puede abrir la versión en vivo (<a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">en línea</a>), pero el archivo local es más confiable y no depende de internet. Ten ambos a la mano.</div>
     </section>
 
+    <!-- CLAUDE.md COMPLETO -->
+    <section id="claudemd">
+      <span class="eyebrow">★ Cópialo tal cual</span>
+      <h2 class="s">CLAUDE.md (pégalo completo en la raíz)</h2>
+      <p class="lead">Este es el archivo que Claude Code lee en cada sesión. Cópialo entero a un archivo llamado <code>CLAUDE.md</code> en la raíz del proyecto (Día 1). Ya trae la regla del prototipo, el stack y TODAS las reglas de negocio.</p>
+      <div class="prompt"><span class="lbl">CLAUDE.md</span><button class="copybtn">Copiar</button># clasemaestra — Reglas del proyecto
+
+## REGLA #1 — FIDELIDAD AL PROTOTIPO
+Antes de construir CUALQUIER pantalla, abre y lee referencia/prototipo.html y localiza la pantalla por su #hash (#landing, #u-library, #a-content, etc.). Replica EXACTAMENTE: estructura, orden de secciones, textos visibles, jerarquía, colores, espaciados y comportamiento. NO inventes copy ni cambies textos. Si algo no es claro, pregunta antes de inventar. El diseño visual es el de clasemaestra (referencia/manual-identidad.html).
+
+## STACK
+Next.js 14 (App Router) + TypeScript, Tailwind v3 (tailwind.config.ts), Supabase (Postgres + Auth + Storage + RLS), Stripe (Payment Element + webhooks), TipTap (editor), Resend (correo), Vercel (deploy).
+
+## MARCA (tokens)
+carbon #243240 · cian #29C0F5 · amarillo #F7A823 · rojo #E8483B · gris #8A8C8E · fondo #F6F9FB.
+Fuente Archivo. Titulares en mayúscula de oración. El CTA primario es cian con texto carbon. El rojo es SOLO para alertas/errores. NUNCA menciones inteligencia artificial en el texto visible al usuario (el posicionamiento es "creado y revisado por expertos en educación").
+
+## REGLAS DE NEGOCIO
+- Planes (MXN/mes): Solo 147 (1 grado), Plus 297 (2 grados), Escuela 997 (5 cuentas Plus + panel). Comunidad incluida en TODOS los planes.
+- Modalidades: Español base; +Inglés (+50 Solo / +100 Plus); +Bilingüe (+100 Solo / +200 Plus). Escuela: ES 997 / EN 1497 / BI 1997.
+- Anual = mensual × 10 (paga 10, recibe 12).
+- Add-ons: Grado extra +97 (solo Plus/Escuela); Maestra adicional +197 (solo Escuela).
+- NO existe Pack NEE ni plan "Total". No hay descuentos por defecto.
+- Entrega MODELO A: el bundle mensual COMPLETO se libera al inicio del mes (sin goteo ni candados), organizado por los 4 campos formativos NEM y por semana. Navegación por tira del ciclo escolar (Ago→Jul).
+- USO: la maestra edita su planeación EN la plataforma y la imprime. NUNCA se descarga el documento de planeación. Únicas descargas permitidas: la muestra gratis (lead magnet) y la factura.
+- Enfoques (lenguaje "compatible con", nunca "afiliado/certificado/oficial"; nota "no somos proveedor oficial"): PYP = preescolar + toda primaria, todo idioma; CASEL = todos, donde haya socioemocional; Montessori = preescolar + primaria baja (1º-3º); Reggio = solo preescolar; Cambridge = cualquier grado pero SOLO en modalidad inglés/bilingüe.
+- Comunidad en todos los planes; programa de aportes (estrellitas) con niveles Aportadora (100), Destacada (300), Embajadora (600); recompensas que NO canibalizan ingreso (estatus, votar/elegir tema, acceso anticipado, spotlight) — nunca meses gratis ni descuentos al plan.
+- Pausa de verano: 2 meses sin cobro que se reanudan solos el 1 de septiembre.
+- Garantía de 7 días. Referidas: 50% el primer mes para la colega + 25% de comisión para la referidora (al ser Embajadora).
+
+## SEGURIDAD
+RLS en todas las tablas con datos de usuaria (filtrar por auth.uid()). Acceso a actividades solo con suscripción activa y grado/modalidad del plan. El rol admin se valida en el SERVIDOR, nunca en el navegador.
+
+## ENTREGA
+Una rama por día. Al terminar cada día, lista qué archivos tocaste, cómo verlo en el navegador y qué quedó pendiente.</div>
+    </section>
+
     <!-- STACK -->
     <section id="stack">
       <span class="eyebrow">04 · Stack</span>
@@ -406,6 +450,93 @@ Antes de construir CUALQUIER pantalla, abre y lee el archivo local referencia/pr
           <tr><td><code>campaigns</code></td><td>id, asunto, cuerpo, segmento, status, sent_at, stats</td><td>Correos del admin + secuencias automáticas.</td></tr>
         </table>
       </div>
+    </section>
+
+    <!-- FORMATO DE BLOQUES -->
+    <section id="bloques">
+      <span class="eyebrow">★ Contrato compartido</span>
+      <h2 class="s">Formato de contenido por bloques</h2>
+      <p class="lead">Este es el formato del campo <code>content</code> de una actividad y de una personalización. Lo usan 5 pantallas (actividad, editor I y II, personalizaciones y "Mi estilo"). <b>Defínelo una sola vez</b> como un tipo de TypeScript en <code>src/lib/blocks.ts</code> y que todo lo use; así nada se desincroniza.</p>
+      <div class="prompt"><span class="lbl">content (jsonb)</span><button class="copybtn">Copiar</button>{
+  "version": 1,
+  "blocks": [
+    { "id": "b1", "type": "heading",   "level": 2, "text": "Inicio" },
+    { "id": "b2", "type": "paragraph", "text": "Texto editable de la planeación..." },
+    { "id": "b3", "type": "list",      "style": "bullet", "items": ["Material 1", "Material 2"] },
+    { "id": "b4", "type": "image",     "url": "https://.../foto.jpg", "alt": "Material" }
+  ]
+}</div>
+      <div class="card" style="margin-top:10px">
+        <table class="kvt">
+          <tr><th>type</th><th>Campos</th></tr>
+          <tr><td><code>heading</code></td><td><code>level</code> (1-3), <code>text</code></td></tr>
+          <tr><td><code>paragraph</code></td><td><code>text</code></td></tr>
+          <tr><td><code>list</code></td><td><code>style</code> (bullet/number), <code>items</code> []</td></tr>
+          <tr><td><code>image</code></td><td><code>url</code>, <code>alt</code></td></tr>
+        </table>
+        <div class="note">Una <b>personalización</b> es una copia de este mismo <code>content</code> con los cambios de la maestra. El estilo (color/tipografía/encabezado) NO va aquí: vive en <code>brand_kits</code> y se aplica al renderizar.</div>
+      </div>
+    </section>
+
+    <!-- ESQUEMA SQL -->
+    <section id="schema">
+      <span class="eyebrow">★ Pégalo en Supabase</span>
+      <h2 class="s">Esquema SQL listo (punto de partida)</h2>
+      <p class="lead">Pega esto en Supabase → <b>SQL Editor</b> y ejecútalo (o entrégaselo a Claude Code como base el Día 2). Incluye enums, tablas, un ejemplo de RLS y el trigger que crea el perfil al registrarse. Ajusta detalles según necesites.</p>
+      <div class="prompt"><span class="lbl">schema.sql</span><button class="copybtn">Copiar</button>-- ===== ENUMS =====
+create type rol as enum ('teacher','coordinator','admin');
+create type plan_t as enum ('solo','plus','escuela');
+create type modalidad as enum ('es','en','bi');
+create type sub_status as enum ('active','past_due','paused','canceled','incomplete');
+create type ciclo as enum ('monthly','annual');
+
+-- ===== CATÁLOGO =====
+create table grades (id serial primary key, nombre text not null, nivel text not null check (nivel in ('preescolar','primaria')), orden int not null);
+create table campos_formativos (id serial primary key, nombre text not null);
+
+-- ===== USUARIAS / ESCUELAS =====
+create table schools (id uuid primary key default gen_random_uuid(), nombre text not null, modalidad modalidad not null default 'es', coordinator_id uuid, created_at timestamptz default now());
+create table profiles (id uuid primary key references auth.users(id) on delete cascade, nombre text, rol rol not null default 'teacher', school_id uuid references schools(id), puntos int not null default 0, created_at timestamptz default now());
+alter table schools add constraint fk_coord foreign key (coordinator_id) references profiles(id);
+
+-- ===== SUSCRIPCIONES =====
+create table subscriptions (id uuid primary key default gen_random_uuid(), profile_id uuid not null references profiles(id) on delete cascade, plan plan_t not null, modalidad modalidad not null default 'es', billing ciclo not null default 'monthly', status sub_status not null default 'incomplete', stripe_customer_id text, stripe_subscription_id text, current_period_end timestamptz, pause_until timestamptz, created_at timestamptz default now());
+create table subscription_addons (id uuid primary key default gen_random_uuid(), subscription_id uuid not null references subscriptions(id) on delete cascade, tipo text not null check (tipo in ('grado_extra','maestra_adicional')), cantidad int not null default 1, stripe_item_id text);
+create table teacher_grades (profile_id uuid references profiles(id) on delete cascade, grade_id int references grades(id), primary key (profile_id, grade_id));
+
+-- ===== CONTENIDO =====
+create table bundles (id uuid primary key default gen_random_uuid(), mes date not null, grade_id int not null references grades(id), modalidad modalidad not null, published_at timestamptz);
+create table activities (id uuid primary key default gen_random_uuid(), bundle_id uuid not null references bundles(id) on delete cascade, grade_id int not null references grades(id), campo_formativo int references campos_formativos(id), semana int, titulo text not null, descripcion text, frameworks jsonb default '[]', content jsonb not null default '{"version":1,"blocks":[]}', status text not null default 'draft' check (status in ('draft','scheduled','published')), created_at timestamptz default now());
+create table personalizations (id uuid primary key default gen_random_uuid(), profile_id uuid not null references profiles(id) on delete cascade, activity_id uuid not null references activities(id) on delete cascade, content jsonb not null, updated_at timestamptz default now(), unique (profile_id, activity_id));
+create table brand_kits (profile_id uuid primary key references profiles(id) on delete cascade, logo_url text, accent_color text default '#29C0F5', font text default 'Archivo', header_style text default 'barra');
+
+-- ===== SEÑAL / COMUNIDAD / PUNTOS =====
+create table ratings (id uuid primary key default gen_random_uuid(), profile_id uuid not null references profiles(id) on delete cascade, activity_id uuid not null references activities(id) on delete cascade, estrellas int not null check (estrellas between 1 and 5), que_cambiaste text, created_at timestamptz default now());
+create table edit_events (id uuid primary key default gen_random_uuid(), profile_id uuid not null references profiles(id) on delete cascade, activity_id uuid references activities(id) on delete set null, tipo text not null, meta jsonb, created_at timestamptz default now());
+create table subforums (id uuid primary key default gen_random_uuid(), tipo text not null check (tipo in ('grade','general')), grade_id int references grades(id), nombre text not null);
+create table posts (id uuid primary key default gen_random_uuid(), profile_id uuid not null references profiles(id) on delete cascade, subforum_id uuid references subforums(id) on delete set null, body text, photo_url text, featured boolean default false, created_at timestamptz default now());
+create table comments (id uuid primary key default gen_random_uuid(), post_id uuid not null references posts(id) on delete cascade, profile_id uuid not null references profiles(id) on delete cascade, body text not null, created_at timestamptz default now());
+create table likes (post_id uuid not null references posts(id) on delete cascade, profile_id uuid not null references profiles(id) on delete cascade, primary key (post_id, profile_id));
+create table points_ledger (id uuid primary key default gen_random_uuid(), profile_id uuid not null references profiles(id) on delete cascade, accion text not null, puntos int not null, created_at timestamptz default now());
+create table referrals (id uuid primary key default gen_random_uuid(), referrer_id uuid not null references profiles(id) on delete cascade, referred_email text not null, status text not null default 'pending', stripe_coupon text, comision numeric default 0, created_at timestamptz default now());
+create table qa_sessions (id uuid primary key default gen_random_uuid(), fecha timestamptz not null, tema text, recording_url text);
+
+-- ===== FACTURACIÓN / MARKETING =====
+create table invoices (id uuid primary key default gen_random_uuid(), profile_id uuid references profiles(id) on delete set null, stripe_invoice_id text, monto numeric, status text, fecha timestamptz, pdf_url text);
+create table leads (id uuid primary key default gen_random_uuid(), tipo text not null check (tipo in ('sample','colegio')), nombre text, correo text, datos jsonb, created_at timestamptz default now());
+create table campaigns (id uuid primary key default gen_random_uuid(), asunto text, cuerpo text, segmento text, status text default 'draft', sent_at timestamptz, stats jsonb);
+
+-- ===== RLS (ejemplo; repítelo en cada tabla con datos de usuaria) =====
+alter table personalizations enable row level security;
+create policy "duena_ve_lo_suyo" on personalizations for all using (profile_id = auth.uid()) with check (profile_id = auth.uid());
+
+-- ===== TRIGGER: crear perfil al registrarse =====
+create function public.handle_new_user() returns trigger language plpgsql security definer as $$
+begin
+  insert into public.profiles (id, nombre) values (new.id, new.raw_user_meta_data ->> 'nombre');
+  return new;
+end; $$;
+create trigger on_auth_user_created after insert on auth.users for each row execute function public.handle_new_user();</div>
     </section>
 
     <!-- REGLAS -->
@@ -544,6 +675,67 @@ Antes de construir CUALQUIER pantalla, abre y lee el archivo local referencia/pr
       </div>
     </section>
 
+    <!-- VARIABLES DE ENTORNO -->
+    <section id="env">
+      <span class="eyebrow">Referencia</span>
+      <h2 class="s">Variables de entorno (todas en un lugar)</h2>
+      <p class="lead">Van en <code>.env.local</code> (tu compu) y en Vercel → Settings → Environment Variables (producción). Nunca en GitHub.</p>
+      <div class="card"><table class="kvt">
+        <tr><th>Variable</th><th>Dónde se obtiene</th></tr>
+        <tr><td><code>NEXT_PUBLIC_SUPABASE_URL</code></td><td>Supabase → Project Settings → API</td></tr>
+        <tr><td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td><td>Supabase → Project Settings → API</td></tr>
+        <tr><td><code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>Supabase → Project Settings → API (¡secreta!)</td></tr>
+        <tr><td><code>STRIPE_SECRET_KEY</code></td><td>Stripe → Developers → API keys (sk_test_… / sk_live_…)</td></tr>
+        <tr><td><code>NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY</code></td><td>Stripe → Developers → API keys (pk_…)</td></tr>
+        <tr><td><code>STRIPE_WEBHOOK_SECRET</code></td><td>Del <code>stripe listen</code> (local) y del webhook de producción (whsec_…)</td></tr>
+        <tr><td><code>RESEND_API_KEY</code></td><td>Resend → API Keys</td></tr>
+        <tr><td><code>NEXT_PUBLIC_SITE_URL</code></td><td>Tú: http://localhost:3000 (local) y tu dominio (producción)</td></tr>
+      </table></div>
+    </section>
+
+    <!-- MAPA DE CARPETAS -->
+    <section id="carpetas">
+      <span class="eyebrow">Referencia</span>
+      <h2 class="s">Mapa de carpetas del proyecto</h2>
+      <div class="prompt"><span class="lbl">estructura</span><button class="copybtn">Copiar</button>clasemaestra-app/
+├─ referencia/              # prototipo + manual (solo para consulta; no se publica)
+├─ scripts/                 # crear-precios.mjs, etc.
+├─ public/assets/           # kipi + wordmark
+├─ src/
+│  ├─ app/
+│  │  ├─ (public)/          # landing, colegios, muestra, login, checkout
+│  │  ├─ app/               # zona de la maestra (dashboard, biblioteca, actividad, editor, mi-estilo, suscripcion, pago, escuela, comunidad, perfil)
+│  │  ├─ admin/             # backend (dashboard, usuarias, crm, contenidos, subir, planes, flywheel, senal, correos)
+│  │  └─ api/stripe/webhook # receptor de avisos de Stripe
+│  ├─ components/ui/        # botones, tarjetas, modales, shells…
+│  └─ lib/
+│     ├─ pricing.ts         # ÚNICA fuente de cálculo de precios
+│     ├─ frameworks.ts      # mapa de enfoques
+│     ├─ blocks.ts          # tipo del contenido por bloques
+│     └─ billing/           # mapa de price_id y lógica de Stripe
+├─ CLAUDE.md
+└─ .env.local               # llaves (NUNCA a GitHub)</div>
+    </section>
+
+    <!-- GLOSARIO -->
+    <section id="glosario">
+      <span class="eyebrow">Para no técnicos</span>
+      <h2 class="s">Glosario rápido</h2>
+      <div class="card"><table class="kvt">
+        <tr><th>Término</th><th>Qué significa (en simple)</th></tr>
+        <tr><td><b>Terminal</b></td><td>La ventana donde escribes comandos de texto.</td></tr>
+        <tr><td><b>Repo / Git</b></td><td>El "historial guardado" de tu código; GitHub lo aloja en la nube.</td></tr>
+        <tr><td><b>Variable de entorno</b></td><td>Una contraseña/llave que la app usa sin escribirla en el código.</td></tr>
+        <tr><td><b>Webhook</b></td><td>Un "aviso automático" que un servicio (Stripe) le manda a tu app cuando pasa algo.</td></tr>
+        <tr><td><b>RLS</b></td><td>Reglas de la base de datos para que cada usuaria solo vea SUS datos.</td></tr>
+        <tr><td><b>Server action</b></td><td>Código que corre en el servidor (seguro) para cosas sensibles como cobrar.</td></tr>
+        <tr><td><b>Prorrateo</b></td><td>Cobrar solo la parte proporcional cuando alguien cambia de plan a media quincena.</td></tr>
+        <tr><td><b>Bucket (Storage)</b></td><td>La "cubeta" donde se guardan los archivos subidos (logos, fotos).</td></tr>
+        <tr><td><b>Idempotencia</b></td><td>Que procesar dos veces el mismo aviso no cause doble efecto.</td></tr>
+        <tr><td><b>Deploy</b></td><td>Publicar la app en internet (lo hace Vercel).</td></tr>
+      </table></div>
+    </section>
+
     <!-- ==== DÍA POR DÍA (se agrega en las siguientes partes) ==== -->
     <section id="plan">
       <span class="eyebrow">10 · Ejecución</span>
@@ -610,6 +802,27 @@ curl -L -o referencia/manual-identidad.html "https://quadrant-agency.github.io/c
       </div>
     </div>
 
+    <!-- DÍA 0.5 -->
+    <div class="day" id="d05">
+      <div class="day-h"><span class="dn">Día 0.5</span><div><h3>Cómo hablarle a Claude Code</h3><div class="sub">5 minutos que te ahorran horas de frustración.</div></div></div>
+      <div class="day-b">
+        <div class="goal"><b>Qué vas a lograr hoy:</b> aprender 4 trucos para que Claude Code te ayude bien aunque no sepas programar.</div>
+        <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--cian-d);margin:0 0 6px">Los 4 trucos</h4>
+        <ul class="clean">
+          <li><b>1. Pídele que lea primero.</b> Empieza cada sesión con: "Lee CLAUDE.md y abre referencia/prototipo.html. Hoy es el Día N."</li>
+          <li><b>2. Si se atora, pide explicación en simple.</b> "Explícame en palabras sencillas qué está fallando y qué opciones tengo, sin tecnicismos."</li>
+          <li><b>3. Pega el error completo.</b> Si algo truena, copia y pega TODO el texto rojo del error; Claude Code lo arregla mejor con el mensaje completo.</li>
+          <li><b>4. Avanza en pasos chiquitos.</b> Pídele una cosa a la vez y prueba antes de seguir. Si algo se rompió, dile "deshaz el último cambio".</li>
+        </ul>
+        <div class="step"><span class="n">★</span><span class="t">Cómo deshacer si algo se rompió (red de seguridad)</span></div>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>git add .
+git commit -m "punto de control"   # haz esto cuando algo SÍ funciona
+# si después algo se rompe y quieres volver al último punto bueno:
+git restore .</div>
+        <div class="note"><b>Regla de oro:</b> haz un commit ("punto de control") cada vez que algo funcione. Así siempre puedes regresar a un estado bueno.</div>
+      </div>
+    </div>
+
     <!-- DÍA 1 -->
     <div class="day" id="d1">
       <div class="day-h"><span class="dn">Día 1</span><div><h3>Cimientos del proyecto</h3><div class="sub">Crear la app, ponerle la marca y publicarla en internet.</div></div></div>
@@ -618,12 +831,15 @@ curl -L -o referencia/manual-identidad.html "https://quadrant-agency.github.io/c
 
         <div class="step"><span class="n">1</span><span class="t">Comandos en la terminal (dentro de la carpeta del proyecto)</span></div>
         <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+# Esta guía usa tailwind.config.ts (Tailwind v3). Fíjalo para evitar la v4:
+npm install -D tailwindcss@3 postcss autoprefixer
+npx tailwindcss init -p
 npm run dev</div>
-        <p class="lead" style="margin:4px 0">El segundo comando abre la app en <code>http://localhost:3000</code>. Déjalo corriendo en esa ventana; abre OTRA ventana de terminal para lo demás. Para apagarlo: <code>Ctrl + C</code>.</p>
+        <p class="lead" style="margin:4px 0">El último comando abre la app en <code>http://localhost:3000</code>. Déjalo corriendo en esa ventana; abre OTRA ventana de terminal para lo demás. Para apagarlo: <code>Ctrl + C</code>. <b>Importante:</b> fijamos Tailwind v3 porque la v4 ya no usa <code>tailwind.config.ts</code> (cambia toda la configuración) y esta guía está escrita para v3.</p>
 
         <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
         <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Eres mi pair-programmer en este proyecto Next.js 14 (App Router, TypeScript, Tailwind). Primero, lee el manual de marca en referencia/manual-identidad.html. Luego configura el sistema de diseño de "clasemaestra":
-1) En tailwind.config.ts define estos colores exactos como tokens: carbon #243240, cian #29C0F5, cian-d #1192c4, amarillo #F7A823, rojo #E8483B, gris #8A8C8E, fondo #F6F9FB, line #e4e9ef. Radios 12-16px y sombras suaves.
+1) En tailwind.config.ts (debe existir, estamos en Tailwind v3) define estos colores exactos como tokens: carbon #243240, cian #29C0F5, cian-d #1192c4, amarillo #F7A823, rojo #E8483B, gris #8A8C8E, fondo #F6F9FB, line #e4e9ef. Radios 12-16px y sombras suaves.
 2) En src/app/globals.css carga la fuente Archivo desde Google Fonts (pesos 400 a 900) y ponla como fuente base; fondo de la app color fondo (#F6F9FB); color de texto carbon.
 3) Crea la estructura de carpetas src/components, src/lib, y archivos vacíos src/lib/pricing.ts, src/lib/frameworks.ts y la carpeta src/lib/billing.
 4) Copia las imágenes de referencia/assets a la carpeta public/assets del proyecto.
@@ -670,7 +886,8 @@ git push -u origin main</div>
 6) Crea un middleware que proteja las rutas /app (maestra) y /admin (solo rol admin verificado en el servidor, nunca confiando en el navegador).
 7) Crea un seed que inserte 9 grados (3 de preescolar y 6 de primaria), los 4 campos formativos del plan NEM y un usuario admin de prueba.
 8) Escribe una prueba que confirme que una usuaria NO puede leer filas de otra.
-Cuando termines, dime cómo registrar un usuario de prueba y cómo correr el seed.</div>
+9) En el seed, agrega también CONTENIDO DE EJEMPLO: un bundle del mes en curso para 2 o 3 grados, cada uno con 4 a 6 actividades (una por campo formativo), usando el "formato de contenido por bloques" (te lo paso aparte). Esto permite probar las pantallas de los Días 9 a 13 antes de tener el módulo de carga del admin.
+Dime EXACTAMENTE dónde pego y ejecuto el SQL (en Supabase, menú "SQL Editor") o cómo usar la Supabase CLI, cómo registrar un usuario de prueba y cómo correr el seed.</div>
 
         <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
         <div class="verify"><ul class="acc">
@@ -679,7 +896,7 @@ Cuando termines, dime cómo registrar un usuario de prueba y cómo correr el see
           <li>En Supabase → Table editor ves las tablas creadas y los 9 grados del seed.</li>
           <li>La prueba de "una usuaria no ve datos de otra" pasa.</li>
         </ul></div>
-        <div class="trouble"><b>Si truena:</b> si el login no manda correos, en Supabase → Authentication revisa que el proveedor "Email" esté activado. Si una tabla no se crea, lee el error del SQL: casi siempre es una llave foránea apuntando a una tabla que aún no existe (ajusta el orden).</div>
+        <div class="trouble"><b>Si truena:</b> si el login no manda correos, en Supabase → Authentication revisa que el proveedor "Email" esté activado. Si una tabla no se crea, lee el error del SQL: casi siempre es una llave foránea apuntando a una tabla que aún no existe (ajusta el orden). Si al registrarte te pide confirmar el correo y no llega, en Supabase → Authentication → Providers → Email puedes desactivar "Confirm email" SOLO para pruebas (reactívalo para producción).</div>
         <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#login">#login</a></div>
       </div>
     </div>
@@ -781,15 +998,50 @@ Pule también la pantalla /login para que calce con #login. Usa los componentes 
         <div class="step"><span class="n">1</span><span class="t">Primero, crea los productos en Stripe (en su panel, modo prueba)</span></div>
         <p class="lead" style="margin:4px 0 8px">En Stripe → "Product catalog" crea 3 productos: Maestra Solo, Maestra Plus, Plan Escuela. A cada uno agrégale precios recurrentes (mensual y anual) para las 3 modalidades, según la matriz (Solo 147 / Plus 297 / Escuela 997, con los recargos de inglés y bilingüe; anual = mensual × 10). Crea también 2 productos de add-on: "Grado extra" 97 y "Maestra adicional" 197. Copia cada <code>price_id</code> (empieza con <code>price_...</code>); los pondrás en el siguiente paso.</p>
         <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>npm install stripe @stripe/stripe-js @stripe/react-stripe-js</div>
+        <div class="note"><b>Moneda:</b> crea TODOS los precios en Stripe en <b>MXN</b>. <b>Patrón técnico para suscripción con Payment Element</b> (díselo a Claude Code si no lo aplica): crea la Subscription con <code>payment_behavior: 'default_incomplete'</code>, expande <code>latest_invoice.payment_intent</code>, manda ese <code>client_secret</code> al navegador y confirma ahí el pago.</div>
+        <div class="step"><span class="n">1b</span><span class="t">Opción recomendada: crea los precios con un script (evita errores a mano)</span></div>
+        <p class="lead" style="margin:4px 0 8px">En vez de crear ~18 precios a mano, guarda esto como <code>scripts/crear-precios.mjs</code> y córrelo una vez. Te imprime los <code>price_id</code> para pegarlos en el siguiente prompt.</p>
+        <div class="prompt"><span class="lbl term">scripts/crear-precios.mjs</span><button class="copybtn">Copiar</button>import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const C = 100; // centavos
+const planes = {
+  solo:    { nombre: 'Maestra Solo',  es: 147,  en: 197,  bi: 247 },
+  plus:    { nombre: 'Maestra Plus',  es: 297,  en: 397,  bi: 497 },
+  escuela: { nombre: 'Plan Escuela',  es: 997,  en: 1497, bi: 1997 },
+};
+const addons = { grado_extra: 97, maestra_adicional: 197 };
+const out = {};
+for (const [key, p] of Object.entries(planes)) {
+  const prod = await stripe.products.create({ name: p.nombre });
+  for (const m of ['es','en','bi']) {
+    const mensual = p[m];
+    const anual = mensual * 10; // paga 10, recibe 12
+    const pm = await stripe.prices.create({ product: prod.id, currency: 'mxn', unit_amount: mensual*C, recurring:{interval:'month'} });
+    const pa = await stripe.prices.create({ product: prod.id, currency: 'mxn', unit_amount: anual*C,  recurring:{interval:'year'} });
+    out[key+'_'+m+'_mensual'] = pm.id;
+    out[key+'_'+m+'_anual']   = pa.id;
+  }
+}
+for (const [key, monto] of Object.entries(addons)) {
+  const prod = await stripe.products.create({ name: key });
+  const price = await stripe.prices.create({ product: prod.id, currency: 'mxn', unit_amount: monto*C, recurring:{interval:'month'} });
+  out[key] = price.id;
+}
+console.log('Pega estos price_id en src/lib/billing:');
+console.log(JSON.stringify(out, null, 2));</div>
+        <p class="lead" style="margin:4px 0 10px">Córrelo así (pega tu llave secreta de prueba):</p>
+        <div class="prompt"><span class="lbl term">TERMINAL</span><button class="copybtn">Copiar</button>STRIPE_SECRET_KEY=sk_test_xxx node scripts/crear-precios.mjs</div>
 
         <div class="step"><span class="n">2</span><span class="t">Pega este prompt en Claude Code</span></div>
         <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #checkout. Integra Stripe (modo prueba) y construye el checkout copiando ese diseño exacto.
 1) En src/lib/billing crea un archivo que mapee cada combinación (plan, modalidad, ciclo) a su price_id de Stripe, y los add-ons grado_extra y maestra_adicional a su price_id. Yo te pasaré los price_id que copié de Stripe; déjalos como constantes claras.
-2) Construye el checkout en 4 pasos (ruta /checkout): Paso 1 elegir plan (Solo/Plus/Escuela); Paso 2 elegir modalidad (Español/Inglés/Bilingüe) y ciclo (Mensual/Anual = mensual×10); Paso 3 datos de la cuenta (nombre, correo, contraseña: aquí se crea el usuario); Paso 4 pago con el Stripe Payment Element embebido (tarjeta).
+2) Construye el checkout en 4 pasos (ruta /checkout): Paso 1 elegir plan (Solo/Plus/Escuela); Paso 2 elegir modalidad (Español/Inglés/Bilingüe) y ciclo (Mensual/Anual = mensual×10); Paso 3 datos de la cuenta (nombre, correo, contraseña; la cuenta se crea al confirmarse el pago, ver punto 4); Paso 4 pago con el Stripe Payment Element embebido (tarjeta).
 3) Muestra a la derecha un resumen que recalcula el total EN VIVO usando src/lib/pricing.ts cuando cambian plan, modalidad o ciclo.
-4) En una server action: crea el Customer y la Subscription en Stripe; cuando el pago se confirme, crea el perfil del usuario y su fila en la tabla subscriptions (como espejo) y asígnale los grados según el plan (Solo = 1 grado, Plus = 2 grados).
-5) Página de éxito que da la bienvenida y lleva al dashboard.
-6) Maneja errores de pago con un mensaje claro en rojo (el rojo solo para errores).
+4) Manejo de la cuenta (importante): la cuenta se crea SOLO cuando el pago se confirma (no antes, para no dejar cuentas huérfanas si el pago falla). Si el correo ya existe, ofrece iniciar sesión en vez de duplicar. Si la maestra ya está logueada, permite que compre o mejore su plan sin volver a capturar datos.
+5) En una server action: crea el Customer y la Subscription en Stripe; al confirmarse el pago, crea (o actualiza) el perfil y su fila en subscriptions (espejo). La maestra DEBE elegir cuáles grados imparte (un selector de grados en el Paso 2 o en un onboarding inmediato): Solo elige 1 grado, Plus elige 2. Guárdalos en teacher_grades.
+6) Si el plan es Escuela: crea además una fila en la tabla schools y marca a la compradora con rol coordinator (es quien administrará el panel de escuela del Día 14).
+7) Página de éxito que da la bienvenida y lleva al dashboard.
+8) Maneja errores de pago con un mensaje claro en rojo (el rojo solo para errores).
 Para probar usa la tarjeta 4242 4242 4242 4242, cualquier fecha futura y cualquier CVC. Confirma que comparaste contra #checkout y dime cómo probar el flujo completo.</div>
 
         <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
@@ -823,6 +1075,7 @@ stripe listen --forward-to localhost:3000/api/stripe/webhook</div>
 3) Crea una server action de reembolso para la garantía de 7 días: solo permite reembolsar dentro de los 7 días desde el primer pago.
 4) Construye la pantalla de pago en /app/pago copiando #u-billing: método de pago actual con opción de actualizar la tarjeta (vía Stripe) y la lista de facturas con su descarga (la factura SÍ se puede descargar).
 Confirma que comparaste contra #u-billing. Dime cómo simular un pago y un pago fallido con la Stripe CLI.</div>
+        <div class="note"><b>Tarjetas de prueba (Stripe test mode):</b> <code>4242 4242 4242 4242</code> = pago exitoso · <code>4000 0000 0000 0002</code> = rechazada (para probar la cobranza/dunning) · <code>4000 0027 6000 3184</code> = pide 3D Secure. Cualquier fecha futura y cualquier CVC.</div>
 
         <div class="step"><span class="n">3</span><span class="t">Cómo verificar que quedó bien</span></div>
         <div class="verify"><ul class="acc">
@@ -831,7 +1084,7 @@ Confirma que comparaste contra #u-billing. Dime cómo simular un pago y un pago 
           <li>En /app/pago ves tus facturas y puedes actualizar la tarjeta.</li>
           <li>El reembolso de garantía funciona dentro de 7 días y se rechaza después.</li>
         </ul></div>
-        <div class="trouble"><b>Si truena:</b> si el webhook da error de "firma inválida", el <code>whsec_</code> no coincide; vuelve a copiarlo del <code>stripe listen</code>. Si nada llega, revisa que la ventana de <code>stripe listen</code> siga abierta.</div>
+        <div class="trouble"><b>Si truena:</b> si el webhook da error de "firma inválida", el <code>whsec_</code> no coincide (vuelve a copiarlo del <code>stripe listen</code>) O estás leyendo el cuerpo ya convertido a JSON: para validar la firma debes leer el <b>cuerpo crudo</b> (en el App Router: <code>await request.text()</code>). Si nada llega, revisa que la ventana de <code>stripe listen</code> siga abierta.</div>
         <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#u-billing">#u-billing</a></div>
       </div>
     </div>
@@ -871,7 +1124,7 @@ Todos los cambios deben reflejarse en la tabla subscriptions a través de los we
 
         <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
         <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #u-dashboard y #u-library. Construye dos pantallas copiando su diseño exacto, leyendo datos reales de Supabase:
-1) /app (inicio, #u-dashboard): saludo con Kipi, tarjetas de indicadores (grados activos, horas ahorradas este mes, número de actividades, descargadas), el paquete del mes destacado y, para cuentas nuevas, un onboarding de 3 pasos.
+1) /app (inicio, #u-dashboard): saludo con Kipi, tarjetas de indicadores (grados activos, horas ahorradas este mes —es una estimación, ej. 1.5 h por actividad usada—, número de actividades, personalizadas), el paquete del mes destacado y, para cuentas nuevas, un onboarding de 3 pasos.
 2) /app/biblioteca (#u-library) con el MODELO A: el paquete (bundle) mensual COMPLETO se muestra de una vez, organizado por los 4 campos formativos NEM (Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; De lo humano y lo comunitario) y por semana sugerida. NADA de liberar por goteo ni candados por semana. La navegación entre meses es una TIRA horizontal del ciclo escolar (de Agosto a Julio); los meses anteriores quedan disponibles. Cada tarjeta de actividad muestra sus etiquetas de enfoque (PYP/CASEL/Montessori; Cambridge solo si la modalidad es Inglés o Bilingüe) y al hacer clic abre /app/actividad/[id].
 3) Control de acceso: la maestra solo ve los grados y la modalidad de su plan activo; lo que no incluye su plan se muestra como "vista previa" con un botón para mejorar el plan.
 Confirma que comparaste contra los deep-links.</div>
@@ -1058,6 +1311,7 @@ Confirma que comparaste contra #u-community.</div>
 3) Recompensas por nivel: votar/elegir el tema del próximo paquete, acceso anticipado al paquete, aparecer destacada (spotlight) y plantillas premium. REGLA: ninguna recompensa puede ser meses gratis ni descuento al plan (no deben canibalizar el ingreso).
 4) Un "Reto del mes" con barra de progreso (ejemplo: comparte 3 adaptaciones y desbloqueas el siguiente paquete una semana antes).
 5) Referidas: cada maestra tiene su enlace propio. La colega referida recibe 50% de descuento el primer mes (usando un cupón de Stripe) y la maestra que refiere gana 25% de comisión cuando alcanza el nivel Embajadora. Registra todo en la tabla referrals.
+6) IMPORTANTE para consistencia: crea UNA sola función reutilizable para otorgar estrellitas, por ejemplo otorgarPuntos(maestraId, accion), y úsala desde TODOS los lugares que dan puntos (comunidad, curaduría del admin, asistencia al Q&A, referidas). Así el conteo y los niveles nunca se desincronizan.
 Confirma que comparaste contra el prototipo.</div>
 
         <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
@@ -1250,6 +1504,7 @@ Confirma qué quedó y qué riesgos ves.</div>
             <li>Cuentas y llaves: Supabase, Stripe (prueba + real), Resend, Vercel.</li>
             <li>Dominio y correos del negocio (soporte, colegios@).</li>
             <li>Webhook signing secret de Stripe (prueba y real).</li>
+            <li>Para crear el primer admin en producción: regístrate normal y cambia tu rol a <code>admin</code> en Supabase (Table editor → profiles → rol).</li>
           </ul>
         </div>
         <div class="card">
@@ -1276,6 +1531,7 @@ Confirma qué quedó y qué riesgos ves.</div>
             <li>¿Q&amp;A en vivo con qué herramienta (Zoom/Meet) y dónde se aloja la grabación?</li>
             <li>¿La factura fiscal (CFDI) entra en v1 o v2?</li>
             <li>Política exacta de prorrateo al cambiar de plan.</li>
+            <li>Cómo se pagan las comisiones de referidas (Stripe Connect, transferencia manual o crédito interno).</li>
           </ul>
         </div>
       </div>
