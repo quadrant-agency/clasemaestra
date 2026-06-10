@@ -537,8 +537,9 @@ tbody tr:hover{background:var(--bg)}
           </div>
           <label style="font-weight:700;font-size:13px;display:block;margin:14px 0 8px">Grado(s)</label>
           <div class="chips" id="gradeChips">
-            <span class="chip on">2.º primaria</span><span class="chip">1.º primaria</span><span class="chip">3.º primaria</span>
-            <span class="chip">Preescolar 2</span><span class="chip">4.º primaria</span><span class="chip">5.º primaria</span>
+            <span class="chip">Preescolar 1</span><span class="chip">Preescolar 2</span><span class="chip">Preescolar 3</span>
+            <span class="chip on">1.º primaria</span><span class="chip on">2.º primaria</span><span class="chip">3.º primaria</span>
+            <span class="chip">4.º primaria</span><span class="chip">5.º primaria</span><span class="chip">6.º primaria</span>
           </div>
           <p class="muted mt" style="font-size:12.5px">💡 En Plus puedes agregar un grado extra por +$97/mes desde tu cuenta cuando lo necesites.</p>
           <div class="flex mt"><button class="btn btn-ghost" onclick="coStep(1)">← Atrás</button><button class="btn btn-cta grow" style="flex:1" onclick="coStep(3)">Continuar →</button></div>
@@ -600,7 +601,7 @@ tbody tr:hover{background:var(--bg)}
       <a data-link="u-billing" onclick="nav('u-billing')"><span class="em">💳</span> Pago y facturación</a>
       <a data-link="u-school" onclick="nav('u-school')"><span class="em">🏫</span> Mi escuela</a>
       <a data-link="u-profile" onclick="nav('u-profile')"><span class="em">⚙️</span> Perfil</a>
-      <div class="upsell">
+      <div class="upsell" id="upsellGrado">
         <b style="color:#fff;font-size:14px">¿Necesitas otro grado?</b>
         <p>Agrega un grado extra a tu plan por +$97/mes.</p>
         <button class="btn btn-cta btn-sm btn-block" onclick="nav('u-subscription')">Agregar grado</button>
@@ -888,7 +889,7 @@ tbody tr:hover{background:var(--bg)}
           <div class="cards c2" style="grid-template-columns:1.4fr 1fr;align-items:start">
             <div class="section-card" style="margin:0"><div class="sc-body">
               <div class="field"><label>Título de la actividad</label><input placeholder="Ej. Mercadito de fracciones"></div>
-              <div class="flex"><div class="field" style="flex:1"><label>Grado</label><select><option>2.º primaria</option><option>1.º primaria</option><option>Preescolar 2</option></select></div><div class="field" style="flex:1"><label>Materia / campo</label><select><option>Matemáticas</option><option>Socioemocional</option><option>Ciencias / STEAM</option><option>Lenguajes</option></select></div></div>
+              <div class="flex"><div class="field" style="flex:1"><label>Grado</label><select><option>Preescolar 1</option><option>Preescolar 2</option><option>Preescolar 3</option><option>1.º primaria</option><option selected>2.º primaria</option><option>3.º primaria</option><option>4.º primaria</option><option>5.º primaria</option><option>6.º primaria</option></select></div><div class="field" style="flex:1"><label>Materia / campo</label><select><option>Matemáticas</option><option>Socioemocional</option><option>Ciencias / STEAM</option><option>Lenguajes</option></select></div></div>
               <div class="field"><label>Descripción</label><textarea rows="3" placeholder="Resumen pedagógico de la actividad..."></textarea></div>
               <div class="field"><label>Archivos</label><div class="stripe-box" style="flex-direction:column;align-items:center;padding:28px;border-style:dashed;cursor:pointer" onclick="toast('Selector de archivos (demo)')"><span style="font-size:28px">📎</span><b>Arrastra o selecciona archivos</b><span class="muted" style="font-size:12px">PDF, DOCX, PPT, ZIP</span></div></div>
               <div class="flex"><div class="field" style="flex:1"><label>Modalidades</label><div class="chips"><span class="chip on">ES</span><span class="chip">EN</span><span class="chip">BI</span></div></div><div class="field" style="flex:1"><label>Fecha de liberación (drip)</label><input value="15 / 06 / 2026"></div></div>
@@ -1104,6 +1105,11 @@ var tTimer;
 function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(function(){t.classList.remove('show');},2600);}
 
 updateSummary();
+
+// ---- Plan del usuario demo: 'solo' | 'plus' | 'escuela' ----
+// El upsell de "Grado extra" solo aplica a Maestra Plus.
+var DEMO_PLAN='plus';
+(function(){var ug=document.getElementById('upsellGrado'); if(ug) ug.style.display=(DEMO_PLAN==='plus')?'block':'none';})();
 </script>
 </body>
 </html>
