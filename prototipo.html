@@ -366,6 +366,28 @@ tbody tr:hover{background:var(--bg)}
 /* barra de progreso (lealtad / retos) */
 .prog{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
 .prog>i{display:block;height:100%;background:var(--cyan);border-radius:99px}
+/* Editor tipo documento (Canva-like) */
+.ed-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start}
+@media(max-width:900px){.ed-grid{grid-template-columns:1fr}}
+.doc{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(36,50,64,.07);--doc-accent:#29C0F5;font-family:Archivo,sans-serif}
+.doc-header{background:var(--doc-accent);color:#fff;padding:18px 22px;display:flex;align-items:center;gap:14px}
+.doc-logo{width:46px;height:46px;border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:22px;flex:none;cursor:pointer}
+.doc-body{padding:18px 22px}
+.blk{position:relative;border-radius:8px;margin:3px 0;padding:4px 8px}
+.blk:hover{background:rgba(41,192,245,.05)}
+.blk [contenteditable]{outline:none;border-radius:6px;padding:2px}
+.blk [contenteditable]:focus{box-shadow:inset 0 0 0 1.5px var(--doc-accent);background:rgba(41,192,245,.06)}
+.doc-title{font-size:25px;font-weight:800;color:var(--ink)}
+.doc-meta{font-size:13px;color:var(--text-2);font-weight:600}
+.doc-h{font-size:17px;font-weight:800;color:var(--doc-accent);margin-top:8px}
+.doc-p{font-size:14.5px;line-height:1.6;color:var(--ink)}
+.doc-img{height:140px;border-radius:10px;background:linear-gradient(135deg,#dfeaf2,#eef3f7);display:grid;place-items:center;color:var(--gray);cursor:pointer;font-size:13px}
+.blk-ctrl{position:absolute;top:2px;right:2px;display:none;gap:3px;z-index:2}
+.blk:hover .blk-ctrl{display:flex}
+.blk-ctrl button{width:24px;height:24px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:11px;line-height:1;color:var(--ink)}
+.blk-ctrl button:hover{background:var(--niebla)}
+.swatch{width:28px;height:28px;border-radius:8px;cursor:pointer;box-shadow:0 0 0 1.5px var(--line)}
+.swatch.on{box-shadow:0 0 0 2px var(--ink)}
 </style>
 </head>
 <body class="ctx-public">
@@ -916,7 +938,7 @@ tbody tr:hover{background:var(--bg)}
             <span class="chip on">2.º primaria</span><span class="chip">1.º primaria</span>
             <span class="chip" style="border-style:dashed;color:var(--cyan-dark)" onclick="nav('u-subscription')">+ Agregar grado</span>
           </div>
-          <div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🗣️</span><div><h3 style="font-size:18px">Lenguajes</h3><div class="muted" style="font-size:12.5px">Español · Inglés · Lectura y escritura</div></div></div><div class="lib-grid" style="margin-bottom:30px"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#8A8C8E,#6c6e70)">✏️</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 2</span><h4>Taller de escritura creativa</h4><div class="meta">Español · 4 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y descargar</button></div></div></div><div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🔬</span><div><h3 style="font-size:18px">Saberes y pensamiento científico</h3><div class="muted" style="font-size:12.5px">Matemáticas · Ciencias · STEAM</div></div></div><div class="lib-grid" style="margin-bottom:30px"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#29C0F5,#1A9BD0)">📐</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 1</span><h4>Mercadito de fracciones</h4><div class="meta">Matemáticas · Proyecto · 5 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y descargar</button></div></div><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#243240,#3a4d5e)">🔬</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 1</span><h4>STEAM: El agua viajera</h4><div class="meta">Ciencias · STEAM · 4 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y descargar</button></div></div><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#29C0F5,#1A9BD0)">🎨</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 3</span><h4>Arte y geometría</h4><div class="meta">Matemáticas y Arte · STEAM · 3 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y descargar</button></div></div></div><div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🌎</span><div><h3 style="font-size:18px">Ética, naturaleza y sociedades</h3><div class="muted" style="font-size:12.5px">Conocimiento del medio · Convivencia</div></div></div><div class="lib-grid" style="margin-bottom:30px"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#7a5cd0,#5e45a8)">🌍</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 4</span><h4>Proyecto: Mi comunidad</h4><div class="meta">Conocimiento del medio · Proyecto · 5 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y descargar</button></div></div></div><div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🌱</span><div><h3 style="font-size:18px">De lo humano y lo comunitario</h3><div class="muted" style="font-size:12.5px">Socioemocional · Cuerpo · Bienestar</div></div></div><div class="lib-grid"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#F7A823,#e08f0a)">🌱</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 2</span><h4>Mis emociones tienen nombre</h4><div class="meta">Socioemocional · 3 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y descargar</button></div></div></div>
+          <div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🗣️</span><div><h3 style="font-size:18px">Lenguajes</h3><div class="muted" style="font-size:12.5px">Español · Inglés · Lectura y escritura</div></div></div><div class="lib-grid" style="margin-bottom:30px"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#8A8C8E,#6c6e70)">✏️</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 2</span><h4>Taller de escritura creativa</h4><div class="meta">Español · 4 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y personalizar</button></div></div></div><div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🔬</span><div><h3 style="font-size:18px">Saberes y pensamiento científico</h3><div class="muted" style="font-size:12.5px">Matemáticas · Ciencias · STEAM</div></div></div><div class="lib-grid" style="margin-bottom:30px"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#29C0F5,#1A9BD0)">📐</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 1</span><h4>Mercadito de fracciones</h4><div class="meta">Matemáticas · Proyecto · 5 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y personalizar</button></div></div><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#243240,#3a4d5e)">🔬</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 1</span><h4>STEAM: El agua viajera</h4><div class="meta">Ciencias · STEAM · 4 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y personalizar</button></div></div><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#29C0F5,#1A9BD0)">🎨</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 3</span><h4>Arte y geometría</h4><div class="meta">Matemáticas y Arte · STEAM · 3 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y personalizar</button></div></div></div><div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🌎</span><div><h3 style="font-size:18px">Ética, naturaleza y sociedades</h3><div class="muted" style="font-size:12.5px">Conocimiento del medio · Convivencia</div></div></div><div class="lib-grid" style="margin-bottom:30px"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#7a5cd0,#5e45a8)">🌍</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 4</span><h4>Proyecto: Mi comunidad</h4><div class="meta">Conocimiento del medio · Proyecto · 5 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y personalizar</button></div></div></div><div style="display:flex;align-items:center;gap:11px;margin:6px 0 14px"><span style="font-size:22px">🌱</span><div><h3 style="font-size:18px">De lo humano y lo comunitario</h3><div class="muted" style="font-size:12.5px">Socioemocional · Cuerpo · Bienestar</div></div></div><div class="lib-grid"><div class="lib-card"><div class="lib-thumb" style="background:linear-gradient(135deg,#F7A823,#e08f0a)">🌱</div><div class="lib-body"><span class="pill pill-green" style="align-self:flex-start;margin-bottom:8px">Disponible · Semana 2</span><h4>Mis emociones tienen nombre</h4><div class="meta">Socioemocional · 3 sesiones</div><div class="compat"><span class="cmp cmp-pyp">PYP</span><span class="cmp cmp-mont">Montessori</span><span class="cmp cmp-casel">CASEL</span></div><button class="btn btn-cta btn-sm btn-block" onclick="nav('u-activity')">Abrir y personalizar</button></div></div></div>
         </div>
 
         <!-- ACTIVITY DETAIL -->
@@ -940,14 +962,9 @@ tbody tr:hover{background:var(--bg)}
             </div>
             <div class="summary">
               <div class="card mb">
-                <div style="background:linear-gradient(135deg,rgba(41,192,245,.13),rgba(247,168,35,.10));border-radius:12px;padding:14px;margin-bottom:14px">
-                  <b style="font-size:15px">✏️ Hazlo tuyo</b>
-                  <div class="muted" style="font-size:12.5px;margin:4px 0 11px">Edítalo aquí: ponle tu logo, ajusta secciones y textos. Se guarda en tu cuenta para reusarlo el próximo ciclo.</div>
-                  <button class="btn btn-cta btn-block" onclick="nav('u-editor')">Personalizar y editar</button>
-                </div>
-                <div class="muted" style="font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:9px">O SOLO DESCARGA</div>
-                <button class="btn btn-ghost btn-block mb" onclick="toast('⬇️ Descargando paquete completo...')">⬇️ Descargar todo (ZIP)</button>
-                <button class="btn btn-ghost btn-block" onclick="toast('⬇️ Descargando PDF...')">Secuencia para imprimir (PDF)</button>
+                <button class="btn btn-cta btn-block mb" onclick="nav('u-editor')">✏️ Abrir y personalizar</button>
+                <button class="btn btn-ghost btn-block" onclick="toast('🖨️ Preparando impresión para tu clase...')">🖨️ Imprimir para mi clase</button>
+                <div class="muted" style="font-size:12px;text-align:center;margin-top:11px">🎨 Tu estilo se aplica a todas tus planeaciones.</div>
                 <div class="divider"></div>
                 <div class="flex"><span style="font-size:18px">🌎</span><span class="muted" style="font-size:13px">Disponible también en inglés.</span></div>
                 <button class="btn btn-ghost btn-sm btn-block mt" onclick="nav('u-subscription')">Activar modalidad bilingüe</button>
@@ -971,30 +988,49 @@ tbody tr:hover{background:var(--bg)}
         <!-- EDITOR (personalización) -->
         <div class="view" data-v="u-editor">
           <span class="back" onclick="nav('u-activity')">← Volver a la actividad</span>
-          <div class="page-intro"><h2>Personaliza tu plan</h2><p>Ponle tu logo y tu estilo. Queda como tuyo — y listo para imprimir. <b>Lo guardamos para que lo reúses.</b></p></div>
-          <div class="cards c2" style="grid-template-columns:1.5fr 1fr;align-items:start">
-            <div class="section-card" style="margin:0"><div class="sc-body">
-              <div class="field"><label>Logo de tu escuela</label><div class="stripe-box" style="border-style:dashed;justify-content:center;padding:20px;cursor:pointer" onclick="toast('Selector de logo (demo)')">🏫 Arrastra o selecciona tu logo</div></div>
-              <div class="flex"><div class="field" style="flex:1"><label>Título del plan</label><input value="Mercadito de fracciones"></div><div class="field" style="flex:1"><label>Grupo</label><input value="2.º A · Miss Mariana"></div></div>
-              <div class="field"><label>Objetivos (edítalos a tu salón)</label><textarea rows="2">Que las y los estudiantes comprendan fracciones a través del juego y la repartición.</textarea></div>
-              <label style="font-weight:700;font-size:13px;display:block;margin-bottom:8px">Secciones <span class="muted" style="font-weight:400">· quita o agrega lo que necesites</span></label>
-              <div id="secList">
-                <div class="opt"><div class="grow"><b style="font-size:14px">Inicio · activación</b></div><span class="link" onclick="this.closest('.opt').remove()">Quitar</span></div>
-                <div class="opt"><div class="grow"><b style="font-size:14px">Desarrollo · el mercadito</b></div><span class="link" onclick="this.closest('.opt').remove()">Quitar</span></div>
-                <div class="opt"><div class="grow"><b style="font-size:14px">Cierre · reflexión</b></div><span class="link" onclick="this.closest('.opt').remove()">Quitar</span></div>
-                <div class="opt"><div class="grow"><b style="font-size:14px">Evaluación · rúbrica</b></div><span class="link" onclick="this.closest('.opt').remove()">Quitar</span></div>
+          <div class="flex" style="justify-content:space-between;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <div><h2 style="margin:0">Editor</h2><p class="muted" style="margin:3px 0 0">Edita tu planeación como un documento. Haz clic en cualquier texto para cambiarlo. Todo se guarda en tu cuenta.</p></div>
+            <div class="flex"><button class="btn btn-ghost btn-sm" onclick="toast('🖨️ Preparando impresión para tu clase...')">🖨️ Imprimir</button><button class="btn btn-cta btn-sm" onclick="toast('💾 Tu versión se guardó');nav('u-activity')">Guardar mi versión</button></div>
+          </div>
+          <div class="ed-grid">
+            <div class="doc" id="doc">
+              <div class="doc-header" id="docHeader">
+                <div class="doc-logo" onclick="toast('🏫 Sube el logo de tu escuela')">🏫</div>
+                <div><div contenteditable="true" style="font-weight:800;font-size:16px">Colegio Montessori del Valle</div><div contenteditable="true" style="font-size:12.5px;opacity:.92">Miss Mariana · 2.º A · Ciclo 2026</div></div>
               </div>
-              <button class="btn btn-ghost btn-sm mt" onclick="addSection()">+ Agregar sección</button>
-              <div class="field mt"><label>Notas para ti</label><textarea rows="2" placeholder="Tus anotaciones (solo tú las ves)..."></textarea></div>
-            </div></div>
-            <div class="section-card summary" style="margin:0"><div class="sc-body">
-              <h3 style="margin-bottom:6px">Tu versión</h3>
-              <p class="muted" style="font-size:13px">La guardamos para que la próxima vez la abras tal cual la dejaste.</p>
-              <button class="btn btn-cta btn-block mb mt" onclick="toast('💾 Tu versión personalizada se guardó');nav('u-activity')">Guardar mi versión</button>
-              <button class="btn btn-ghost btn-block" onclick="toast('⬇️ Descargando PDF con tu logo...')">Descargar con mi logo</button>
-              <div class="divider"></div>
-              <div class="flex"><span style="font-size:18px">📁</span><span class="muted" style="font-size:12.5px">Tus planes personalizados viven aquí, listos para reusar.</span></div>
-            </div></div>
+              <div class="doc-body" id="docBody">
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-title" contenteditable="true">Mercadito de fracciones</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-meta" contenteditable="true">2.º primaria · Matemáticas · Proyecto · NEM 2022 · Saberes y Pensamiento Científico</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-h" contenteditable="true">Objetivo de aprendizaje</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-p" contenteditable="true">Que las y los estudiantes comprendan fracciones a través del juego, el dinero y la repartición en situaciones cotidianas.</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-h" contenteditable="true">Inicio · activación (15 min)</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-p" contenteditable="true">Plantea la pregunta detonadora: ¿cómo repartimos algo en partes iguales? Recupera saberes previos con ejemplos del día a día.</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-h" contenteditable="true">Desarrollo · el mercadito (30 min)</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><ul class="doc-p" style="margin:0;padding-left:20px"><li contenteditable="true">Organiza equipos y entrega "productos" divisibles.</li><li contenteditable="true">Cada equipo vende y reparte su producto en fracciones.</li><li contenteditable="true">Registran las fracciones obtenidas en su cuaderno.</li></ul></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-img" onclick="toast('🖼️ Selector de imagen (demo)')">🖼️ Imagen del material · haz clic para cambiarla</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-h" contenteditable="true">Cierre · reflexión (15 min)</div></div>
+                <div class="blk"><div class="blk-ctrl"><button onclick="edMove(this,-1)" title="Subir">↑</button><button onclick="edMove(this,1)" title="Bajar">↓</button><button onclick="edDel(this)" title="Quitar">✕</button></div><div class="doc-p" contenteditable="true">Comparten qué fracciones usaron y cómo las representaron. Conecta con la pregunta del inicio.</div></div>
+              </div>
+            </div>
+            <div class="ed-panel">
+              <div class="section-card" style="margin:0 0 16px"><div class="sc-body">
+                <b style="font-size:14px">➕ Agregar bloque</b>
+                <div class="flex wrapf mt" style="gap:8px"><button class="btn btn-ghost btn-sm" onclick="edAdd('h')">＋ Encabezado</button><button class="btn btn-ghost btn-sm" onclick="edAdd('p')">＋ Párrafo</button><button class="btn btn-ghost btn-sm" onclick="edAdd('list')">＋ Lista</button><button class="btn btn-ghost btn-sm" onclick="edAdd('img')">＋ Imagen</button></div>
+                <p class="muted" style="font-size:12px;margin-top:11px">Pasa el cursor sobre un bloque para moverlo (↑↓) o quitarlo (✕).</p>
+              </div></div>
+              <div class="section-card" style="margin:0;border:1.5px solid var(--amber)"><div class="sc-body">
+                <b style="font-size:14px">🎨 Mi estilo</b>
+                <div class="muted" style="font-size:12px;margin:2px 0 13px">Defínelo una vez y aplícalo a <b>todas</b> tus planeaciones con un clic.</div>
+                <label style="font-size:12px;font-weight:700">Logo de la escuela</label>
+                <div class="stripe-box" style="border-style:dashed;justify-content:center;padding:14px;cursor:pointer;margin:6px 0 14px" onclick="toast('🏫 Sube tu logo (demo)')">🏫 Subir logo</div>
+                <label style="font-size:12px;font-weight:700">Color de acento</label>
+                <div class="flex mt" style="gap:9px;margin-bottom:15px"><span class="swatch on" style="background:#29C0F5" onclick="edAccent('#29C0F5',this)"></span><span class="swatch" style="background:#F7A823" onclick="edAccent('#F7A823',this)"></span><span class="swatch" style="background:#243240" onclick="edAccent('#243240',this)"></span><span class="swatch" style="background:#E8483B" onclick="edAccent('#E8483B',this)"></span><span class="swatch" style="background:#2f8f53" onclick="edAccent('#2f8f53',this)"></span></div>
+                <label style="font-size:12px;font-weight:700">Tipografía</label>
+                <div class="flex mt" style="gap:6px;margin-bottom:16px"><span class="chip on" onclick="edFont('Archivo,sans-serif',this)">Moderna</span><span class="chip" onclick="edFont('Georgia,serif',this)">Clásica</span><span class="chip" onclick="edFont('Trebuchet MS,sans-serif',this)">Redonda</span></div>
+                <button class="btn btn-ghost btn-sm btn-block mb" onclick="edSaveStyle()">Guardar como «Mi estilo»</button>
+                <button class="btn btn-cta btn-sm btn-block" onclick="edApplyAll()">🪄 Aplicar mi estilo a mis 8 actividades</button>
+              </div></div>
+            </div>
           </div>
         </div>
 
@@ -1453,9 +1489,9 @@ tbody tr:hover{background:var(--bg)}
             <div class="section-card" style="margin:0"><div class="sc-head"><h3>Redactar correo</h3></div><div class="sc-body">
               <div class="field"><label>Para</label><select><option>Segmento: Todas las activas (2,418)</option><option>Plan Solo (1,210)</option><option>Plan Plus (980)</option><option>Pago fallido (6)</option><option>Mariana Hernández (individual)</option></select></div>
               <div class="field"><label>Asunto</label><input placeholder="Tu bundle de julio ya está listo 🎉"></div>
-              <div class="field"><label>Mensaje</label><textarea rows="6" placeholder="Hola Miss,&#10;&#10;Ya puedes descargar las actividades de julio para tu grado...">Hola Miss,
+              <div class="field"><label>Mensaje</label><textarea rows="6" placeholder="Hola Miss,&#10;&#10;Ya puedes entrar a personalizar tus actividades de julio...">Hola Miss,
 
-Tu bundle de julio ya está disponible. Entra a tu panel para descargar las nuevas actividades para tu grado.
+Tu bundle de julio ya está disponible. Entra a tu panel para personalizar y usar las nuevas actividades para tu grado.
 
 Con cariño,
 El equipo de clasemaestra</textarea></div>
@@ -1644,7 +1680,14 @@ function modalRefer(){return mHead('Invita a una colega')+
  '<div class="modal-foot"><button class="btn btn-cta btn-sm" onclick="closeModal()">Listo</button></div>';}
 
 function rate(n){var c=document.getElementById('rateStars'); if(!c)return; c.dataset.r=n; c.querySelectorAll('span').forEach(function(x,i){x.textContent=i<n?'★':'☆';}); toast('Calificaste con '+n+' ⭐');}
-function addSection(){var l=document.getElementById('secList'); if(!l)return; var d=document.createElement('div'); d.className='opt'; d.innerHTML='<div class="grow"><input class="field" style="margin:0" placeholder="Nueva sección..."></div><span class="link" onclick="this.closest(\'.opt\').remove()">Quitar</span>'; l.appendChild(d);}
+function edBlk(t){var c='<div class="blk-ctrl"><button onclick="edMove(this,-1)">↑</button><button onclick="edMove(this,1)">↓</button><button onclick="edDel(this)">✕</button></div>';var i;if(t==='h')i='<div class="doc-h" contenteditable="true">Nuevo encabezado</div>';else if(t==='img')i='<div class="doc-img" onclick="toast(\'🖼️ Selector de imagen (demo)\')">🖼️ Haz clic para agregar una imagen</div>';else if(t==='list')i='<ul class="doc-p" style="margin:0;padding-left:20px"><li contenteditable="true">Nuevo elemento</li></ul>';else i='<div class="doc-p" contenteditable="true">Escribe aquí tu párrafo…</div>';return '<div class="blk">'+c+i+'</div>';}
+function edAdd(t){var b=document.getElementById('docBody');if(!b)return;b.insertAdjacentHTML('beforeend',edBlk(t));var bl=b.querySelectorAll('.blk');var ce=bl[bl.length-1].querySelector('[contenteditable]');if(ce)ce.focus();}
+function edDel(btn){btn.closest('.blk').remove();}
+function edMove(btn,d){var b=btn.closest('.blk'),p=b.parentNode;if(d<0&&b.previousElementSibling)p.insertBefore(b,b.previousElementSibling);else if(d>0&&b.nextElementSibling)p.insertBefore(b.nextElementSibling,b);}
+function edAccent(c,el){var d=document.getElementById('doc');if(d)d.style.setProperty('--doc-accent',c);el.parentNode.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('on');});el.classList.add('on');}
+function edFont(f,el){var d=document.getElementById('doc');if(d)d.style.fontFamily=f;el.parentNode.querySelectorAll('.chip').forEach(function(s){s.classList.remove('on');});el.classList.add('on');}
+function edSaveStyle(){toast('💾 Guardado como «Mi estilo»');}
+function edApplyAll(){toast('🪄 Tu estilo se aplicó a tus 8 actividades');}
 var PLAN_RANK={solo:1,plus:2,escuela:3};
 var FEATURE_REQ={'u-school':'escuela'};
 (function(){
