@@ -352,6 +352,9 @@ tbody tr:hover{background:var(--bg)}
 .onb .ostep.done .ck{background:#2f8f53;border-color:#2f8f53;color:#fff}
 .onb .x{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--gray)}
 @media(max-width:640px){.burger{display:block}.pub-head .acts{display:none}}
+@media(max-width:760px){
+  table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+}
 </style>
 </head>
 <body class="ctx-public">
@@ -521,7 +524,8 @@ tbody tr:hover{background:var(--bg)}
             <li>Español, inglés o bilingüe</li><button class="btn btn-ghost btn-block" onclick="startPlan('escuela')">Cotizar Escuela</button>
           </div>
         </div>
-        <p class="note" data-note>Precios de contenido en español. El Plan Escuela se cotiza en español; pregúntanos por inglés o bilingüe.</p>
+        <p class="note" data-note>Precios de contenido en español. Todos los planes —incluido Plan Escuela— están disponibles en inglés y bilingüe.</p>
+        <div class="center" style="margin-top:14px"><span class="pill pill-green">🛡️ Garantía de devolución de 7 días, sin preguntas</span></div>
         <div style="margin-top:34px"><h3 style="text-align:center;font-size:20px;margin-bottom:16px">Compara los planes</h3>
         <table class="ptab"><thead><tr><th>Incluye</th><th>Solo</th><th>Plus</th><th>Escuela</th></tr></thead><tbody>
         <tr><td>Grados incluidos</td><td>1</td><td>2</td><td>Todos · 5 cuentas</td></tr>
@@ -639,7 +643,7 @@ tbody tr:hover{background:var(--bg)}
         <div class="field"><label>Correo</label><input value="mariana@colegio.mx"></div>
         <div class="field"><label>Contraseña</label><input type="password" value="••••••••"></div>
         <button class="btn btn-cta btn-block" onclick="nav('u-dashboard')">Entrar</button>
-        <p class="muted" style="margin-top:14px;text-align:center"><span class="link">¿Olvidaste tu contraseña?</span></p>
+        <p class="muted" style="margin-top:14px;text-align:center"><span class="link" onclick="toast('📧 Te enviamos un enlace de recuperación')">¿Olvidaste tu contraseña?</span></p>
         <div class="divider"></div>
         <p class="muted" style="text-align:center">¿Aún no tienes cuenta? <span class="link" onclick="nav('checkout')">Crear cuenta</span></p>
         <p class="muted" style="text-align:center;margin-top:10px;font-size:12px">Demo: <span class="link" onclick="nav('u-dashboard')">entrar como maestra</span> · <span class="link" onclick="nav('a-dashboard')">entrar como admin</span></p>
@@ -910,10 +914,10 @@ tbody tr:hover{background:var(--bg)}
             <table>
               <thead><tr><th>Maestra</th><th>Grado</th><th>Modalidad</th><th>Estado</th><th></th></tr></thead>
               <tbody>
-                <tr><td><div class="uid"><div class="av" style="background:var(--cyan)">M</div> Miss Mariana</div></td><td>1.º y 2.º</td><td>Español</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr><td><div class="uid"><div class="av" style="background:var(--amber)">P</div> Miss Paola</div></td><td>3.º</td><td>Bilingüe</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr><td><div class="uid"><div class="av" style="background:var(--ink)">L</div> Miss Lucía</div></td><td>Preescolar 2 y 3</td><td>Español</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr><td><div class="uid"><div class="av" style="background:#2f8f53">S</div> Miss Sofía</div></td><td>5.º</td><td>Inglés</td><td><span class="pill pill-amber">Invitada</span></td><td style="text-align:right"><span class="link">Reenviar</span></td></tr>
+                <tr><td><div class="uid"><div class="av" style="background:var(--cyan)">M</div> Miss Mariana</div></td><td>1.º y 2.º</td><td>Español</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr><td><div class="uid"><div class="av" style="background:var(--amber)">P</div> Miss Paola</div></td><td>3.º</td><td>Bilingüe</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr><td><div class="uid"><div class="av" style="background:var(--ink)">L</div> Miss Lucía</div></td><td>Preescolar 2 y 3</td><td>Español</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr><td><div class="uid"><div class="av" style="background:#2f8f53">S</div> Miss Sofía</div></td><td>5.º</td><td>Inglés</td><td><span class="pill pill-amber">Invitada</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();toast('📩 Invitación reenviada')">Reenviar</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1118,11 +1122,11 @@ tbody tr:hover{background:var(--bg)}
             <table>
               <thead><tr><th>Maestra</th><th>Plan</th><th>Modalidad</th><th>Grados</th><th>Alta</th><th>Estado</th><th></th></tr></thead>
               <tbody>
-                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:var(--cyan)">M</div> Mariana Hernández</div></td><td>Plus</td><td>ES</td><td>1.º, 2.º</td><td>abr 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:var(--amber)">P</div> Paola Ríos</div></td><td>Plus</td><td>BI</td><td>3.º</td><td>feb 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:var(--ink)">R</div> Regina Solís</div></td><td>Escuela</td><td>ES</td><td>Coordinación</td><td>ene 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:#2f8f53">S</div> Sofía Aguilar</div></td><td>Solo</td><td>EN</td><td>5.º</td><td>may 2026</td><td><span class="pill pill-amber">Pago fallido</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
-                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:#7a5cd0">D</div> Daniela Cruz</div></td><td>Solo</td><td>ES</td><td>Preescolar 2</td><td>may 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link">Ver</span></td></tr>
+                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:var(--cyan)">M</div> Mariana Hernández</div></td><td>Plus</td><td>ES</td><td>1.º, 2.º</td><td>abr 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:var(--amber)">P</div> Paola Ríos</div></td><td>Plus</td><td>BI</td><td>3.º</td><td>feb 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:var(--ink)">R</div> Regina Solís</div></td><td>Escuela</td><td>ES</td><td>Coordinación</td><td>ene 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:#2f8f53">S</div> Sofía Aguilar</div></td><td>Solo</td><td>EN</td><td>5.º</td><td>may 2026</td><td><span class="pill pill-amber">Pago fallido</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
+                <tr onclick="nav('a-crm')" style="cursor:pointer"><td><div class="uid"><div class="av" style="background:#7a5cd0">D</div> Daniela Cruz</div></td><td>Solo</td><td>ES</td><td>Preescolar 2</td><td>may 2026</td><td><span class="pill pill-green">Activa</span></td><td style="text-align:right"><span class="link" onclick="event.stopPropagation();showModal(modalDetail())">Ver</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1348,6 +1352,9 @@ function toggleMenu(){var m=document.getElementById('mmenu'); if(m) m.classList.
 function modalDemo(){return mHead('Agenda una demo para tu colegio')+
  '<div class="modal-body"><div class="field"><label>Colegio</label><input placeholder="Nombre del colegio"></div><div class="field"><label>Tu nombre y cargo</label><input placeholder="Coordinación / Dirección"></div><div class="field"><label>Correo</label><input placeholder="correo@colegio.mx"></div><div class="field"><label>N.º de maestras (aprox.)</label><input placeholder="Ej. 12"></div></div>'+
  '<div class="modal-foot"><button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-cta btn-sm" onclick="mDone(\'📅 ¡Listo! Te contactamos para agendar tu demo\')">Solicitar demo</button></div>';}
+function modalDetail(){return mHead('Detalle de la maestra')+
+ '<div class="modal-body"><div class="flex mb" style="gap:11px"><div class="avatar">M</div><div><b>Miss Mariana</b><div class="muted" style="font-size:12.5px">1.º y 2.º · Español · Activa</div></div></div><div class="kv"><span class="k">Actividades descargadas</span><b>12</b></div><div class="kv"><span class="k">Último acceso</span><b>Hoy</b></div><div class="kv"><span class="k">Enfoques de su contenido</span><b>PYP · CASEL · Mont.</b></div></div>'+
+ '<div class="modal-foot"><button class="btn btn-cta btn-sm" onclick="closeModal()">Cerrar</button></div>';}
 function modalRefer(){return mHead('Invita a una colega')+
  '<div class="modal-body"><p class="muted mb">Comparte tu enlace. Cuando se suscriba, <b>ambas reciben un mes con 50% de descuento</b>.</p><div class="stripe-box"><span style="font-size:13px">clasemaestra.mx/ref/mariana</span><button class="btn btn-cta btn-sm" style="margin-left:auto" onclick="toast(\'🔗 Enlace copiado\')">Copiar</button></div></div>'+
  '<div class="modal-foot"><button class="btn btn-cta btn-sm" onclick="closeModal()">Listo</button></div>';}
