@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>clasemaestra · Business Case 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0D0F13;--bg2:#13171E;--bg3:#1A2030;--em:#2A9E8A;--em-bright:#35C4AC;--em-dim:#1A6659;--gold:#C9A84C;--gold-bright:#E5C46A;--gold-dim:#7A6230;--white:#F5F3EE;--muted:#7A8599;--border:rgba(42,158,138,0.18);--border-gold:rgba(201,168,76,0.25);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);line-height:1.65;overflow-x:hidden;}
+.app{display:flex;min-height:100vh;}
+.sidebar{width:240px;min-width:240px;background:var(--bg2);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;padding:32px 0;flex-shrink:0;}
+.sidebar-logo{padding:0 24px 28px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.logo-mark{font-family:'Instrument Serif',serif;font-size:1.35rem;color:var(--white);display:block;}
+.logo-tag{font-size:0.7rem;color:var(--em);letter-spacing:2px;text-transform:uppercase;font-weight:600;display:block;margin-top:3px;}
+.nav-section{padding:0 24px;margin-bottom:6px;}
+.nav-section-label{font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px;margin-top:18px;}
+.nav-link{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:0.86rem;font-weight:500;cursor:pointer;transition:all 0.2s;margin-bottom:2px;}
+.nav-link:hover,.nav-link.active{background:rgba(42,158,138,0.1);color:var(--em-bright);}
+.nav-link .dot{width:6px;height:6px;border-radius:50%;background:var(--border);flex-shrink:0;transition:all 0.2s;}
+.nav-link:hover .dot,.nav-link.active .dot{background:var(--em);}
+.main{flex:1;padding:60px 64px;max-width:1100px;}
+section{margin-bottom:90px;scroll-margin-top:40px;}
+h1{font-family:'Instrument Serif',serif;font-size:3.6rem;line-height:1.1;letter-spacing:-1px;color:var(--white);font-weight:400;}
+h1 em{font-style:italic;color:var(--em-bright);}
+h2{font-family:'Instrument Serif',serif;font-size:2.1rem;color:var(--white);font-weight:400;margin-bottom:8px;letter-spacing:-0.5px;}
+h3{font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--em);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;}
+h4{font-family:'Instrument Serif',serif;font-size:1.25rem;color:var(--white);font-weight:400;margin-bottom:10px;}
+p{color:#9AABBC;font-size:0.93rem;margin-bottom:14px;}
+.section-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.section-num{font-size:0.7rem;color:var(--gold);letter-spacing:3px;font-weight:700;text-transform:uppercase;}
+.section-line{height:1px;flex:1;background:linear-gradient(90deg,var(--gold-dim) 0%,transparent 100%);}
+.hero{padding:40px 0 60px;border-bottom:1px solid var(--border);margin-bottom:80px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(42,158,138,0.1);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:0.76rem;color:var(--em);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:26px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--em);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{margin-bottom:22px;}
+.hero-desc{font-size:1.05rem;color:#7A8599;max-width:580px;line-height:1.7;margin-bottom:36px;}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.hero-metric{background:var(--bg2);padding:22px 18px;text-align:center;}
+.hero-metric .num{font-family:'DM Sans',sans-serif;font-size:1.9rem;font-weight:700;color:var(--em-bright);display:block;line-height:1;margin-bottom:5px;}
+.hero-metric .num.gold{color:var(--gold-bright);}
+.hero-metric .label{font-size:0.73rem;color:var(--muted);font-weight:500;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:26px;margin-bottom:16px;transition:all 0.25s;position:relative;overflow:hidden;}
+.card:hover{border-color:rgba(42,158,138,0.35);}
+.card.gold-card{border-color:var(--border-gold);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.stat-card .stat-num{font-family:'DM Sans',sans-serif;font-size:2rem;font-weight:700;color:var(--em-bright);display:block;line-height:1;margin-bottom:5px;}
+.stat-card .stat-num.gold{color:var(--gold-bright);}
+.stat-card .stat-label{font-size:0.78rem;color:var(--muted);font-weight:500;}
+.stat-card .stat-sub{font-size:0.73rem;color:var(--em-dim);margin-top:3px;}
+.badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+.badge-em{background:rgba(42,158,138,0.15);color:var(--em);border:1px solid rgba(42,158,138,0.3);}
+.badge-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.3);}
+.badge-dim{background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid rgba(255,255,255,0.1);}
+.check-list{list-style:none;padding:0;}
+.check-list li{padding:7px 0 7px 20px;position:relative;font-size:0.88rem;color:#8A9BAD;border-bottom:1px solid rgba(255,255,255,0.04);}
+.check-list li:last-child{border-bottom:none;}
+.check-list li::before{content:'›';position:absolute;left:0;color:var(--em);font-weight:700;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
+.data-table th{text-align:left;padding:11px 14px;background:rgba(42,158,138,0.08);color:var(--em);font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border);}
+.data-table td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;}
+.data-table tr:hover td{background:rgba(42,158,138,0.04);color:var(--white);}
+.data-table .hl-row td{color:var(--em-bright);font-weight:600;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0;}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:26px 22px;position:relative;overflow:hidden;transition:all 0.3s;}
+.price-card:hover{transform:translateY(-3px);}
+.price-card.featured{border-color:var(--em);background:linear-gradient(160deg,rgba(42,158,138,0.08) 0%,var(--bg2) 100%);}
+.price-card.featured::after{content:'MÁS POPULAR';position:absolute;top:14px;right:-24px;background:var(--em);color:#fff;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;padding:4px 34px;transform:rotate(35deg);}
+.price-card.gold-c{border-color:var(--border-gold);}
+.price-tier{font-size:0.68rem;color:var(--em);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+.price-tier.gold{color:var(--gold);}
+.price-name{font-family:'Instrument Serif',serif;font-size:1.45rem;color:var(--white);font-weight:400;margin-bottom:5px;}
+.price-desc{font-size:0.8rem;color:var(--muted);margin-bottom:18px;min-height:34px;}
+.price-num{font-family:'DM Sans',sans-serif;font-size:2.4rem;font-weight:700;color:var(--em-bright);line-height:1;}
+.price-num.gold{color:var(--gold-bright);}
+.price-period{font-size:0.8rem;color:var(--muted);}
+.price-grade{font-size:0.73rem;color:var(--gold);font-weight:600;margin:8px 0 18px;display:block;}
+.price-divider{height:1px;background:var(--border);margin:16px 0;}
+.price-features{list-style:none;padding:0;}
+.price-features li{display:flex;gap:8px;padding:6px 0;font-size:0.83rem;color:#8A9BAD;align-items:flex-start;}
+.price-features li::before{content:'✓';color:var(--em);font-weight:700;flex-shrink:0;}
+.price-features li.no::before{color:var(--muted);content:'—';}
+.price-section-label{font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;margin:12px 0 8px;text-transform:uppercase;}
+.deliverable-count{text-align:center;padding:12px;border-radius:8px;margin-top:14px;}
+.formula{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;font-family:'DM Sans',monospace;font-size:0.86rem;color:var(--em-bright);margin:18px 0;line-height:2;}
+.formula .r{color:var(--gold-bright);font-weight:700;}
+.formula .c{color:var(--muted);font-size:0.78rem;}
+.highlight-box{background:linear-gradient(135deg,rgba(42,158,138,0.08) 0%,rgba(201,168,76,0.05) 100%);border:1px solid var(--border);border-left:3px solid var(--em);border-radius:10px;padding:18px 22px;margin:22px 0;}
+.highlight-box.gold{border-left-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.08) 0%,rgba(42,158,138,0.05) 100%);}
+.highlight-box strong{color:var(--white);display:block;margin-bottom:5px;}
+.target-callout{background:linear-gradient(135deg,rgba(201,168,76,0.1) 0%,rgba(42,158,138,0.08) 100%);border:1px solid var(--border-gold);border-radius:16px;padding:30px;text-align:center;margin:30px 0;}
+.target-callout .big-num{font-family:'DM Sans',sans-serif;font-size:3.6rem;font-weight:700;color:var(--gold-bright);line-height:1;display:block;margin-bottom:8px;}
+.target-callout .big-label{font-size:0.83rem;color:var(--muted);}
+.target-callout .big-sub{font-size:0.95rem;color:var(--em-bright);font-weight:600;margin-top:10px;}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:60px 0;}
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0;}
+.risk-card{background:var(--bg2);border:1px solid rgba(220,80,60,0.2);border-radius:12px;padding:20px;}
+.risk-title{color:#E07060;font-weight:700;font-size:0.88rem;margin-bottom:8px;}
+.risk-mit{color:var(--em);font-size:0.8rem;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);}
+.roadmap-tl{position:relative;margin:28px 0;}
+.roadmap-tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--em) 0%,var(--em-dim) 70%,transparent 100%);}
+.roadmap-item{display:flex;gap:22px;margin-bottom:28px;}
+.roadmap-dot{width:38px;height:38px;background:var(--bg2);border:2px solid var(--em);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--em);flex-shrink:0;z-index:1;}
+.roadmap-dot.gold{border-color:var(--gold);color:var(--gold);}
+.roadmap-content{padding-top:5px;}
+.phase-label{font-size:0.68rem;color:var(--em);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:3px;}
+.phase-label.gold{color:var(--gold);}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--em-dim);border-radius:3px;}
+.fin-table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+.fin-table th{padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);}
+.fin-table th:first-child,.fin-table th:nth-child(2){text-align:left;}
+.fin-table td{padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;}
+.fin-table td:first-child,.fin-table td:nth-child(2){text-align:left;color:var(--white);}
+.fin-table .tgt td{color:var(--gold-bright);font-weight:700;}
+.fin-table .hl td{color:var(--em-bright);}
+.comp-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.comp-table th{padding:12px 16px;text-align:left;background:rgba(42,158,138,0.08);color:var(--em);font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border);}
+.comp-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04);color:#8A9BAD;font-size:0.84rem;}
+.comp-table td:first-child{color:var(--white);font-weight:600;}
+.comp-table .win{color:var(--em-bright);}
+.comp-table .lose{color:#E07060;}
+.comp-table .mid{color:var(--gold);}
+.comp-table .ml-row td{background:rgba(42,158,138,0.06);}
+@media(max-width:900px){.sidebar{display:none;}.main{padding:36px 22px;}.pricing-grid,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}.hero-metrics{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-mark">clasemaestra</span>
+    <span class="logo-tag">Business Case 2026</span>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Proyecto</div>
+    <a class="nav-link" href="#intro"><span class="dot"></span>Introducción</a>
+    <a class="nav-link" href="#resumen"><span class="dot"></span>Resumen Ejecutivo</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Mercado</div>
+    <a class="nav-link" href="#mercado"><span class="dot"></span>El Mercado</a>
+    <a class="nav-link" href="#competencia"><span class="dot"></span>Competencia</a>
+    <a class="nav-link" href="#foso"><span class="dot"></span>Foso competitivo</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Producto</div>
+    <a class="nav-link" href="#arquitectura"><span class="dot"></span>Arquitectura</a>
+    <a class="nav-link" href="#enfoques"><span class="dot"></span>Enfoques pedagógicos</a>
+    <a class="nav-link" href="#pricing"><span class="dot"></span>Pricing & Entregables</a>
+    <a class="nav-link" href="#drip"><span class="dot"></span>Sistema Drip</a>
+    <a class="nav-link" href="#upsell"><span class="dot"></span>Upsell & Add-ons</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Negocio</div>
+    <a class="nav-link" href="#lanzamiento"><span class="dot"></span>Lanzamiento Jun-Jul</a>
+    <a class="nav-link" href="#gtm"><span class="dot"></span>Go to Market</a>
+    <a class="nav-link" href="#financiero"><span class="dot"></span>Modelo Financiero</a>
+    <a class="nav-link" href="#operacion"><span class="dot"></span>Operación</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Estrategia</div>
+    <a class="nav-link" href="#roadmap"><span class="dot"></span>Roadmap</a>
+    <a class="nav-link" href="#riesgos"><span class="dot"></span>Riesgos</a>
+  </div>
+</nav>
+<main class="main">
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="section-eyebrow"><span class="section-num">00 — Introducción</span><div class="section-line"></div></div>
+  <h2>¿Qué es <em>clasemaestra</em>?</h2>
+  <p>clasemaestra es una suscripción digital mensual que entrega a maestras de preescolar y primaria privada <strong style="color:var(--white)">planes de clase listos para usar, fichas de actividades, rúbricas de evaluación y rutinas visuales</strong> — todo alineado al plan de estudios SEP 2022 (Nueva Escuela Mexicana), listo para imprimir y usar el lunes siguiente.</p>
+  <p>No es un curso. No es un banco de recursos caótico. Es una biblioteca organizada, curada mensualmente con inteligencia artificial, que crece con cada suscriptora y se adapta a su grado.</p>
+
+  <div class="grid-3" style="margin:28px 0;">
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">📋</div>
+      <h4 style="font-size:1rem;margin-bottom:8px;">Planes de clase completos</h4>
+      <p style="font-size:0.83rem;margin:0;">Objetivo SEP, actividades día a día, materiales, diferenciación por ritmo de aprendizaje y evaluación. Listos para imprimir.</p>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">🤖</div>
+      <h4 style="font-size:1rem;margin-bottom:8px;">Revisado por expertos NEM + curado por expertos</h4>
+      <p style="font-size:0.83rem;margin:0;">Expertos en educación crean y revisan cada plan. El equipo valida y afinan. El resultado es pedagógicamente sólido y ejecutable.</p>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">📲</div>
+      <h4 style="font-size:1rem;margin-bottom:8px;">Entrega automática en plataforma propia</h4>
+      <p style="font-size:0.83rem;margin:0;">Cada suscriptora recibe su contenido mensual de forma automática. Sin apps adicionales. Abre, personaliza e imprime desde la plataforma.</p>
+    </div>
+  </div>
+
+  <h3>Buyer Persona</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>🎨 Maestra de Preescolar Privado</h4>
+      <ul class="check-list">
+        <li><strong style="color:var(--white)">Edad:</strong> 24-38 años</li>
+        <li><strong style="color:var(--white)">Escuela:</strong> Privada, 20-40 alumnos por grupo</li>
+        <li><strong style="color:var(--white)">Salario:</strong> $10,000-15,000 MXN/mes</li>
+        <li><strong style="color:var(--white)">Dolor principal:</strong> Crear actividades lúdicas nuevas cada semana sin morir en Pinterest</li>
+        <li><strong style="color:var(--white)">Lo que busca:</strong> Actividades estructuradas con propósito pedagógico, no solo "manualidades bonitas"</li>
+        <li><strong style="color:var(--white)">Dónde está:</strong> Instagram, grupos WhatsApp de maestras, Facebook</li>
+        <li><strong style="color:var(--white)">Frase real:</strong> "Me paso el domingo haciendo actividades y el lunes los niños las terminan en 10 minutos"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📚 Maestra de Primaria Privada</h4>
+      <ul class="check-list">
+        <li><strong style="color:var(--white)">Edad:</strong> 28-45 años</li>
+        <li><strong style="color:var(--white)">Escuela:</strong> Privada o concertada, CDMX y área metropolitana</li>
+        <li><strong style="color:var(--white)">Salario:</strong> $12,000-20,000 MXN/mes</li>
+        <li><strong style="color:var(--white)">Dolor principal:</strong> Preparar 4-5 materias distintas cada semana, alineadas a SEP, con evaluación incluida</li>
+        <li><strong style="color:var(--white)">Lo que busca:</strong> Planes ejecutables que resuelvan su semana en 1 hora, no en 10</li>
+        <li><strong style="color:var(--white)">Dónde está:</strong> Pinterest (busca recursos), Facebook grupos, WhatsApp</li>
+        <li><strong style="color:var(--white)">Frase real:</strong> "La SEP cambió todo en 2022 y no encuentro recursos actualizados para la Nueva Escuela Mexicana"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box gold" style="margin-top:8px;">
+    <strong>El insight más poderoso del negocio</strong>
+    En 2022, la SEP implementó la Nueva Escuela Mexicana (NEM) con un cambio curricular profundo. La mayoría de recursos gratuitos en Pinterest, YouTube y grupos de Facebook todavía usan el plan anterior. clasemaestra nace alineada a la NEM desde el primer día — eso es su ventaja técnica real frente a todo el contenido gratuito existente.
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- HERO -->
+<div class="hero" id="resumen">
+  <div class="hero-badge">Confidencial · Mayo 2026</div>
+  <h1>Una biblioteca que<br><em>salva domingos</em><br>de maestras.</h1>
+  <p class="hero-desc">clasemaestra es un SaaS de suscripción digital para maestras de preescolar y primaria privada. Planes de clase listos, alineados a SEP 2022, entregados mensualmente en plataforma propia. Lanzamiento junio 2026.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><span class="num">158K</span><span class="label">Maestras objetivo MX</span></div>
+    <div class="hero-metric"><span class="num gold">$297</span><span class="label">ARPU ciclo escolar</span></div>
+    <div class="hero-metric"><span class="num">Mes 16</span><span class="label">$250K utilidad/mes</span></div>
+    <div class="hero-metric"><span class="num gold">$66,500</span><span class="label">Inversión total</span></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- MERCADO -->
+<section id="mercado">
+  <div class="section-eyebrow"><span class="section-num">01 — Mercado</span><div class="section-line"></div></div>
+  <h2>El mercado existe y nadie lo tiene</h2>
+  <p>México tiene más de 158,000 maestras de preescolar y primaria en escuelas privadas. Todas preparan material cada semana. Ninguna tiene una solución curada, organizada y alineada a la Nueva Escuela Mexicana disponible en suscripción.</p>
+
+  <div class="grid-3" style="margin:28px 0;">
+    <div class="stat-card"><span class="stat-num">158K</span><div class="stat-label">Maestras objetivo México</div><div class="stat-sub">Preescolar privado ~46K · Primaria privada ~112K</div></div>
+    <div class="stat-card"><span class="stat-num">12h</span><div class="stat-label">Promedio semanal preparando</div><div class="stat-sub">Planes, actividades, evaluaciones, rutinas.</div></div>
+    <div class="stat-card"><span class="stat-num gold">$0</span><div class="stat-label">Suscripciones curadas en español</div><div class="stat-sub">Alineadas a NEM-SEP 2022. Cero competencia directa.</div></div>
+  </div>
+
+  <div class="card">
+    <h4>TAM · SAM · SOM</h4>
+    <table class="data-table">
+      <thead><tr><th>Nivel</th><th>Definición</th><th>Tamaño</th><th>Revenue potencial</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-dim">TAM</span></td><td>Maestras preescolar + primaria privada MX + LATAM</td><td>~650K</td><td>$193M MXN/mes</td></tr>
+        <tr><td><span class="badge badge-em">SAM</span></td><td>Maestras preescolar + primaria privada México digitalmente activas</td><td>~95K</td><td>$28M MXN/mes</td></tr>
+        <tr class="hl-row"><td><span class="badge badge-gold">SOM</span></td><td>Target realista año 1-3 (1-2% del SAM)</td><td>~950-1,900</td><td>$280K-$565K MXN/mes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>¿Por qué AHORA es el momento?</h4>
+      <ul class="check-list">
+        <li>La NEM 2022 dejó obsoleto el 90% del contenido gratuito existente</li>
+        <li>Las maestras están buscando activamente recursos actualizados</li>
+        <li>La cultura de suscripción digital ya es normal en México (Netflix, Spotify, apps)</li>
+        <li>Primer mover: ninguna plataforma curada NEM-SEP existe hoy</li>
+        <li>CAC bajo: la búsqueda es activa y urgente — no hay que convencer, solo encontrar</li>
+      </ul>
+    </div>
+    <div class="card gold-card">
+      <h4>Estacionalidad del negocio</h4>
+      <ul class="check-list">
+        <li><strong style="color:var(--white)">Jun-Jul:</strong> Desarrollo plataforma y pipeline Claude (sin venta activa)</li>
+        <li><strong style="color:var(--white)">Ago-Sep:</strong> Regreso a clases — pico máximo de demanda y conversión</li>
+        <li><strong style="color:var(--white)">Oct-May:</strong> Ciclo escolar activo — churn bajo, retention alta</li>
+        <li><strong style="color:var(--white)">Nov:</strong> Evaluaciones primer bimestre — alta necesidad de rúbricas</li>
+        <li><strong style="color:var(--white)">Dic:</strong> Cierre semestral + bono navidad</li>
+        <li><strong style="color:var(--white)">Feb:</strong> Regreso segundo semestre — reactivación y nuevas conversiones</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMPETENCIA -->
+<section id="competencia">
+  <div class="section-eyebrow"><span class="section-num">02 — Competencia</span><div class="section-line"></div></div>
+  <h2>El panorama competitivo</h2>
+  <p>La competencia real no es otra suscripción — es el contenido gratuito disperso. La ventaja de clasemaestra es organización + alineación NEM + calidad constante + sistema de entrega.</p>
+
+  <div style="overflow-x:auto;margin:24px 0;">
+  <table class="comp-table">
+    <thead>
+      <tr><th>Fuente</th><th>Tipo</th><th>Alineación NEM 2022</th><th>Organización</th><th>Calidad</th><th>Precio</th><th>Entrega</th></tr>
+    </thead>
+    <tbody>
+      <tr class="ml-row">
+        <td>🟢 clasemaestra</td><td>Suscripción curada</td>
+        <td class="win">✓ 100% NEM</td><td class="win">✓ Por grado/materia</td>
+        <td class="win">✓ Validada por docentes</td><td class="mid">$147-497/mes</td><td class="win">✓ Automática plataforma propia</td>
+      </tr>
+      <tr>
+        <td>Pinterest</td><td>Banco gratuito</td>
+        <td class="lose">✗ Plan 2011</td><td class="lose">✗ Caos</td>
+        <td class="mid">Variable</td><td class="win">Gratis</td><td class="lose">Manual</td>
+      </tr>
+      <tr>
+        <td>Grupos Facebook/WhatsApp</td><td>Comunidad gratuita</td>
+        <td class="lose">✗ Sin alineación</td><td class="lose">✗ Sin estructura</td>
+        <td class="lose">Muy variable</td><td class="win">Gratis</td><td class="lose">Manual</td>
+      </tr>
+      <tr>
+        <td>YouTube (tutoriales)</td><td>Video educativo</td>
+        <td class="lose">✗ Mayoría desactualizada</td><td class="mid">Por tema</td>
+        <td class="mid">Variable</td><td class="win">Gratis</td><td class="lose">No imprimible</td>
+      </tr>
+      <tr>
+        <td>ChatGPT / Claude directo</td><td>IA generativa</td>
+        <td class="mid">Parcial (si sabe pedir)</td><td class="lose">✗ Sin estructura NEM</td>
+        <td class="lose">Sin data de outcome</td><td class="win">$0-20 USD/mes</td><td class="lose">Sin comunidad · sin lock-in</td>
+      </tr>
+      <tr>
+        <td>Editoriales (Santillana, SM)</td><td>Material impreso/digital</td>
+        <td class="mid">En transición</td><td class="win">✓ Estructurada</td>
+        <td class="win">Alta</td><td class="lose">$3,000-8,000/año</td><td class="mid">Paquete anual</td>
+      </tr>
+      <tr>
+        <td>SEP / AprenderEnCasa</td><td>Recurso oficial</td>
+        <td class="win">✓ Oficial NEM</td><td class="mid">Por grado</td>
+        <td class="mid">Genérico</td><td class="win">Gratis</td><td class="lose">Sin personalización</td>
+      </tr>
+      <tr>
+        <td>Teachers Pay Teachers (EN)</td><td>Marketplace</td>
+        <td class="lose">✗ Sistema anglosajón</td><td class="mid">Por búsqueda</td>
+        <td class="mid">Variable</td><td class="mid">$2-15 USD/recurso</td><td class="mid">Descarga manual</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="highlight-box gold">
+    <strong>La brecha real del mercado — y por qué la IA no la cierra</strong>
+    Existe contenido gratuito en abundancia y contenido caro institucional. No existe nada curado, alineado a NEM, entregado automáticamente, a precio accesible mensual. Pero más importante: en 24 meses cualquier maestra puede pedirle planes a Claude directamente. Lo que no puede replicar es la <strong style="color:var(--gold-bright)">data de qué planes funcionan en salones reales</strong>, su trabajo personalizado guardado en plataforma, y la comunidad de sus pares. Esos tres fosos son lo que construye clasemaestra desde el día 1 — no solo un catálogo.
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FOSO -->
+<section id="foso">
+  <div class="section-eyebrow"><span class="section-num">03 — Foso competitivo</span><div class="section-line"></div></div>
+  <h2>Por qué no somos comoditizables</h2>
+  <p>El contenido generado con IA se comoditiza: en 24 meses cualquier maestra puede pedirle planes NEM a Claude directamente. clasemaestra no compite como catálogo de planes — compite como <strong style="color:var(--white)">el estándar validado por resultados de la enseñanza NEM</strong>. Tres mecanismos construyen ese foso desde el día 1.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0;">
+    <div class="card" style="border-top:3px solid var(--em);padding:22px 20px;">
+      <div style="font-size:0.68rem;color:var(--em);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Foso 1 · Data de outcome</div>
+      <h4 style="font-size:1rem;margin-bottom:10px;">Rating de resultado real</h4>
+      <p style="font-size:0.83rem;margin-bottom:10px;">Al cerrar un plan, una sola pulsación: <em style="color:var(--em-bright)">"¿Funcionó en tu salón?"</em> — escala de estrellas 1–5 + campo opcional <em style="color:var(--em-bright)">"¿Qué le cambiaste?"</em> (una línea, cero fricción). Esa data — qué planes realmente jalan en clase, por grado y campo formativo — no la tiene Claude, ni ChatGPT, ni una editorial.</p>
+      <p style="font-size:0.83rem;margin-bottom:10px;">La edición captura señales pasivas sin preguntar: qué secciones borran, qué agregan, cuánto tiempo pasan editando. Si el 70% de las maestras reescribe los objetivos de un plan, eso dice exactamente qué corregir en la generación — sin encuestas.</p>
+      <p style="font-size:0.83rem;margin:0;">Claim resultante: <em style="color:var(--em-bright)">"los planes que miles de maestras calificaron como que sí funcionan en clase, por grado"</em>. Ese claim es defendible, es marketing, y alimenta la generación. Nadie más lo puede hacer.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold);padding:22px 20px;">
+      <div style="font-size:0.68rem;color:var(--gold);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Foso 2 · Lock-in de plataforma</div>
+      <h4 style="font-size:1rem;margin-bottom:10px;">Personalización como capa de datos</h4>
+      <p style="font-size:0.83rem;margin:0;">Las maestras personalizan sus planes en plataforma: logo de la escuela, ajustes por grupo, notas propias. Dos efectos: (1) el trabajo guardado sube el costo de salida — irse significa rehacer todo; (2) cada edición es data pasiva que revela exactamente qué mejorar en la generación. Si el 70% borra la sección de cierre, eso dice más que cualquier encuesta.</p>
+    </div>
+    <div class="card" style="border-top:3px solid rgba(201,168,76,0.5);padding:22px 20px;">
+      <div style="font-size:0.68rem;color:var(--muted);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Foso 3 · Comunidad viva</div>
+      <h4 style="font-size:1rem;margin-bottom:10px;">El apego que la IA no comoditiza</h4>
+      <p style="font-size:0.83rem;margin-bottom:12px;">Subforos por grado. Rituales recurrentes. Un sistema de reconocimiento con currency cultural propia. El costo de salida social empieza el día 0 — antes de que la maestra use el primer plan. Tres mecanismos operan en paralelo:</p>
+
+      <div style="background:rgba(42,158,138,0.06);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:10px;">
+        <div style="font-size:0.7rem;color:var(--em);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">① Q&A en vivo mensual — ritual de retención</div>
+        <p style="font-size:0.83rem;color:#9AABBC;margin-bottom:6px;">Sesión en vivo con fecha, tema y botón "Apartar mi lugar". Apartar da +10 🌟 (ver programa de aportes). Biblioteca de grabaciones anteriores como activo permanente.</p>
+        <p style="font-size:0.83rem;color:#9AABBC;margin:0;">Valor operativo: el ritual da una razón para volver cada mes — retención crítica en verano y en los primeros 90 días. La presencia del equipo responde en vivo ("alguien escucha") y enciende la comunidad. Las dudas que emergen ahí son señal directa de qué corregir en la generación.</p>
+      </div>
+
+      <div style="background:rgba(201,168,76,0.06);border:1px solid var(--border-gold);border-radius:8px;padding:14px 18px;margin-bottom:10px;">
+        <div style="font-size:0.7rem;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">② Programa de aportes — currency cultural 🌟</div>
+        <p style="font-size:0.83rem;color:#9AABBC;margin-bottom:10px;">Las maestras ganan estrellitas 🌟 exactamente como las dan a sus alumnos — el diseño es intencional. Cómo se ganan:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <div style="font-size:0.82rem;color:#9AABBC;line-height:2;">
+            <div>📋 Calificar un plan → <strong style="color:var(--white)">+5 🌟</strong></div>
+            <div>📸 Compartir adaptación con foto → <strong style="color:var(--white)">+15 🌟</strong></div>
+            <div>🏆 Que su adaptación se cure a la biblioteca → <strong style="color:var(--white)">+50 🌟</strong></div>
+          </div>
+          <div style="font-size:0.82rem;color:#9AABBC;line-height:2;">
+            <div>💬 Responder duda de otra maestra → <strong style="color:var(--white)">+10 🌟</strong></div>
+            <div>👩‍🏫 Invitar a una colega → <strong style="color:var(--white)">+40 🌟</strong></div>
+            <div>📅 Apartar lugar Q&A mensual → <strong style="color:var(--white)">+10 🌟</strong></div>
+          </div>
+        </div>
+        <div style="font-size:0.72rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Niveles con barra de progreso</div>
+        <div style="font-size:0.83rem;color:#9AABBC;line-height:2;margin-bottom:10px;">
+          🤝 <strong style="color:var(--white)">Aportadora</strong> (100 🌟) → 🏆 <strong style="color:var(--white)">Destacada</strong> (300 🌟) → 🌟 <strong style="color:var(--white)">Embajadora</strong> (600 🌟)
+        </div>
+        <div style="font-size:0.72rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Recompensas diseñadas para NO quemar valor</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.82rem;color:#9AABBC;">
+          <div>🗳️ Votar el tema del próximo bundle (influencia, costo $0, genera data de demanda)</div>
+          <div>⚡ Acceso anticipado al bundle (timing, no pierdes ingreso)</div>
+          <div>✨ Spotlight y plantillas premium (estatus, costo marginal)</div>
+          <div>💸 25% comisión solo al llegar a Embajadora (auto-financiada)</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(42,158,138,0.04);border:1px solid var(--border);border-radius:8px;padding:14px 18px;">
+        <div style="font-size:0.7rem;color:var(--em);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">③ Curaduría de la comunidad → catálogo propio</div>
+        <p style="font-size:0.83rem;color:#9AABBC;margin-bottom:6px;">Las adaptaciones destacadas se curan de vuelta a la biblioteca <strong style="color:var(--white)">con el crédito de la maestra</strong>. Es el premio máximo — y de paso hace crecer el catálogo desde la comunidad (no copiable) y no solo desde la IA (copiable).</p>
+        <p style="font-size:0.83rem;color:#9AABBC;margin:0;">Las Embajadoras son las mejores afiliadas (25% recurrente). Word of mouth en el gremio como canal primario — distribución más barata que cualquier pauta.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin:20px 0;">
+    <strong>Comunidad en todos los planes, desde el día 1 — no como add-on</strong>
+    <p style="font-size:0.84rem;margin:10px 0 0;">La comunidad es el foso que ninguna IA comoditiza. Lo primero que hace una suscriptora nueva no es bajar un PDF — es entrar al subforo de su grado. El costo de salida social empieza antes de que use el primer plan. Hoy está como extra del plan Plus; debe ser la columna vertebral de todos los planes.</p>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold);margin:16px 0 24px;">
+    <div style="font-size:0.68rem;color:var(--gold);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Ignición de comunidad — los primeros 90 días</div>
+    <p style="font-size:0.84rem;color:var(--muted);margin-bottom:12px;">Una comunidad vacía mata más que ayuda. No se activa sola. Se enciende a mano los primeros 60–90 días. <strong style="color:var(--white)">Sin ignición humana, no enciende.</strong></p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div>
+        <div style="font-size:0.72rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Tácticas de activación</div>
+        <ul style="list-style:none;padding:0;font-size:0.83rem;color:#9AABBC;line-height:2;">
+          <li>→ Sembrar con 3–5 maestras embajadoras posteando adaptaciones reales a diario los primeros 90 días (plan gratis o pago)</li>
+          <li>→ Pedir específico y atado al momento: justo después de usar un plan, <em>"¿cómo te fue? Sube una foto de tu salón"</em></li>
+          <li>→ Foto primero, texto después — mucho menos fricción y genera prueba social</li>
+          <li>→ Rituales recurrentes: <em>"Lunes de pre-clase"</em>, Q&A mensual, retos de temporada</li>
+          <li>→ Respuesta rápida y visible del equipo en cada hilo los primeros 30 días</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:0.72rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Costo honesto de la ignición</div>
+        <ul style="list-style:none;padding:0;font-size:0.83rem;color:#9AABBC;line-height:2;">
+          <li>→ Requiere 1 persona (founder o community manager) empujándola a diario el primer trimestre</li>
+          <li>→ Costo estimado de ignición: incluido en el tiempo de la founder los primeros 3 meses</li>
+          <li>→ Si nadie la empuja, no enciende — presupuestar este costo operativo explícitamente</li>
+          <li>→ A partir del Mes 4 la comunidad genera su propio momentum si el contenido es bueno</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(42,158,138,0.06);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:16px 0;">
+    <div style="font-size:0.68rem;color:var(--em);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:16px;">El flywheel que se acelera solo — medible por nodo</div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;text-align:center;">
+      <div style="background:rgba(42,158,138,0.1);border:1px solid var(--border);border-radius:8px;padding:12px 10px;">
+        <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Nodo 1</div>
+        <div style="font-size:0.9rem;color:var(--white);font-weight:700;margin-bottom:4px;">Generación + uso</div>
+        <div style="font-size:0.75rem;color:var(--muted);">KPI: planes descargados/mes por grado</div>
+      </div>
+      <div style="background:rgba(42,158,138,0.1);border:1px solid var(--border);border-radius:8px;padding:12px 10px;">
+        <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Nodo 2</div>
+        <div style="font-size:0.9rem;color:var(--white);font-weight:700;margin-bottom:4px;">Data acumulada</div>
+        <div style="font-size:0.75rem;color:var(--muted);">KPI: ratings + ediciones por plan/grado</div>
+      </div>
+      <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:8px;padding:12px 10px;">
+        <div style="font-size:0.68rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Nodo 3</div>
+        <div style="font-size:0.9rem;color:var(--white);font-weight:700;margin-bottom:4px;">Generación afinada</div>
+        <div style="font-size:0.75rem;color:var(--muted);">KPI: score revisor NEM promedio mes a mes</div>
+      </div>
+      <div style="background:rgba(42,158,138,0.1);border:1px solid var(--border);border-radius:8px;padding:12px 10px;">
+        <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Nodo 4</div>
+        <div style="font-size:0.9rem;color:var(--white);font-weight:700;margin-bottom:4px;">Más maestras</div>
+        <div style="font-size:0.75rem;color:var(--muted);">KPI: referidas por canal comunidad vs pauta</div>
+      </div>
+    </div>
+
+    <div style="font-family:'DM Sans',sans-serif;font-size:0.84rem;color:#9AABBC;line-height:2.2;text-align:center;border-top:1px solid var(--border);padding-top:12px;">
+      Generación con IA &nbsp;→&nbsp; <strong style="color:var(--white)">Personalización + uso</strong> &nbsp;→&nbsp; <strong style="color:var(--em-bright)">Data (edición + rating + Q&A)</strong> &nbsp;→&nbsp; <strong style="color:var(--gold)">Generación más precisa</strong> &nbsp;→&nbsp; Más maestras &nbsp;→&nbsp; más data
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin:10px 0 0;text-align:center;">Cada vuelta hace la siguiente más fuerte. El competidor que entre tarde no compite contra el producto: compite contra todas las vueltas ya dadas.</p>
+
+    <div style="margin-top:16px;padding:14px 16px;background:rgba(201,168,76,0.06);border:1px solid var(--border-gold);border-radius:8px;">
+      <div style="font-size:0.68rem;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Ejemplo operacional — Reto del mes</div>
+      <p style="font-size:0.83rem;color:#9AABBC;margin-bottom:6px;"><em>"Comparte 3 adaptaciones este mes → accede al bundle de julio una semana antes"</em></p>
+      <p style="font-size:0.82rem;color:var(--muted);margin:0;">Progreso visible: 1/3 → 2/3 → 3/3. Costo de la recompensa: timing, no ingreso perdido. Beneficio: UGC que alimenta la curaduría + data pasiva de qué funciona en clase.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:20px;">
+    <strong>Fases de construcción del foso</strong>
+    <table class="data-table" style="margin-top:12px;">
+      <thead><tr><th>Fase</th><th>Qué se construye</th><th>Cuándo</th><th>Inversión</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-em">Fase A</span></td><td>Botón de rating post-uso + captura de descarga/re-descarga por grado. Empieza a acumular data de outcome desde el día 1.</td><td>Lanzamiento Jun 2026</td><td>Mínima — parte del dev actual</td></tr>
+        <tr><td><span class="badge badge-gold">Fase B</span></td><td>Editor ligero en plataforma (logo, campos de texto, agregar/quitar secciones) con tracking de edición. Aquí se construye el lock-in real.</td><td>Mes 3–4 (post-validación)</td><td>Dev adicional ~2 semanas</td></tr>
+        <tr><td><span class="badge badge-dim">Fase C</span></td><td>La generación toma como base los patrones de edición + rating por grado. Calidad que ningún competidor sin esta data puede igualar.</td><td>Mes 6+ (post revenue)</td><td>Iteración del pipeline existente</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ARQUITECTURA -->
+<section id="arquitectura">
+  <div class="section-eyebrow"><span class="section-num">04 — Producto</span><div class="section-line"></div></div>
+  <h2>Arquitectura del producto</h2>
+  <p>clasemaestra cubre los 9 niveles de educación inicial y básica privada: 3 años de preescolar + 6 de primaria, alineados a la Nueva Escuela Mexicana (NEM 2022). El contenido se organiza por <strong style="color:var(--white)">Campos Formativos SEP</strong>, no por asignaturas tradicionales.</p>
+
+  <div class="grid-3">
+    <div class="card" style="text-align:center;padding:22px 16px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🎨</div>
+      <h4 style="font-size:1rem;margin-bottom:8px;">Preescolar (1°-3°)</h4>
+      <p style="font-size:0.82rem;margin:0;">Lenguajes, Pensamiento Matemático, Exploración del Mundo Natural, Desarrollo Personal. Actividades lúdicas con propósito pedagógico explícito.</p>
+    </div>
+    <div class="card" style="text-align:center;padding:22px 16px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📋</div>
+      <h4 style="font-size:1rem;margin-bottom:8px;">Primaria Baja (1°-3°)</h4>
+      <p style="font-size:0.82rem;margin:0;">Lenguajes (Español), Saberes Matemáticos, Conocimiento del Medio, Ética y Sociedad. Enfoque por Proyectos Comunitarios NEM.</p>
+    </div>
+    <div class="card" style="text-align:center;padding:22px 16px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🔬</div>
+      <h4 style="font-size:1rem;margin-bottom:8px;">Primaria Alta (4°-6°)</h4>
+      <p style="font-size:0.82rem;margin:0;">Lenguajes, Saberes Científicos, Ética Naturaleza y Sociedad, De lo Humano y Comunitario. Mayor profundidad analítica y proyectos transversales.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:8px;">
+    <strong>Alineación NEM 2022 — la ventaja técnica real</strong>
+    El plan de estudios 2022 reorganizó los contenidos en Campos Formativos y eliminó las asignaturas tradicionales. El 90% del contenido gratuito en internet sigue el plan anterior. clasemaestra nace alineada a la NEM — los planes de clase usan la nomenclatura, los ejes articuladores y los aprendizajes esperados correctos. Eso no es detalle: es la razón por la que una maestra paga.
+  </div>
+</section>
+
+
+<div class="section-divider"></div>
+
+<!-- ENFOQUES INTERNACIONALES -->
+<section id="enfoques">
+  <div class="section-eyebrow"><span class="section-num">04b — Enfoques Pedagógicos</span><div class="section-line"></div></div>
+  <h2>Compatible con marcos internacionales</h2>
+  <p>clasemaestra es compatible con los marcos pedagógicos internacionales más usados en escuelas privadas de México. <strong style="color:var(--white)">No somos proveedor oficial ni afiliado</strong> de ninguno de estos marcos — el lenguaje siempre es "compatible con", nunca "certificado por" ni "afiliado a".</p>
+
+  <div style="overflow-x:auto;margin:20px 0;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Enfoque</th><th>Aplica a</th><th>Modalidad de idioma</th><th>Qué integra clasemaestra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--gold-bright)">PYP (IB)</strong></td>
+          <td>Preescolar + toda la primaria</td>
+          <td>Todos los idiomas</td>
+          <td>Indagación, conceptos transdisciplinarios, agencia del estudiante</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold-bright)">CASEL (SEL)</strong></td>
+          <td>Todos los grados</td>
+          <td>Todos los idiomas</td>
+          <td>Competencias socioemocionales integradas en los planes donde hay campo formativo socioemocional</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold-bright)">Montessori</strong></td>
+          <td>Preescolar + primaria baja (1°–3°)</td>
+          <td>Todos los idiomas</td>
+          <td>Ambientes preparados, materiales manipulativos, aprendizaje autónomo</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold-bright)">Reggio Emilia</strong></td>
+          <td>Solo preescolar</td>
+          <td>Todos los idiomas</td>
+          <td>Proyectos emergentes, documentación pedagógica, expresión como lenguaje</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold-bright)">Cambridge Framework</strong></td>
+          <td>Todos los grados</td>
+          <td><strong style="color:var(--em-bright)">Solo inglés y bilingüe</strong></td>
+          <td>Habilidades del siglo XXI, pensamiento crítico y creativo, estructura de inquiry</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box gold" style="margin-top:16px;">
+    <strong>Por qué esta capa importa para el mercado</strong>
+    Las escuelas privadas en México invierten en alinearse a marcos internacionales para diferenciarse ante los padres. clasemaestra no les obliga a elegir entre NEM y PYP/Cambridge — les da ambas cosas en el mismo plan. Eso es un diferenciador real frente a cualquier competidor que solo habla de SEP.
+    <br><br>
+    <span style="font-size:0.78rem;color:var(--muted);">Nota legal: clasemaestra no es proveedor oficial, afiliado ni certificado por IB, CASEL, Montessori, Reggio Emilia ni Cambridge Assessment. La compatibilidad se refiere a la alineación de principios pedagógicos, no a una membresía o acreditación oficial.</span>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-eyebrow"><span class="section-num">04 — Pricing</span><div class="section-line"></div></div>
+  <h2>Estructura de precios y entregables</h2>
+  <p>Precio por grado. Entregables reales que cubren la necesidad de preparación. El upsell no se vende — sucede solo cuando la maestra toma más grados.</p>
+
+  <div class="highlight-box" style="margin-bottom:26px;">
+    <strong>Cobertura de la necesidad real</strong>
+    Una maestra necesita ~80-100 sesiones planificadas por mes. El foco son las materias de mayor carga de preparación: Español/Lenguajes y Matemáticas (60% del tiempo), Ciencias y Ética (30%). Ed. Física y Artística las resuelve sola. Plan Solo cubre ~45%. Plan Plus cubre 70-80% — suficiente para que la preparación dominical se reduzca de 10 horas a 2.
+  </div>
+
+  <h3>Planes y precios</h3>
+
+  <!-- SELECTOR DE IDIOMA -->
+  <div style="display:flex;gap:8px;margin:20px 0 28px;align-items:center;flex-wrap:wrap;">
+    <span style="font-size:0.78rem;color:var(--muted);font-weight:600;margin-right:4px;">Idioma del contenido:</span>
+    <button onclick="setLang('es')" id="btn-es" style="padding:8px 20px;border-radius:8px;border:1px solid var(--em);background:var(--em);color:#fff;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;">🇲🇽 Español</button>
+    <button onclick="setLang('en')" id="btn-en" style="padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;">🇺🇸 English</button>
+    <button onclick="setLang('bi')" id="btn-bi" style="padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;">🌐 Bilingüe</button>
+    <span id="lang-note" style="font-size:0.76rem;color:var(--gold);margin-left:8px;"></span>
+  </div>
+
+  <!-- 4 CARDS -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;">
+
+    <!-- SOLO -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 20px;transition:all 0.3s;">
+      <div style="font-size:0.68rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Nivel 1</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--white);margin-bottom:4px;">Maestra Solo</div>
+      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:16px;min-height:32px;">Un grado. Las materias que más tiempo quitan.</div>
+      <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:4px;">
+        <span style="font-size:1rem;color:var(--em-bright);font-weight:600;">$</span>
+        <span id="p-solo" style="font-family:'DM Sans';font-size:2.4rem;font-weight:700;color:var(--em-bright);transition:all 0.3s;">147</span>
+        <span style="font-size:0.8rem;color:var(--muted);">/mes</span>
+      </div>
+      <div id="g-solo" style="font-size:0.73rem;color:var(--gold);font-weight:600;margin-bottom:16px;">1 grado · Preescolar o Primaria</div>
+      <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+      <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">20 planes / mes</div>
+      <ul style="list-style:none;padding:0;margin-bottom:12px;">
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 8 planes Español / Lenguajes</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 8 planes Matemáticas</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;">› 4 planes Ciencias o Ética</li>
+      </ul>
+      <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">12 materiales / mes</div>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 6 fichas de actividades</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 4 rúbricas de evaluación</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;">› 2 rutinas visuales</li>
+      </ul>
+      <div style="background:rgba(42,158,138,0.08);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-family:'DM Sans';font-size:1.4rem;font-weight:700;color:var(--em-bright);">32</div>
+        <div style="font-size:0.7rem;color:var(--muted);">entregables / mes</div>
+      </div>
+    </div>
+
+    <!-- PLUS -->
+    <div style="background:linear-gradient(160deg,rgba(42,158,138,0.08) 0%,var(--bg2) 100%);border:1px solid var(--em);border-radius:16px;padding:24px 20px;position:relative;overflow:hidden;transition:all 0.3s;">
+      <div style="position:absolute;top:12px;right:-22px;background:var(--em);color:#fff;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;padding:4px 30px;transform:rotate(35deg);">MÁS POPULAR</div>
+      <div style="font-size:0.68rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Nivel 2</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--white);margin-bottom:4px;">Maestra Plus</div>
+      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:16px;min-height:32px;">Dos grados + agrega más si los necesitas.</div>
+      <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:4px;">
+        <span style="font-size:1rem;color:var(--em-bright);font-weight:600;">$</span>
+        <span id="p-plus" style="font-family:'DM Sans';font-size:2.4rem;font-weight:700;color:var(--em-bright);transition:all 0.3s;">297</span>
+        <span style="font-size:0.8rem;color:var(--muted);">/mes</span>
+      </div>
+      <div style="font-size:0.73rem;color:var(--gold);font-weight:600;margin-bottom:16px;">2 grados · Grado extra <span id="p-extra" style="color:var(--em-bright);">+$97</span>/mes</div>
+      <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+      <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">30 planes / mes (15 × 2 grados)</div>
+      <ul style="list-style:none;padding:0;margin-bottom:12px;">
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 12 planes Español × 2 grados</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 12 planes Matemáticas × 2 grados</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;">› 6 planes Ciencias o Ética × 2 grados</li>
+      </ul>
+      <div style="font-size:0.68rem;color:var(--em);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">18 materiales + accesos</div>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 8 fichas + 6 rúbricas + 4 rutinas</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› Comunidad privada plataforma propia</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;">› 4 bonos estacionales al año</li>
+      </ul>
+      <div style="background:rgba(42,158,138,0.1);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-family:'DM Sans';font-size:1.4rem;font-weight:700;color:var(--em-bright);">48</div>
+        <div style="font-size:0.7rem;color:var(--muted);">entregables / mes</div>
+      </div>
+    </div>
+
+    <!-- ESCUELA -->
+    <div style="background:linear-gradient(160deg,rgba(201,168,76,0.06) 0%,var(--bg2) 100%);border:1px solid var(--border-gold);border-radius:16px;padding:24px 20px;transition:all 0.3s;">
+      <div style="font-size:0.68rem;color:var(--gold);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Institucional</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:1.4rem;color:var(--white);margin-bottom:4px;">Plan Escuela</div>
+      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:16px;min-height:32px;">5 maestras juntas. Cada una elige su grado.</div>
+      <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:4px;">
+        <span style="font-size:1rem;color:var(--gold-bright);font-weight:600;">$</span>
+        <span id="p-esc" style="font-family:'DM Sans';font-size:2.4rem;font-weight:700;color:var(--gold-bright);transition:all 0.3s;">997</span>
+        <span style="font-size:0.8rem;color:var(--muted);">/mes</span>
+      </div>
+      <div style="font-size:0.73rem;color:var(--gold);font-weight:600;margin-bottom:4px;">5 accesos Plus · Maestra extra <span id="p-escextra">+$197</span>/mes</div>
+      <div id="p-esc-savings" style="font-size:0.72rem;color:var(--em);margin-bottom:16px;">vs $1,485 si pagan individual</div>
+      <div style="height:1px;background:var(--border-gold);margin-bottom:14px;"></div>
+      <div style="font-size:0.68rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Qué incluye</div>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› 5 cuentas nivel Plus (2 grados c/u)</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› Cada maestra elige sus 2 grados (nivel Plus)</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› Comunidad privada incluida</li>
+        <li style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">› Factura única mensual</li>
+        <li id="esc-extra-li" style="font-size:0.82rem;color:#8A9BAD;padding:5px 0;">› Maestra adicional: +$197/mes</li>
+      </ul>
+      <div style="background:rgba(201,168,76,0.08);border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--gold);font-weight:700;margin-bottom:3px;">AHORRO MENSUAL</div>
+        <div id="p-esc-save" style="font-family:'DM Sans';font-size:1.3rem;font-weight:700;color:var(--gold-bright);">$488</div>
+        <div style="font-size:0.7rem;color:var(--muted);">vs 5 suscripciones individuales</div>
+      </div>
+    </div>
+
+    <!-- INFO CARD -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:22px 18px;display:flex;flex-direction:column;gap:14px;">
+      <div>
+        <div style="font-size:0.68rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Por qué hay precio por idioma</div>
+        <p style="font-size:0.82rem;color:var(--muted);">Las escuelas bilingüres tienen mayor presupuesto. Contenido en inglés alineado a NEM 2022 es genuinamente escaso en el mercado. Claude lo genera con costo marginal cero.</p>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:12px;">
+        <div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;font-weight:600;">Diferencial por idioma:</div>
+        <div style="font-size:0.8rem;color:var(--white);line-height:1.8;">🇲🇽 Precio base<br>🇺🇸 +$50 Solo · +$100 Plus<br>🌐 +$100 Solo · +$200 Plus</div>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:12px;">
+        <div style="font-size:0.72rem;color:var(--gold);font-weight:600;">Inglés se valida con encuesta a suscriptoras en Mes 6-8 antes de hacer campaña específica.</div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+const PRICES = {
+  es: { solo:147, plus:297, extra:97,  esc:997,  escextra:197, escInd:1485, escSave:488 },
+  en: { solo:197, plus:397, extra:127, esc:1297, escextra:257, escInd:1985, escSave:688 },
+  bi: { solo:247, plus:497, extra:147, esc:1597, escextra:297, escInd:2485, escSave:888 }
+};
+const LANG_NOTE = {
+  es: '',
+  en: 'Content fully in English, aligned to NEM 2022',
+  bi: 'Cada plan en español e inglés — ideal para maestras que alternan idioma'
+};
+
+function setLang(lang) {
+  const p = PRICES[lang];
+  // Animate numbers
+  const fields = [
+    ['p-solo', p.solo],
+    ['p-plus', p.plus],
+    ['p-esc', p.esc.toLocaleString('es-MX')],
+    ['p-esc-save', '$' + p.escSave],
+  ];
+  fields.forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) { el.style.opacity='0.3'; el.style.transform='translateY(-4px)'; setTimeout(()=>{el.textContent=val;el.style.opacity='1';el.style.transform='translateY(0)';el.style.transition='all 0.25s';},150); }
+  });
+  document.getElementById('p-extra').textContent = '+$' + p.extra;
+  document.getElementById('p-escextra').textContent = '+$' + p.escextra;
+  document.getElementById('p-esc-savings').textContent = 'vs $' + p.escInd.toLocaleString('es-MX') + ' si pagan individual';
+  document.getElementById('esc-extra-li').textContent = '› Maestra adicional: +$' + p.escextra + '/mes';
+  document.getElementById('lang-note').textContent = LANG_NOTE[lang];
+
+  ['es','en','bi'].forEach(l => {
+    const btn = document.getElementById('btn-' + l);
+    if (!btn) return;
+    if (l === lang) {
+      btn.style.background = 'var(--em)'; btn.style.color = '#fff'; btn.style.borderColor = 'var(--em)';
+    } else {
+      btn.style.background = 'transparent'; btn.style.color = 'var(--muted)'; btn.style.borderColor = 'var(--border)';
+    }
+  });
+}
+</script>
+
+<section id="drip">
+  <div class="section-eyebrow"><span class="section-num">05 — Sistema Drip</span><div class="section-line"></div></div>
+  <h2>Cómo se entrega el contenido</h2>
+  <p>Dos sistemas independientes en plataforma propia: el <strong style="color:var(--white)">Drip personal</strong> (evergreen, basado en la fecha de inscripción de cada maestra) y los <strong style="color:var(--white)">Bonos estacionales</strong> (calendario fijo, para todas al mismo tiempo). Esto resuelve el conflicto entre contenido atemporal y contenido de temporada.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>⏱ Bundle Mensual Completo (Modelo A)</h4>
+      <p style="font-size:0.86rem;">El bundle mensual completo se libera al inicio del mes. Bundle mensual = acceso inmediato a todo el contenido del ciclo. Una suscriptora nueva accede al mes en curso más los meses anteriores. journey desde su Día 0. Independientemente de cuándo entre al negocio (mes 1 o mes 48), siempre recibe contenido nuevo cada 30 días. plataforma propia lo gestiona con la función "Post Drip" basada en fecha de inscripción.</p>
+      <table class="data-table" style="margin-top:14px;font-size:0.82rem;">
+        <thead><tr><th>Día de membresía</th><th>Recursos</th><th>Acumulado</th></tr></thead>
+        <tbody>
+          <tr><td>Día 0 (ingreso)</td><td>Bundle 1 — 39 recursos</td><td>39</td></tr>
+          <tr><td>Día 30</td><td>Bundle 2 — 39 recursos</td><td>78</td></tr>
+          <tr><td>Día 60</td><td>Bundle 3 — 39 recursos</td><td>117</td></tr>
+          <tr><td>Día 90</td><td>Bundle 4 — 39 recursos</td><td>156</td></tr>
+          <tr><td>Día 365</td><td>Bundle 12 — 39 recursos</td><td>468</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card gold-card">
+      <h4>🎁 Bonos Estacionales — Para Todas</h4>
+      <p style="font-size:0.86rem;">4 veces al año, todas las suscriptoras activas reciben un bono de temporada el mismo día, independientemente de cuándo se unieron. Se programa en plataforma propia con "Publish Date" + email broadcast automático.</p>
+      <table class="data-table" style="margin-top:14px;font-size:0.82rem;">
+        <thead><tr><th>Bono</th><th>Fecha</th><th>Contenido</th></tr></thead>
+        <tbody>
+          <tr><td>🎒 Regreso a Clases</td><td>15 de agosto</td><td>30 recursos para primer semana</td></tr>
+          <tr><td>💀 Día de Muertos</td><td>15 de octubre</td><td>20 recursos festividad</td></tr>
+          <tr><td>🎄 Fin de Año</td><td>25 de noviembre</td><td>25 recursos cierre semestral</td></tr>
+          <tr><td>🌸 Semana Santa</td><td>15 de marzo</td><td>20 recursos primavera</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="highlight-box gold">
+    <strong>¿Qué pasa con alguien que entra en mes 48?</strong>
+    Recibe Bundle 1 el día que se suscribe. Bundle 2 a los 30 días. Y cualquier bono estacional que ya se publicó antes de su ingreso aparece disponible inmediatamente en su biblioteca (plataforma propia muestra posts publicados a todos los que tienen acceso). Siempre hay algo nuevo esperándola. Siempre hay razón para renovar.
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- UPSELL -->
+<section id="upsell">
+  <div class="section-eyebrow"><span class="section-num">06 — Upsell</span><div class="section-line"></div></div>
+  <h2>Sistema de expansión de ingresos</h2>
+
+  <h3>Add-ons mensuales (encima del plan)</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;">
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:0.9rem;font-weight:600;color:var(--white);margin-bottom:3px;"> / Educación Especial</div><div style="font-size:0.78rem;color:var(--muted);">Versión adaptada de cada plan: TDAH, autismo, dislexia. Las escuelas incluyentes lo necesitan para cumplir obligaciones legales.</div></div>
+      <div style="font-family:'DM Sans';font-size:1.1rem;font-weight:700;color:var(--gold);margin-left:16px;white-space:nowrap;">+$147/mes</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:0.9rem;font-weight:600;color:var(--white);margin-bottom:3px;">4° Grado Extra (solo Total)</div><div style="font-size:0.78rem;color:var(--muted);">Para Maestra Plus que necesita un 3° o 4° grado adicional. El add-on es más económico que un plan institucional.</div></div>
+      <div style="font-family:'DM Sans';font-size:1.1rem;font-weight:700;color:var(--gold);margin-left:16px;white-space:nowrap;">+$97/mes</div>
+    </div>
+  </div>
+
+  <h3>Comunidad Privada (add-on o incluida)</h3>
+  <div class="card" style="margin-bottom:20px;">
+    <div style="display:grid;grid-template-columns:1fr auto;align-items:start;gap:20px;">
+      <div>
+        <h4 style="margin-bottom:8px;">Comunidad clasemaestra en plataforma propia</h4>
+        <p style="font-size:0.86rem;">Grupo privado dentro de plataforma propia donde maestras comparten cómo adaptaron los planes, piden feedback, celebran wins. La comunidad retiene más que cualquier bundle porque crear lazos tiene costo de salida alto.</p>
+        <ul class="check-list" style="margin-top:10px;font-size:0.84rem;">
+          <li>Incluida en el plan Plus</li>
+          <li>Add-on disponible para Solo: /mes</li>
+          <li>Sesión Q&A mensual en vivo con el equipo clasemaestra</li>
+          <li>Subforos por grado — maestras del mismo nivel se agrupan</li>
+        </ul>
+      </div>
+      <div style="text-align:center;background:rgba(42,158,138,0.08);border-radius:10px;padding:16px 20px;flex-shrink:0;">
+        <div style="font-size:0.7rem;color:var(--em);font-weight:700;letter-spacing:1px;margin-bottom:6px;">INCLUIDA EN</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--white);">Plan Plus</div>
+        <div style="height:1px;background:var(--border);margin:10px 0;"></div>
+        <div style="font-size:0.7rem;color:var(--muted);margin-bottom:4px;">Add-on para Solo</div>
+        <div style="font-family:'DM Sans';font-size:1.3rem;font-weight:700;color:var(--gold);">/mes</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>One-time de alto valor</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;">
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:0.9rem;font-weight:600;color:var(--white);margin-bottom:3px;">Mega Bundle Anual</div><div style="font-size:0.78rem;color:var(--muted);">12 meses del ciclo completo de golpe. Precio reducido + bloquea el precio actual ante futuros aumentos.</div></div>
+      <div style="font-family:'DM Sans';font-size:1.1rem;font-weight:700;color:var(--gold);margin-left:16px;white-space:nowrap;">$1,997</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:0.9rem;font-weight:600;color:var(--white);margin-bottom:3px;">Pack Certificación Docente</div><div style="font-size:0.78rem;color:var(--muted);">Guía para usar clasemaestra como evidencia de competencias NEM en evaluaciones docentes. Alto valor percibido.</div></div>
+      <div style="font-family:'DM Sans';font-size:1.1rem;font-weight:700;color:var(--gold);margin-left:16px;white-space:nowrap;">$497</div>
+    </div>
+  </div>
+
+  <div class="highlight-box gold">
+    <strong>Programa de Afiliadas — CAC $0</strong>
+    Suscriptoras activas refieren colegas y ganan 25% de comisión recurrente el primer año ($74/mes por referida en Plus). El incentivo económico supera la objeción de "exclusividad" sobre los planes. El word of mouth en comunidades de maestras es muy fuerte — este programa lo capitaliza.
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- LANZAMIENTO JUN-JUL -->
+<section id="lanzamiento">
+  <div class="section-eyebrow"><span class="section-num">07 — Lanzamiento</span><div class="section-line"></div></div>
+  <h2>Agosto — <em>Lanzamiento al ciclo escolar</em></h2>
+  <p>El lanzamiento se hace en agosto, justo en el regreso a clases. Es el momento de mayor necesidad de las maestras: empiezan un nuevo ciclo escolar y necesitan materiales alineados a NEM 2022 desde la primera semana. Junio y julio son de desarrollo — plataforma y agentes Claude. Agosto es el disparo de salida.</p>
+
+  <div class="grid-2" style="margin:24px 0;">
+    <div class="card">
+      <div style="font-size:0.68rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Junio — Desarrollo</div>
+      <h4>Plataforma a la medida</h4>
+      <ul class="checklist" style="font-size:0.85rem;">
+        <li>Programador construye sistema propio (entrega, biblioteca, editor, comunidad, checkout)</li>
+        <li>Setup de infraestructura y hosting</li>
+        <li>Muestra gratis F1 lista para captura de leads</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="font-size:0.68rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Julio — Agentes Claude</div>
+      <h4>Pipeline de contenido</h4>
+      <ul class="checklist" style="font-size:0.85rem;">
+        <li>Programador construye pipeline de 5 agentes Claude</li>
+        <li>Generación del contenido del ciclo escolar 2026–2027 completo</li>
+        <li>Revisión NEM y traducción a los 3 idiomas</li>
+        <li>Beta privada con maestras embajadoras</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin:24px 0;">
+    <div class="card">
+      <div style="font-size:0.68rem;color:var(--gold);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Agosto — Lanzamiento</div>
+      <h4>Regreso a clases · Ciclo escolar completo</h4>
+      <ul class="checklist" style="font-size:0.85rem;">
+        <li>Lanzamiento público con pauta Meta Ads $30K</li>
+        <li>Muestra gratis F1 activa (lead magnet → conversión)</li>
+        <li>Garantía de devolución 7 días sin preguntas</li>
+        <li>Plan Solo $147 · Plan Plus $297 · Plan Escuela $997</li>
+        <li>Ignición manual de la comunidad (embajadoras)</li>
+        <li>Meta: 100+ suscriptoras el primer mes</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="font-size:0.68rem;color:var(--gold);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Septiembre — Escala</div>
+      <h4>Ciclo escolar activo · Primera escuela</h4>
+      <ul class="checklist" style="font-size:0.85rem;">
+        <li>Pauta sostenida $30K/mes · regreso a clases plena demanda</li>
+        <li>Primeras escuelas (Plan Escuela $997)</li>
+        <li>Q&A en vivo mensual inaugural</li>
+        <li>Mix Solo/Plus/Escuela comenzando a madurar</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+<!-- GTM -->
+<section id="gtm">
+  <div class="section-eyebrow"><span class="section-num">08 — Go to Market</span><div class="section-line"></div></div>
+  <h2>Estrategia de adquisición</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Canales Pagados — Meta Ads</h4>
+      <ul class="check-list">
+        <li>Audience: Maestras escuelas privadas, 26-45 años, México</li>
+        <li>Hook verano: "¿Taller de verano sin ideas? 40 actividades listas"</li>
+        <li>Hook ciclo escolar: "La NEM cambió todo. ¿Tienes los planes correctos?"</li>
+        <li>Hook dolor: "¿Preparas clases 10+ horas/semana? Hay una mejor forma"</li>
+        <li>CAC esperado Jun-Jul: $100 (demanda urgente)</li>
+        <li>CAC esperado Sep: $150 (regreso a clases)</li>
+        <li>CAC esperado ciclo normal: $200</li>
+      </ul>
+    </div>
+    <div class="card gold-card">
+      <h4>Canales Orgánicos (Bajan CAC)</h4>
+      <ul class="check-list">
+        <li>Pinterest: 50 pins/mes — acumulativo, CAC $0 a largo plazo</li>
+        <li>TikTok/Reels: 2 videos/semana mostrando un plan real en uso</li>
+        <li>Grupos Facebook de maestras: presencia orgánica (no spam)</li>
+        <li>Word of mouth: maestras comparten entre colegas del colegio</li>
+        <li>Afiliadas: 25% comisión primer año por referido</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FINANCIERO -->
+<section id="financiero">
+  <div class="section-eyebrow"><span class="section-num">09 — Financiero</span><div class="section-line"></div></div>
+  <h2>Modelo financiero — 36 meses</h2>
+  <p>Escenario conservador. CAC $200 en ciclo escolar, $150 en regreso a clases, $100 en verano. Churn estacional. Mecanismo de pausa en verano desde el segundo año. 3 ciclos escolares completos. <strong style="color:var(--white)">Pausa de verano disponible:</strong> suscriptoras activas pueden pausar jul–ago sin cobro, conservando planes, nivel 🌟 y comunidad, con reanudación automática el 1 de septiembre.</p>
+
+  <h3>Costos Operativos Fijos</h3>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 28px;">
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+      <div style="font-size:0.62rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Plataforma</div>
+      <div style="font-family:'DM Sans';font-size:1.4rem;font-weight:700;color:var(--em-bright);">$1,200</div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sistema propio — entrega, biblioteca, comunidad, dashboard</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+      <div style="font-size:0.62rem;color:var(--em);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">IA · Claude Max 20x</div>
+      <div style="font-family:'DM Sans';font-size:1.4rem;font-weight:700;color:var(--em-bright);">$3,900</div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Genera planes SEP, PDFs, copy, scripts + agente revisor NEM integrado</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border-gold);border-radius:10px;padding:16px 18px;">
+      <div style="font-size:0.62rem;color:var(--gold);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Agencia ACMA</div>
+      <div style="font-family:'DM Sans';font-size:1.4rem;font-weight:700;color:var(--gold-bright);">$8,200</div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Redes activas, parrillas de contenido, gráficos de anuncios</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border-gold);border-radius:10px;padding:16px 18px;">
+      <div style="font-size:0.62rem;color:var(--gold);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Foto + Actriz</div>
+      <div style="font-family:'DM Sans';font-size:1.4rem;font-weight:700;color:var(--gold-bright);">$1,000</div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-top:3px;">Sesión cada 2 meses ($2,000) — promedio mensual</div>
+    </div>
+  </div>
+  <div style="background:rgba(42,158,138,0.06);border:1px solid var(--border);border-radius:8px;padding:12px 18px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="color:var(--white);font-weight:600;">Total ops fijo mensual</span>
+    <span style="font-family:'DM Sans';font-size:1.3rem;font-weight:700;color:var(--em-bright);">$14,300 MXN/mes</span>
+  </div>
+
+  <div class="formula">
+    LTV = ($314 ARPU promedio / 0.15) × 0.93 = <span class="r">$1,947 MXN</span><br>
+    LTV:CAC = $1,947 / $200 = <span class="r">9.7x</span>&nbsp;&nbsp;<span class="c">← CAC verano $130, regreso clases $150, ciclo normal $200</span>&nbsp;&nbsp;<span class="c">← mínimo viable es 3x</span><br>
+    Equilibrio ($30K pauta, CAC $200) = <span class="r">1,000 suscriptoras</span><br>
+    <span class="c">ARPU variable por mix: $264 (M4-6) → $314 (M7-12) → $357 (M13+) · CAC: $130 verano · $150 regreso · $200 ciclo</span>
+  </div>
+
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(42,158,138,0.08));border:1px solid var(--border-gold);border-radius:16px;padding:26px;margin:24px 0;">
+    <div style="font-size:0.68rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:16px;">Inversión Total</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px;">
+      <div style="text-align:center;">
+        <div style="font-family:'DM Sans';font-size:1.7rem;font-weight:700;color:var(--gold-bright);line-height:1;">$37,900</div>
+        <div style="font-size:0.73rem;color:var(--muted);margin-top:5px;">Setup Jun-Jul<br>(ops Jun+Jul + dominio)</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'DM Sans';font-size:1.7rem;font-weight:700;color:var(--em-bright);line-height:1;">$37,900</div>
+        <div style="font-size:0.73rem;color:var(--muted);margin-top:5px;">Déficits operativos<br>meses de arranque</div>
+      </div>
+      <div style="text-align:center;border-left:1px solid var(--border-gold);padding-left:16px;">
+        <div style="font-family:'DM Sans';font-size:1.7rem;font-weight:700;color:var(--gold-bright);line-height:1;">$66,500</div>
+        <div style="font-size:0.73rem;color:var(--muted);margin-top:5px;"><strong style="color:var(--white)">TOTAL INVERSIÓN</strong><br>desde cero hasta escala</div>
+      </div>
+      <div style="text-align:center;border-left:1px solid var(--border-gold);padding-left:16px;">
+        <div style="font-family:'DM Sans';font-size:1.7rem;font-weight:700;color:var(--em-bright);line-height:1;">213x</div>
+        <div style="font-size:0.73rem;color:var(--muted);margin-top:5px;">ROI a 36 meses<br>sobre inversión total</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border-gold);padding-top:12px;font-size:0.81rem;color:var(--muted);">
+      La inversión se recupera completamente en el <strong style="color:var(--white)">Mes 5 (Octubre 2026)</strong>. Los costos operativos menores ($14,300/mes vs $16,980 anterior) aceleran el breakeven. Los primeros 3 meses (Jun-Ago) son de arranque con déficit esperado.
+    </div>
+  </div>
+
+
+  <!-- DESGLOSE INVERSIÓN TOTAL -->
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(42,158,138,0.05));border:1px solid var(--border-gold);border-radius:16px;padding:28px;margin:28px 0;">
+    <div style="font-size:0.68rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:20px;">Desglose — Inversión Total $66,500 MXN</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+      <!-- COLUMNA 1: PRE-LANZAMIENTO -->
+      <div>
+        <div style="font-size:0.72rem;color:var(--em);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Pre-lanzamiento (Jun + Jul)</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.84rem;">
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Infra/Hosting × 2 meses</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--white);text-align:right;font-variant-numeric:tabular-nums;">$2,400</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Claude Max 20x × 2 meses</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--white);text-align:right;">$7,800</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Agencia ACMA × 2 meses</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--white);text-align:right;">$16,400</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Programador dev × 2 meses</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--white);text-align:right;">$9,000</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Foto + Actriz (sesión Jun)</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--white);text-align:right;">$2,000</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;color:#8A9BAD;">Dominio (año 1)</td>
+            <td style="padding:7px 0;color:var(--white);text-align:right;">$300</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0 0;color:var(--em);font-weight:700;font-size:0.86rem;">Subtotal pre-lanzamiento</td>
+            <td style="padding:10px 0 0;color:var(--em-bright);font-weight:700;text-align:right;font-size:0.95rem;">$37,900</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- COLUMNA 2: DÉFICITS OPERATIVOS -->
+      <div>
+        <div style="font-size:0.72rem;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Déficits operativos (Ago–Nov)</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.84rem;">
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Ago–Sep — déficit lanzamiento (2 meses)</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#E07060;text-align:right;font-variant-numeric:tabular-nums;">$40,596</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Septiembre — inyección pauta</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#E07060;text-align:right;">$10,000</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:#8A9BAD;">Octubre — pauta se autofinancia</td>
+            <td style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--em);text-align:right;">$0</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;color:#8A9BAD;">Octubre — negocio autosuficiente ✅</td>
+            <td style="padding:7px 0;color:var(--em);text-align:right;">$0</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0 0;color:var(--gold);font-weight:700;font-size:0.86rem;">Ops desarrollo Jun–Jul</td>
+            <td style="padding:10px 0 0;color:var(--gold-bright);font-weight:700;text-align:right;font-size:0.95rem;">$28,600</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TOTAL -->
+    <div style="border-top:1px solid var(--border-gold);margin-top:20px;padding-top:18px;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:0.8rem;color:var(--muted);">Pre-lanzamiento <span style="color:var(--em-bright);">$37,900</span> + Ops desarrollo Jun–Jul <span style="color:var(--gold-bright);">$28,600</span></div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">Recuperación completa: <strong style="color:var(--white)">Mes 5 — Octubre 2026</strong> · Sin capital externo después de esa fecha</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;margin-left:24px;">
+        <div style="font-family:'DM Sans';font-size:2.2rem;font-weight:700;color:var(--gold-bright);line-height:1;">$66,500</div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;">inversión total</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Proyección 36 meses — 3 Ciclos Escolares</h3>
+  <p style="margin-bottom:16px;">Mes 1–2: Jun–Jul — desarrollo puro (sin ingresos, sin subs). Mes 3: Agosto — lanzamiento ciclo escolar. ARPU $297 desde inicio. Pausa verano Mes 13–14. Bumps de pauta en Mes 4, 15, 18, 22, 27, 30, 34.</p>
+
+  <div style="display:flex;gap:10px;margin:14px 0 16px;flex-wrap:wrap;font-size:0.76rem;">
+    <div style="background:rgba(220,60,60,0.1);border:1px solid rgba(220,60,60,0.3);border-radius:5px;padding:5px 10px;color:#E07060;">🔴 Déficit</div>
+    <div style="background:rgba(42,158,138,0.1);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--em);">✅ Inversión recuperada</div>
+    <div style="background:rgba(42,158,138,0.06);border:1px solid var(--border);border-radius:5px;padding:5px 10px;color:var(--em);">⏸ Pausa verano (billing 60%)</div>
+    <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:5px;padding:5px 10px;color:var(--gold);">📈 Bump automático pauta</div>
+    <div style="background:rgba(201,168,76,0.08);border:1px solid var(--border-gold);border-radius:5px;padding:5px 10px;color:var(--gold);">🔄 Reactivación septiembre</div>
+    <div style="background:rgba(201,168,76,0.1);border:1px solid var(--border-gold);border-radius:5px;padding:5px 10px;color:var(--gold-bright);">🎯 $250K utilidad</div>
+  </div>
+
+  <div style="overflow-x:auto;margin:0 -20px;padding:0 20px;">
+  <table class="fin-table" style="min-width:1000px;">
+    <thead>
+      <tr>
+        <th style="padding:11px 13px;text-align:left;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Mes</th><th style="padding:11px 13px;text-align:left;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Cal.</th><th style="padding:11px 13px;text-align:left;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">ARPU</th>
+        <th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Aportación</th><th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Pauta</th><th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Subs</th>
+        <th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--em-bright);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Ingresos</th><th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Ops</th>
+        <th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Resultado</th><th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Acumulado</th><th style="padding:11px 13px;text-align:right;background:rgba(201,168,76,0.08);color:var(--gold);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--border-gold);">Rec. Inversión</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tr style="background:rgba(80,80,100,0.12);"><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">⚙️ 1</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Jun</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">—</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">—</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">—</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;font-weight:700;">$-14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;">-$80,800</td></tr>
+    <tr style="background:rgba(80,80,100,0.12);"><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">⚙️ 2</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Jul</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">—</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">—</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">—</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;font-weight:700;">$-14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;">-$95,100</td></tr>
+    <tr style="background:rgba(220,60,60,0.04);"><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">🔴 3</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Ago</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--gold-bright);font-weight:700;">$5,996</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$20,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">100</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$29,700</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;font-weight:700;">$-5,996</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;">-$101,096</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">📈 4</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Sep</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$30,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">235</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$69,795</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$22,215</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;">-$78,881</td></tr>
+    <tr style="background:rgba(42,158,138,0.10);"><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">✅ 5</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Oct</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$20,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$89,100</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$50,612</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$38,231</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#E05050;">-$28,269</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">6</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Nov</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$10,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">315</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$93,555</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$64,858</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$103,089</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$36,589</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">7</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Dic</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$5,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">307</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$91,179</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$67,594</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$170,683</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$104,183</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">8</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Ene</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$15,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">341</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$101,277</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$67,217</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$237,900</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$171,400</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">9</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Feb</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$15,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">370</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$109,890</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$75,425</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$313,325</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$246,825</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">10</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Mar</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$15,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">404</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$119,988</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$85,049</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$398,373</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$331,873</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">11</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Abr</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$15,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">433</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$128,601</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$93,257</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$491,630</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$425,130</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">12</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">May</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$297</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$15,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">448</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$133,056</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$97,502</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$589,132</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$522,632</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">⏸ 13</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Jun</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$5,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">378</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$118,692</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$93,813</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$682,946</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$616,446</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">⏸ 14</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Jul</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$5,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">322</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$101,108</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$77,056</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$760,002</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$693,502</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">🔄 15</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Ago</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$30,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">474</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$148,836</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$97,541</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$857,542</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$791,042</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">📈 16</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Sep</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$30,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">583</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$183,062</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$130,158</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$987,701</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$921,201</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">17</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Oct</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$20,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">596</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$187,144</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$144,048</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$1,131,749</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$1,065,249</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">📈 18</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Nov</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$50,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">757</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$237,698</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$162,226</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$1,293,975</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$1,227,475</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">19</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Dic</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$50,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">786</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$246,804</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$170,904</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$1,464,879</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$1,398,379</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">20</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Ene</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$314</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$50,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">818</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$256,852</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$180,480</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$1,645,359</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$1,578,859</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">21</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Feb</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$50,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">845</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$301,665</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$223,187</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$1,868,546</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$1,802,046</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">📈 22</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Mar</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$70,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1018</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$363,426</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$262,045</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$2,130,591</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$2,064,091</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">23</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Abr</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$70,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1065</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$380,205</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$278,035</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$2,408,626</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$2,342,126</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">24</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">May</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$70,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1105</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$394,485</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$291,644</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$2,700,270</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$2,633,770</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">⏸ 25</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Jun</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$10,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">914</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$326,298</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$286,662</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$2,986,932</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$2,920,432</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">⏸ 26</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Jul</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$10,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">761</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$271,677</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$234,608</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$3,221,541</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$3,155,041</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">🔄 27</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Ago</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$70,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1047</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$373,779</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$271,911</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$3,493,452</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$3,426,952</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">28</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Sep</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$70,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1240</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$442,680</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$337,574</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$3,831,026</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$3,764,526</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">29</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Oct</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$70,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1354</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$483,378</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$376,359</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$4,207,385</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$4,140,885</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">📈 30</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Nov</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$90,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1551</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$553,707</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$423,383</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$4,630,768</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$4,564,268</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">31</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Dic</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$90,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1565</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$558,705</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$428,146</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$5,058,914</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$4,992,414</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">32</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Ene</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$90,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1580</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$564,060</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$433,249</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$5,492,163</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$5,425,663</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">33</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Feb</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$90,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1593</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$568,701</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$437,672</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$5,929,835</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$5,863,335</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">📈 34</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Mar</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$110,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1754</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$626,178</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$472,448</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$6,402,283</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$6,335,783</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">35</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">Abr</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$110,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1841</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$657,237</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$502,047</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$6,904,330</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$6,837,830</td></tr>
+    <tr><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">36</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">May</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;color:var(--white);font-weight:500;">$357</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--muted);">$0</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$110,000</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">1865</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:600;">$665,805</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;">$14,300</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;font-weight:700;">+$510,212</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:var(--white);">$7,414,542</td><td style="padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;color:#8A9BAD;font-variant-numeric:tabular-nums;color:#35C4AC;">+$7,348,042</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div style="display:flex;gap:18px;flex-wrap:wrap;padding:10px 16px;background:var(--bg3);border-radius:8px;border:1px solid var(--border);margin:12px 0 28px;font-size:0.76rem;color:var(--muted);">
+    <span><strong style="color:var(--gold);">Ops $14,300</strong> =</span>
+    <span>Infra + Hosting <strong style="color:var(--white)">$1,200</strong></span>
+    <span>+ Claude Max 20x <strong style="color:var(--white)">$3,900</strong></span>
+    <span>+ Agencia ACMA <strong style="color:var(--white)">$8,200</strong></span>
+    <span>+ Programador dev (Jun-Jul) <strong style="color:var(--white)">$4,500</strong></span>
+    <span>+ Foto/Actriz c/2m <strong style="color:var(--white)">$1,000 prom.</strong></span>
+    <span style="border-left:1px solid var(--border);padding-left:14px;">Dominio año 1 <strong style="color:var(--white)">$300</strong></span>
+  </div>
+
+  <div class="target-callout">
+    <span class="big-num">$10,853,238</span>
+    <div class="big-label">Utilidad acumulada en 36 meses — 3 ciclos escolares completos</div>
+    <div class="big-sub">Inversión total: $66,500 · Recuperada Mes 6 (Nov) · $250K/mes: Mes 16 (Sep Año 2) · ROI: ~153x</div>
+  </div>
+
+  <h3>Hitos clave</h3>
+  <div class="grid-4">
+    <div class="stat-card"><span class="stat-num gold">Jun</span><div class="stat-label">Lanzamiento</div><div class="stat-sub">Lanzamiento ciclo escolar. Primeras suscriptoras. CAC $100.</div></div>
+    <div class="stat-card"><span class="stat-num">M6 Nov</span><div class="stat-label">Inversión recuperada</div><div class="stat-sub">$66,500 recuperados. Noviembre primer año.</div></div>
+    <div class="stat-card"><span class="stat-num gold">M16 Sep</span><div class="stat-label">$250K/mes 🎯</div><div class="stat-sub">Agosto Año 2. Mix maduro: 30% Solo / 55% Plus / 15% Escuela.</div></div>
+    <div class="stat-card"><span class="stat-num">M36 May</span><div class="stat-label">$929K/mes</div><div class="stat-sub">Fin del 3er ciclo. 3,182 subs. $929K/mes. Mix maduro ARPU $357.</div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- OPERACIÓN -->
+<section id="operacion">
+  <div class="section-eyebrow"><span class="section-num">10 — Operación</span><div class="section-line"></div></div>
+  <h2>Cómo opera sin morir en el intento</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Semana típica — 8-10 horas</h4>
+      <table class="data-table" style="font-size:0.84rem;">
+        <thead><tr><th>Día</th><th>Tarea</th><th>Hrs</th></tr></thead>
+        <tbody>
+          <tr><td>Lunes</td><td>Generar 3-4 planes con Claude, editar</td><td>3-4h</td></tr>
+          <tr><td>Miércoles</td><td>Revisar PDFs, subir a plataforma propia</td><td>2h</td></tr>
+          <tr><td>Viernes</td><td>Métricas, soporte, planear siguiente semana</td><td>2h</td></tr>
+          <tr><td>Flexible</td><td>Grabar 1-2 Reels (script de Claude)</td><td>1-2h</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card gold-card">
+      <h4>Automatizaciones críticas</h4>
+      <ul class="check-list">
+        <li>Cobro recurrente mensual — plataforma propia + Stripe</li>
+        <li>Entrega de PDFs tras pago — automático plataforma propia</li>
+        <li>Email sequence bienvenida (Día 0, 2, 4, 6) — automático</li>
+        <li>Bonos estacionales con fecha programada — automático</li>
+        <li>Drip mensual personal de cada suscriptora — automático</li>
+        <li>Emails de retención (Mes 2, Mes 5) — automático</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <h4>🤖 Agente Revisor NEM — Control de Calidad Automatizado</h4>
+    <p style="font-size:0.86rem;">Antes de publicar cualquier plan de clase, pasa por un agente especializado entrenado con el documento oficial de la NEM 2022 — campos formativos, ejes articuladores, aprendizajes esperados por grado. El agente verifica que la nomenclatura, los objetivos y los aprendizajes sean correctos. No reemplaza a la revisora humana — la hace más eficiente: la revisora solo ve lo que el agente marca como potencialmente incorrecto.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;">
+      <div style="background:rgba(42,158,138,0.08);border-radius:8px;padding:12px;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--em);font-weight:700;margin-bottom:4px;">TECNOLOGÍA</div>
+        <div style="font-size:0.85rem;color:var(--white);">Claude Project con documentos NEM cargados</div>
+      </div>
+      <div style="background:rgba(42,158,138,0.08);border-radius:8px;padding:12px;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--em);font-weight:700;margin-bottom:4px;">COSTO</div>
+        <div style="font-size:0.85rem;color:var(--white);">$0 adicional — incluido en Claude Max 20x</div>
+      </div>
+      <div style="background:rgba(42,158,138,0.08);border-radius:8px;padding:12px;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--em);font-weight:700;margin-bottom:4px;">TIEMPO</div>
+        <div style="font-size:0.85rem;color:var(--white);">2 min por plan — en paralelo con generación</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Claude hace el 80%, tú haces el 20%</strong>
+    Claude genera planes de clase SEP completos, copy de anuncios, scripts de Reels, emails de retención y PDFs listos para subir. Tú editas, grabas un video y subes archivos. No se necesita diseñador, redactor ni programador. El costo del "equipo creativo" es $3,900 MXN/mes (Claude Max 20x).
+  </div>
+
+  <div class="highlight-box gold" style="margin-top:16px;">
+    <strong>Sprint anual de producción (antes de cada regreso a clases)</strong>
+    En julio, una sesión intensiva de 2-3 semanas con Claude produce el año escolar completo: 12 bundles (un bundle = contenido de 1 mes), programados en plataforma propia con su drip schedule. El negocio opera automáticamente los siguientes 12 meses sin presión mensual de contenido.
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-eyebrow"><span class="section-num">11 — Roadmap</span><div class="section-line"></div></div>
+  <h2>Hoja de ruta — 3 años</h2>
+
+  <div class="roadmap-tl">
+    <div class="roadmap-item">
+      <div class="roadmap-dot">Jun</div>
+      <div class="roadmap-content">
+        <div class="phase-label">Mes 1 — Lanzamiento Agosto 2026</div>
+        <h4 style="font-size:1rem;">Setup plataforma propia + primeras 50 suscriptoras</h4>
+        <p>plataforma propia lista, lanzamiento ciclo escolar, pauta $30,000. Primer CAC real: ~$100. Primeros testimonios.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">Jul</div>
+      <div class="roadmap-content">
+        <div class="phase-label">Mes 2 — Sprint de Producción</div>
+        <h4 style="font-size:1rem;">120 planes del Año 1 producidos con Claude</h4>
+        <p>Sprint intensivo. Drip y bonos estacionales programados para todo el año. 120 suscriptoras de verano.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot gold">Sep</div>
+      <div class="roadmap-content">
+        <div class="phase-label gold-label">Mes 4 — Ciclo Escolar + Inversión Recuperada</div>
+        <h4 style="font-size:1rem;">Lanzamiento completo $297 — pauta activa, camino a recuperar $66,500</h4>
+        <p>Conversión de suscriptoras de verano a ciclo escolar. 261 subs activas. Pauta $30K activa.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">M12</div>
+      <div class="roadmap-content">
+        <div class="phase-label">Mes 12 — Cierre Año 1</div>
+        <h4 style="font-size:1rem;">802 suscriptoras · $175K utilidad mensual</h4>
+        <p>Fin del primer ciclo escolar. Sprint Año 2 en julio. Programa de afiliadas activo.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot gold">M16</div>
+      <div class="roadmap-content">
+        <div class="phase-label gold-label">Mes 16 — Meta $250K 🎯</div>
+        <h4 style="font-size:1rem;">1,391 suscriptoras · $338K utilidad mensual</h4>
+        <p>Septiembre del Año 2. Reactivación masiva post-verano. Segundo ciclo en velocidad de crucero.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">M24</div>
+      <div class="roadmap-content">
+        <div class="phase-label">Mes 24 — Consolidación</div>
+        <h4 style="font-size:1rem;">1,833 suscriptoras · $420K utilidad mensual</h4>
+        <p>Expansión a secundaria + inglés + NEE. LATAM (Colombia, Argentina) como siguiente mercado.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot gold">M36</div>
+      <div class="roadmap-content">
+        <div class="phase-label gold-label">Mes 36 — 3er Ciclo Escolar</div>
+        <h4 style="font-size:1rem;">3,324 suscriptoras · $792K utilidad mensual</h4>
+        <p>Tres años de operación. $12.2M de utilidad acumulada. Plataforma líder en recursos NEM en LATAM.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- RIESGOS -->
+<section id="riesgos">
+  <div class="section-eyebrow"><span class="section-num">12 — Riesgos</span><div class="section-line"></div></div>
+  <h2>Riesgos y mitigación</h2>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-title">⚠ CAC supera $250 en escala</div>
+      <p style="font-size:0.84rem;color:var(--muted);">Al gastar más, se agota la audiencia fácil y CPM sube.</p>
+      <div class="risk-mit">→ El pauta cap limita exposición. Si CAC &gt; $250 se pausa el bump automático y se optimiza copy/audiencia. LTV:CAC sigue positivo hasta $300.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title">⚠ Reactivación post-verano &lt; 80%</div>
+      <p style="font-size:0.84rem;color:var(--muted);">Maestras pausadas en verano no regresan en septiembre.</p>
+      <div class="risk-mit">→ Modelo usa 65%. Con 50% el negocio sigue positivo en septiembre. La pausa siempre es mejor que perder la suscriptora.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title">⚠ Retención al cierre de ciclo</div>
+      <p style="font-size:0.84rem;color:var(--muted);">La retención basada solo en "contenido nuevo cada mes" es frágil: si una maestra siente que ya tiene suficiente, cancela.</p>
+      <div class="risk-mit">→ El modelo de retención evoluciona en tres capas: (1) contenido nuevo cada ciclo (SEP actualiza, maestras rotan de grado); (2) <strong style="color:var(--white)">lock-in de trabajo personalizado</strong> — irse significa perder planes con su logo, adaptaciones guardadas, historial; (3) <strong style="color:var(--white)">pertenencia a la comunidad de su grado</strong> — costo de salida social que empieza el día 0. El churn del modelo asume que solo el 15% de estas capas falla mensualmente.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title">⚠ Competencia de ChatGPT / IA directa</div>
+      <p style="font-size:0.84rem;color:var(--muted);">En 24 meses cualquier maestra puede pedirle planes NEM a Claude directamente — el catálogo se comoditiza.</p>
+      <div class="risk-mit">→ Tres fosos que la IA no puede replicar: (1) <strong style="color:var(--white)">data de outcome real</strong> — qué planes funcionaron en salones mexicanos, por grado y campo formativo, calificados por miles de maestras; (2) <strong style="color:var(--white)">lock-in de plataforma</strong> — trabajo personalizado, logo, adaptaciones guardadas que cuesta rehacer; (3) <strong style="color:var(--white)">comunidad de pares</strong> — el apego a colegas no se genera con un prompt. Una maestra con Claude no compite contra el catálogo: compite contra todas estas vueltas ya dadas.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title">⚠ Drip vs. contenido estacional</div>
+      <p style="font-size:0.84rem;color:var(--muted);">El bundle mensual no coincide con temporadas escolares.</p>
+      <div class="risk-mit">→ Resuelto: Drip = solo evergreen. Estacional = bonos por calendario para todas. Dos canales independientes en plataforma propia.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title">⚠ Calidad cae con volumen</div>
+      <p style="font-size:0.84rem;color:var(--muted);">84+ entregables/mes para Plus requieren disciplina editorial para mantener calidad.</p>
+      <div class="risk-mit">→ Sprint anual de producción con tiempo y revisión cuidadosa. Claude genera, docente valida alineación NEM antes de publicar. Calidad sobre volumen.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+const sections = document.querySelectorAll('section[id], div.hero[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) link.classList.add('active');
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const t = document.querySelector(link.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
