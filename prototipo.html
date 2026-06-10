@@ -1641,7 +1641,8 @@ window.addEventListener('DOMContentLoaded',applyHash);
 window.demoMode=false;
 function enterDemo(){window.demoMode=true;var g=document.getElementById('demoGrade');window.demoGrade=g?g.value:'';nav('u-library');}
 function exitDemo(){window.demoMode=false;demoClose();nav('landing');}
-function demoModal(){var m=document.getElementById('demoModal');if(m)m.classList.add('on');}
+function demoModal(){var m=document.getElementById('demoModal');if(!m)return;var mg=document.getElementById('demoModalGrade');if(mg&&window.demoGrade){mg.value=window.demoGrade;}m.classList.add('on');}
+function demoLead(){var e=document.getElementById('demoEmail');if(!e||!e.value.trim()||e.value.indexOf('@')<1){if(e){e.style.borderColor='var(--red)';e.focus();}toast('Escribe un correo válido para conservar tu personalización');return;}var g=document.getElementById('demoModalGrade');toast('📩 ¡Listo! Conservamos tu personalización'+(g?' · '+g.value:''));demoClose();nav('checkout');}
 function demoClose(){var m=document.getElementById('demoModal');if(m)m.classList.remove('on');}
 function syncDemoBanner(ctx){var b=document.getElementById('demoBanner');if(!b)return;b.style.display=(window.demoMode&&ctx==='user')?'flex':'none';}
 function colMod(m,btn){var d={es:['$997','Español'],en:['$1,497','Inglés'],bi:['$1,997','Bilingüe (español + inglés)']};var p=document.getElementById('colPrice'),n=document.getElementById('colNote');if(p)p.textContent=d[m][0];if(n)n.textContent=d[m][1]+' · 5 cuentas nivel Plus · maestra adicional +$197';document.querySelectorAll('#colSwitch .cmod').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');}
@@ -1832,10 +1833,16 @@ updatePricing();
 <div class="demo-ov" id="demoModal">
   <div class="demo-card">
     <h3>Ya quedó con tu estilo ✨</h3>
-    <p>Crea tu cuenta para conservar esta personalización y desbloquear el mes completo de planeaciones.</p>
-    <button class="btn btn-cta btn-block" onclick="demoClose();nav('checkout')">Crear mi cuenta y conservar</button>
+    <p>Déjanos tus datos para conservar tu personalización y mandarte el bundle de tu grado.</p>
+    <div style="text-align:left">
+      <div class="field"><label>Tu nombre</label><input id="demoName" placeholder="Miss..."></div>
+      <div class="field"><label>Correo</label><input id="demoEmail" type="email" placeholder="tucorreo@colegio.mx"></div>
+      <div class="field"><label>WhatsApp <span style="color:var(--gray);font-weight:400">(opcional)</span></label><input id="demoPhone" placeholder="10 dígitos"></div>
+      <div class="field"><label>Grado que enseñas</label><select id="demoModalGrade"><option>Preescolar 1</option><option>Preescolar 2</option><option>Preescolar 3</option><option>1.º primaria</option><option>2.º primaria</option><option>3.º primaria</option><option>4.º primaria</option><option>5.º primaria</option><option>6.º primaria</option></select></div>
+    </div>
+    <button class="btn btn-cta btn-block" style="margin-top:6px" onclick="demoLead()">Crear mi cuenta y conservar</button>
     <button class="btn btn-ghost btn-block" style="margin-top:10px" onclick="demoClose()">Seguir explorando el demo</button>
-    <p class="mic">Garantía de 7 días: si no te late, te devolvemos tu dinero.</p>
+    <p class="mic">Sin spam. Garantía de 7 días: si no te late, te devolvemos tu dinero.</p>
   </div>
 </div>
 </body>
