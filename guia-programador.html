@@ -155,7 +155,7 @@ ul.clean li{margin:5px 0}
     <a class="day" href="#d1">Día 1 · Cimientos</a>
     <a class="day" href="#d2">Día 2 · Auth + BD</a>
     <a class="day" href="#d3">Día 3 · Design system</a>
-    <a class="day" href="#d4">Día 4 · Público I</a>
+    <a class="day" href="#d4">Día 4 · Landing oficial</a>
     <a class="day" href="#d5">Día 5 · Público II</a>
     <a class="day" href="#d6">Día 6 · Stripe I · checkout</a>
     <a class="day" href="#d7">Día 7 · Stripe II · webhooks + pago</a>
@@ -235,7 +235,7 @@ ul.clean li{margin:5px 0}
           <tr><th>Recurso</th><th>Liga</th><th>Para qué</th></tr>
           <tr><td><b>Prototipo navegable</b></td><td><a href="https://quadrant-agency.github.io/clasemaestra/prototipo.html" target="_blank">prototipo.html</a></td><td>Réplica exacta de cada pantalla, flujo e interacción.</td></tr>
           <tr><td><b>Manual de identidad</b></td><td><a href="https://quadrant-agency.github.io/clasemaestra/manual-identidad.html" target="_blank">manual-identidad.html</a></td><td>Paleta, tipografía, wordmark, Kipi y reglas de marca.</td></tr>
-          <tr><td><b>Landing en vivo</b></td><td><a href="https://quadrant-agency.github.io/clasemaestra/" target="_blank">clasemaestra (index)</a></td><td>Referencia visual del estilo público.</td></tr>
+          
           <tr><td><b>Assets de marca</b></td><td><code>/assets/</code> en el repo</td><td>Kipi (planea, escribe, enseña, celebra) y wordmark (transparente, blanco).</td></tr>
         </table>
       </div>
@@ -707,7 +707,7 @@ create trigger on_auth_user_created after insert on auth.users for each row exec
 ├─ public/assets/           # kipi + wordmark
 ├─ src/
 │  ├─ app/
-│  │  ├─ (public)/          # landing, colegios, muestra, login, checkout
+│  │  ├─ (public)/          # colegios, login, checkout
 │  │  ├─ app/               # zona de la maestra (dashboard, biblioteca, actividad, editor, mi-estilo, suscripcion, pago, escuela, comunidad, perfil)
 │  │  ├─ admin/             # backend (dashboard, usuarias, crm, contenidos, subir, planes, flywheel, senal, correos)
 │  │  └─ api/stripe/webhook # receptor de avisos de Stripe
@@ -933,37 +933,10 @@ Publica una página interna en /dev/ui que muestre todos los componentes juntos 
 
     <!-- DÍA 4 -->
     <div class="day" id="d4">
-      <div class="day-h"><span class="dn">Día 4</span><div><h3>Página pública de inicio (landing)</h3><div class="sub">Lo primero que ve quien llega; donde se decide la compra.</div></div></div>
+      <div class="day-h"><span class="dn">Día 4</span><div><h3>Landing oficial = la del prototipo</h3><div class="sub">No se construye una landing aparte; la fuente de verdad es el prototipo.</div></div></div>
       <div class="day-b">
-        <div class="goal"><b>Qué vas a lograr hoy:</b> la página de inicio completa, idéntica al prototipo, con precios que cambian solos al elegir idioma (Español/Inglés/Bilingüe) y mensual/anual.</div>
-
-        <div class="step"><span class="n">1</span><span class="t">Pega este prompt en Claude Code</span></div>
-        <div class="prompt"><span class="lbl">CLAUDE CODE</span><button class="copybtn">Copiar</button>Lee referencia/prototipo.html y ve a #landing. Construye la página pública de inicio (ruta /) replicándola EXACTAMENTE: mismo orden de secciones, mismos textos visibles, misma jerarquía. Usa los componentes de src/components/ui y los tokens de color. Secciones, en este orden:
-1) Barra de anuncio de temporada arriba del todo.
-2) Header: wordmark a la izquierda; navegación a "Cómo funciona", "Qué incluye", "Precios", "Preguntas" y "Para colegios"; en celular, menú hamburguesa.
-3) Hero: titular grande en mayúscula de oración, subtítulo, DOS botones (el primario cian "Empezar ahora" lleva a /checkout; el secundario "Ver la plataforma por dentro" lleva a /demo), una línea de confianza con el claim "Calificadas por miss reales: sí jalan en el salón", y la imagen de Kipi (public/assets/kipi-planea.png).
-4) Franja de prueba social (logos o números de confianza).
-5) "Cómo funciona" en 3 pasos.
-6) "Qué incluye" en una grilla de 6 (incluye "Comunidad de miss").
-7) "Enfoques internacionales": tarjetas de PYP, CASEL, Montessori y Cambridge. IMPORTANTE: la tarjeta de Cambridge SOLO debe mostrarse cuando la modalidad elegida es Inglés o Bilingüe. Usa el lenguaje "compatible con" (nunca "afiliado" ni "certificado") e incluye la nota "no somos proveedor oficial de estos marcos".
-8) Precios: con dos interruptores, uno de idioma (Español / Inglés / Bilingüe) y otro de ciclo (Mensual / Anual). Los precios se calculan desde src/lib/pricing.ts con esta matriz mensual en pesos: Maestra Solo 147, Maestra Plus 297, Plan Escuela 997; recargo de Inglés +50 (Solo) / +100 (Plus); recargo de Bilingüe +100 (Solo) / +200 (Plus); Escuela: ES 997, EN 1497, BI 1997. El plan Anual = precio mensual × 10 (paga 10, recibe 12). Muestra también una tabla comparativa de los 3 planes y un sello de "Garantía de 7 días".
-9) Testimonios de maestras.
-10) Equipo pedagógico (expertos en educación).
-11) Bloque para colegios con botón a /colegios.
-12) Preguntas frecuentes; incluye la pregunta "¿Por qué no usar solo ChatGPT?".
-13) Footer.
-REGLAS: titulares en mayúscula de oración; CERO menciones de inteligencia artificial en el texto visible; el botón primario siempre cian con texto carbon; el rojo solo para alertas; todo responsive. Al terminar, confirma que comparaste contra #landing y lista qué quedó.</div>
-
-        <div class="step"><span class="n">2</span><span class="t">Cómo verificar que quedó bien</span></div>
-        <div class="verify"><ul class="acc">
-          <li>Cambias el interruptor a "Inglés" y los precios suben +50/+100; aparece la tarjeta de Cambridge. En "Español" desaparece.</li>
-          <li>Cambias a "Anual" y el precio es el mensual × 10.</li>
-          <li>El botón "Empezar ahora" te lleva a /checkout y "Ver la plataforma por dentro" a /demo.</li>
-          <li>No hay ninguna palabra sobre IA en la página.</li>
-          <li>Se ve idéntica a #landing y funciona en celular.</li>
-        </ul></div>
-        <div class="trouble"><b>Si truena:</b> si los precios no cambian, el cálculo quedó "quemado" en la página en vez de leer src/lib/pricing.ts; pídele a Claude Code que centralice TODO el cálculo en ese archivo.</div>
-        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#landing">#landing</a></div>
+        <div class="goal"><b>Qué hay que saber hoy:</b> la landing oficial de clasemaestra es la pantalla <code>#landing</code> del prototipo. <b>No se construye una página de marketing distinta en este manual.</b> La ruta <code>/</code> simplemente sirve (o redirige a) esa landing oficial. Tu trabajo de hoy es dejar <code>/</code> apuntando a la landing del prototipo y seguir con el Día 5.</div>
+        <div class="protolinks"><a target="_blank" href="https://quadrant-agency.github.io/clasemaestra/prototipo.html#landing">#landing (landing oficial)</a></div>
       </div>
     </div>
 
